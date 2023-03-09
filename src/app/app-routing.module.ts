@@ -6,7 +6,7 @@ import { UserPageComponent } from './module/user/page/user-page/user-page.compon
 
 const routes: Routes = [
         {
-                path: 'home',
+                path: '',
                 component: HomePageComponent,
                 children: [
                         {
@@ -16,12 +16,12 @@ const routes: Routes = [
                 ],
         },
         {
-                path: 'user',
+                path: 'login',
                 component: UserPageComponent,
         },
         {
-                path: '',
-                redirectTo: 'home',
+                path: 'home',
+                redirectTo: '',
                 pathMatch: 'full',
         },
 ];
