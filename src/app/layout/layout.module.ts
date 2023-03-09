@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { LayoutComponent } from './layout.component';
-import { LayoutFooterComponent } from './layout-footer/layout-footer.component';
-import { LayoutHeaderComponent } from './layout-header/layout-header.component';
+import { CommonModule } from '@angular/common';
+
+import { LayoutRoutingModule } from './layout-routing.module';
+import { LayoutPageComponent } from './page/layout-page/layout-page.component';
+
 @NgModule({
-        declarations: [LayoutComponent, LayoutFooterComponent, LayoutHeaderComponent],
-        imports: [BrowserModule],
-        exports: [LayoutComponent],
+        declarations: [LayoutPageComponent],
+        imports: [CommonModule, LayoutRoutingModule],
+        exports: [LayoutPageComponent],
 })
 export class LayoutModule {}
