@@ -6,9 +6,18 @@ import { ProductModule } from './module/product/product.module';
 import { CheckoutModule } from './module/checkout/checkout.module';
 import { LayoutModule } from './layout/layout.module';
 import { UserModule } from './module/user/user.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
         declarations: [AppComponent],
-        imports: [BrowserModule, AppRoutingModule, ProductModule, CheckoutModule, LayoutModule, UserModule],
+        imports: [
+                BrowserModule,
+                AppRoutingModule,
+                ProductModule,
+                CheckoutModule,
+                LayoutModule,
+                UserModule,
+                HttpClientModule,
+        ],
         providers: [],
         bootstrap: [AppComponent],
 })
