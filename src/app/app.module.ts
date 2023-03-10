@@ -7,6 +7,7 @@ import { CheckoutModule } from './module/checkout/checkout.module';
 import { LayoutModule } from './layout/layout.module';
 import { UserModule } from './module/user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 @NgModule({
         declarations: [AppComponent],
         imports: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
                 LayoutModule,
                 UserModule,
                 HttpClientModule,
+                FormsModule,
         ],
         providers: [],
         bootstrap: [AppComponent],
