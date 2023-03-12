@@ -1,10 +1,10 @@
-<div class="h-[350px] border-[1px] rounded-md mb-3">
-        <div class="h-[70%]">
-                <img [src]="product.mainImage" alt="" class="object-cover h-full w-full rounded-t-md" />
+<div class="h-[450px] border-[1px] rounded-md select-none">
+        <div class="h-[300px]">
+                <img [src]="product?.mainImage" alt="" class="object-cover h-full w-full rounded-t-md" />
         </div>
-        <div class="h-[40%] font-semibold p-3">
-                <p>{{ product.name }}</p>
-                <p>{{ product.costPerUnit | priceProduct }}</p>
+        <div class="font-semibold p-3 min-h-[100px]">
+                <p>{{ product?.name }}</p>
+                <p>{{ product?.costPerUnit | priceProduct }}</p>
                 <div class="flex items-center justify-between">
                         <span class="flex text-[#FF8C4B] mt-2">
                                 <svg
@@ -79,8 +79,21 @@
                                 </svg>
                         </span>
                         <span class="flex items-center text-sm text-gray-500 font-normal"
-                                >Đã bán {{ product.soldCounter }}</span
+                                >Đã bán {{ product?.soldCounter }}</span
                         >
+                </div>
+                <div class="hidden justify-between h-[5%] mt-2">
+                        <button
+                                class="bg-[#43bcce] text-white px-3 py-1 rounded-md cursor-pointer"
+                                (click)="onBuy(product)"
+                        >
+                                MUA
+                        </button>
+                        <span
+                                class="bg-[#43bcce] text-white px-3 py-1 rounded-md cursor-pointer"
+                                (click)="addToCartProduct(product)"
+                                ><fa-icon [icon]="faCartShopping"></fa-icon
+                        ></span>
                 </div>
         </div>
 </div>

@@ -1,6 +1,6 @@
-<div class="flex flex-wrap p-3">
-        <div class="w-1/4 flex justify-center px-3" *ngFor="let product of listProducts">
-                <app-card-product [product]="product" class="w-full"></app-card-product>
+<div class="flex flex-wrap p-3 min-h-[900px]">
+        <div class="w-1/4 flex justify-center px-3 mb-3" *ngFor="let product of listProducts">
+                <app-card-product [product]="product" class="w-full" appProductItem></app-card-product>
         </div>
 </div>
 
