@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,8 +8,7 @@ import { LayoutModule } from './layout/layout.module';
 import { UserModule } from './module/user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
         declarations: [AppComponent],
@@ -22,8 +21,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
                 UserModule,
                 HttpClientModule,
                 FormsModule,
+                FontAwesomeModule,
         ],
         providers: [],
         bootstrap: [AppComponent],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

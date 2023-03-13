@@ -7,8 +7,6 @@ import { HomePageComponent } from './module/product/pages/home-page/home-page.co
 import { LoginPageComponent } from './module/user/page/login-page/login-page.component';
 import { SignupPageComponent } from './module/user/page/signup-page/signup-page.component';
 import { UserPageComponent } from './module/user/page/user-page/user-page.component';
-import { userRoutes } from './module/user/user-routing.module';
-
 const routes: Routes = [
         {
                 path: '',
@@ -25,7 +23,6 @@ const routes: Routes = [
         {
                 path: 'profile',
                 component: UserPageComponent,
-                children: [...userRoutes],
         },
         {
                 path: 'home',

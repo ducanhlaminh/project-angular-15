@@ -1,1 +1,9 @@
-<p>detail-page works!</p>
+<div class="h-[700px] flex py-3">
+        <div class="w-1/2 h-full">
+                <img [src]="productDetail?.mainImage" alt="" class="object-cover h-full w-full rounded-md" />
+        </div>
+        <div class="w-1/2 h-full px-5">
+                <p class="font-medium text-[35px]">{{ productDetail?.name }}</p>
+                <p class="font-medium text-[25px] text-gray-600">{{ productDetail?.description }}</p>
+        </div>
+</div>

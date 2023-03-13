@@ -7,11 +7,25 @@ import { Observable } from 'rxjs';
 })
 export class ProductServiceService {
         constructor(private http: HttpClient) {}
-        getProduct(page: number = 1) {
+        getProduct(
+                args = {
+                        code: '',
+                        page: 1,
+                },
+        ) {
                 return this.http.get('http://localhost:8888/api/v1/product/', {
                         params: {
                                 limitProduct: 20,
-                                page: page,
+                                page: args.page,
+                                categoryCode: args.code,
+                        },
+                });
+        }
+        getProductById(id: number) {
+                return this.http.get('http://localhost:8888/api/v1/product/', {
+                        params: {
+                                limitProduct: 20,
+                                id: id,
                         },
                 });
         }

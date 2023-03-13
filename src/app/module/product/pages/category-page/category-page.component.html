@@ -1,1 +1,33 @@
-<p>category-page works!</p>
+<div class="flex p-3 min-h-[900px]">
+        <div class="w-1/5 h-full">
+                <app-sidebar></app-sidebar>
+        </div>
+        <div class="min-h-[600px] w-4/5 relative">
+                <div class="flex flex-wrap" *ngIf="!isLoading; else loading">
+                        <div class="w-1/4 flex justify-center px-3 mb-3" *ngFor="let product of listProducts">
+                                <app-card-product [product]="product" class="w-full" appProductItem></app-card-product>
+                        </div>
+                </div>
+        </div>
+</div>
+<mat-paginator
+        #paginator
+        class="demo-paginator"
+        [length]="count"
+        [pageSize]="pageSize"
+        [disabled]="disabled"
+        [hidePageSize]="true"
+        [pageIndex]="pageIndex"
+        aria-label="Select page"
+>
+</mat-paginator>
+<!-- (page)="handlePageEvent($event)" -->
+<ng-template #loading>
+        <ngx-spinner
+                bdColor="rgba(0,0,0,0.55)"
+                size="medium"
+                color="#fff"
+                type="ball-triangle-path"
+                [fullScreen]="false"
+        ></ngx-spinner>
+</ng-template>

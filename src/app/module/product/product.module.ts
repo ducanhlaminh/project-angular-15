@@ -8,6 +8,14 @@ import { CardProductComponent } from './componnets/card-product/card-product.com
 import { PriceProductPipe } from './price-product.pipe';
 import { ProductItemDirective } from './pages/home-page/directive/product-item.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PaginatorProductComponent } from './componnets/paginator-product/paginator-product.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SidebarComponent } from './componnets/sidebar/sidebar.component';
+interface NgxSpinnerConfig {
+        type?: string;
+}
 @NgModule({
         declarations: [
                 HomePageComponent,
@@ -16,8 +24,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
                 CardProductComponent,
                 PriceProductPipe,
                 ProductItemDirective,
+                PaginatorProductComponent,
+                SidebarComponent,
         ],
-        imports: [CommonModule, ProductRoutingModule, FontAwesomeModule],
+        imports: [
+                CommonModule,
+                ProductRoutingModule,
+                FontAwesomeModule,
+                MatPaginatorModule,
+                NgxSpinnerModule.forRoot({ type: 'ball-triangle-path' }),
+                BrowserAnimationsModule,
+        ],
         exports: [HomePageComponent, CategoryPageComponent, DetailPageComponent, ProductItemDirective],
 })
 export class ProductModule {}
