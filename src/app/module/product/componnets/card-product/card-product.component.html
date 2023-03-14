@@ -1,8 +1,4 @@
-<div
-        class="h-[450px] border-[1px] rounded-md select-none cursor-pointer"
-        (click)="onClick(product)"
-        [routerLink]="'/product/' + this.convert(product.name) + 'id=' + this.product.id"
->
+<div class="h-[450px] border-[1px] rounded-md select-none cursor-pointer" (click)="onClick(product)">
         <div class="h-[300px]">
                 <img [src]="product?.mainImage" alt="" class="object-cover h-full w-full rounded-t-md" />
         </div>

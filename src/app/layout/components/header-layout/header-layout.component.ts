@@ -12,7 +12,7 @@ import { ProductServiceService } from 'src/app/module/product/product-service.se
 export class HeaderLayoutComponent {
         listCategory: any;
         valueSearch: string = '';
-        listProductCart: any = [];
+        listProductCart = [];
 
         navigationSubscription: any;
 
@@ -20,15 +20,14 @@ export class HeaderLayoutComponent {
                 public ProductService: ProductServiceService,
                 public CartService: CartServiceService,
                 private router: Router,
-        ) {
-                this.listProductCart = this.CartService.listProductCart;
-        }
+        ) {}
         faCartShopping = faCartShopping;
         ngOnInit() {
                 this.ProductService.getCategory().subscribe((cateData: any) => {
                         this.listCategory = cateData.response;
-                        console.log(this.listCategory);
                 });
+                // update products in cart
+                this.CartService.getCart().subscribe((item: any) => (this.listProductCart = item));
         }
         updateValueSearch(newValue: string) {
                 this.valueSearch = newValue;

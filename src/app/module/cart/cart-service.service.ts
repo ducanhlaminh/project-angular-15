@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 class ProductCartType {
         couter: number = 1;
@@ -11,14 +12,17 @@ class ProductCartType {
         providedIn: 'root',
 })
 export class CartServiceService {
-        listProductCart: ProductCartType[] = [];
+        ProductCart = new Subject<ProductCartType>();
+        listProduct: any = [];
         constructor() {}
         addToCart(product: any) {
-                const check: boolean = this.listProductCart.some(
+                const check: boolean = this.listProduct.some(
                         (productCart: any) => productCart.product.id === product.id,
                 );
-                !check && (this.listProductCart = [...this.listProductCart, new ProductCartType(product)]);
-
-                console.log(this.listProductCart);
+                !check && (this.listProduct = [...this.listProduct, new ProductCartType(product)]);
+                this.ProductCart.next(this.listProduct);
+        }
+        getCart() {
+                return this.ProductCart.asObservable();
         }
 }

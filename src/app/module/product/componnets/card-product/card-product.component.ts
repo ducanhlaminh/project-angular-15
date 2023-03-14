@@ -13,6 +13,8 @@ export class CardProductComponent implements OnInit {
         constructor(public CartService: CartServiceService) {}
         ngOnInit(): void {}
         addToCartProduct(product: any) {
+                console.log('card');
+
                 this.CartService.addToCart(product);
         }
         onBuy(product: any) {}
@@ -40,7 +42,7 @@ export class CardProductComponent implements OnInit {
                 return str;
         }
         onClick(product: any) {
-                this.productSelected = product;
-                console.log(product);
+                // this.productSelected = product;
+                // console.log(product);
         }
 }

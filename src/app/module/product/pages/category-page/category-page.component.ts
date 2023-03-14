@@ -27,24 +27,15 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         code: string;
         disabled = false;
         pageEvent: PageEvent;
-        isLoading: boolean = true;
+        isLoading: boolean = false;
         navigationSubscription: any;
-        // handlePageEvent(e: PageEvent) {
-        //         this.isLoading = true;
-        //         this.ProductService.getProduct(code, e.pageIndex + 1).subscribe((products: any) => {
-        //                 this.isLoading = false;
-        //                 console.log(this.isLoading);
-
-        //                 return (
-        //                         (this.listProducts = products.productData.rows),
-        //                         (this.count = products.productData.count)
-        //                 );
-        //         });
-        //         this.pageEvent = e;
-        //         this.length = e.length;
-        //         this.pageSize = e.pageSize;
-        //         this.pageIndex = e.pageIndex;
-        // }
+        handlePageEvent(e: PageEvent) {
+                this.pageEvent = e;
+                this.length = e.length;
+                this.pageSize = e.pageSize;
+                this.pageIndex = e.pageIndex;
+                this.getData();
+        }
         constructor(
                 public ProductService: ProductServiceService,
                 public CartService: CartServiceService,
@@ -73,18 +64,14 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         }
 
         ngOnDestroy() {
-                if (this.navigationSubscription) {
-                        this.navigationSubscription.unsubscribe();
-                }
+                // if (this.navigationSubscription) {
+                //         this.navigationSubscription.unsubscribe();
+                // }
         }
 
         getData() {
-                this.ProductService.getProduct({ code: this.categoryId, page: this.pageIndex }).subscribe(
+                this.ProductService.getProduct({ code: this.categoryId, page: this.pageIndex + 1 }).subscribe(
                         (products: any) => {
-                                console.log(products);
-
-                                this.isLoading = false;
-
                                 return (
                                         (this.listProducts = products.productData.rows),
                                         (this.count = products.productData.count)

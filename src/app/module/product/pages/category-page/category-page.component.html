@@ -19,9 +19,10 @@
         [hidePageSize]="true"
         [pageIndex]="pageIndex"
         aria-label="Select page"
+        (page)="handlePageEvent($event)"
 >
 </mat-paginator>
-<!-- (page)="handlePageEvent($event)" -->
+
 <ng-template #loading>
         <ngx-spinner
                 bdColor="rgba(0,0,0,0.55)"
