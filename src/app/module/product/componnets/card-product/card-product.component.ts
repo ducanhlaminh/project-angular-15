@@ -13,8 +13,6 @@ export class CardProductComponent implements OnInit {
         constructor(public CartService: CartServiceService) {}
         ngOnInit(): void {}
         addToCartProduct(product: any) {
-                console.log('card');
-
                 this.CartService.addToCart(product);
         }
         onBuy(product: any) {}

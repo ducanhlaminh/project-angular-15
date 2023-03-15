@@ -27,7 +27,6 @@ export class HeaderLayoutComponent {
                         this.listCategory = cateData.response;
                 });
                 // update products in cart
-                this.CartService.getCart().subscribe((item: any) => (this.listProductCart = item));
         }
         updateValueSearch(newValue: string) {
                 this.valueSearch = newValue;

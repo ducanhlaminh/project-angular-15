@@ -3,7 +3,6 @@ import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 import { CardProductComponent } from '../../componnets/card-product/card-product.component';
 import { ProductServiceService } from '../../product-service.service';
 import { PageEvent } from '@angular/material/paginator';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 interface Product {
         name: string;
@@ -39,7 +38,6 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         constructor(
                 public ProductService: ProductServiceService,
                 public CartService: CartServiceService,
-                private spinner: NgxSpinnerService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
         ) {}

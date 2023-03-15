@@ -13,9 +13,6 @@ import { PaginatorProductComponent } from './componnets/paginator-product/pagina
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './componnets/sidebar/sidebar.component';
-interface NgxSpinnerConfig {
-        type?: string;
-}
 @NgModule({
         declarations: [
                 HomePageComponent,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 class ProductCartType {
         couter: number = 1;
@@ -12,17 +12,20 @@ class ProductCartType {
         providedIn: 'root',
 })
 export class CartServiceService {
-        ProductCart = new Subject<ProductCartType>();
-        listProduct: any = [];
+        ProductCart = new Observable();
+        listProduct: any[] = [];
         constructor() {}
         addToCart(product: any) {
-                const check: boolean = this.listProduct.some(
+                const index: number = this.listProduct.findIndex(
                         (productCart: any) => productCart.product.id === product.id,
                 );
-                !check && (this.listProduct = [...this.listProduct, new ProductCartType(product)]);
-                this.ProductCart.next(this.listProduct);
+                // check duplicates product trong ccart && update counter a product
+                index === -1
+                        ? (this.listProduct = [...this.listProduct, new ProductCartType(product)])
+                        : (this.listProduct[index].couter = ++this.listProduct[index].couter);
+                console.log(this.listProduct);
         }
         getCart() {
-                return this.ProductCart.asObservable();
+                return this.listProduct;
         }
 }
