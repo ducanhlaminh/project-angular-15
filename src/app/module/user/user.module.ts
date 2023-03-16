@@ -10,6 +10,7 @@ import { ProfilePageComponent } from './componets/profile-page/profile-page.comp
 import { ManageBillsComponent } from './page/manage-bills/manage-bills.component';
 import { HistoryBillsComponent } from './page/history-bills/history-bills.component';
 import { AdminComponent } from './page/admin/admin.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
         declarations: [
                 UserPageComponent,
@@ -22,7 +23,7 @@ import { AdminComponent } from './page/admin/admin.component';
                 HistoryBillsComponent,
                 AdminComponent,
         ],
-        imports: [CommonModule, UserRoutingModule],
+        imports: [CommonModule, UserRoutingModule, FormsModule],
         exports: [UserPageComponent, LoginPageComponent, SignupPageComponent, BillPageComponent],
 })
 export class UserModule {}

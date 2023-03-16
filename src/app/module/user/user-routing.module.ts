@@ -5,6 +5,7 @@ import { HistoryBillComponent } from './page/user-page/history-bill/history-bill
 import { BillPageComponent } from './page/bill-page/bill-page.component';
 import { AdminComponent } from './page/admin/admin.component';
 import { ManageBillsComponent } from './page/manage-bills/manage-bills.component';
+import { LoginPageComponent } from './page/login-page/login-page.component';
 
 export const userRoutes: Routes = [
         {
@@ -24,6 +25,10 @@ export const userRoutes: Routes = [
         {
                 path: 'history-bill',
                 component: HistoryBillComponent,
+        },
+        {
+                path: 'login',
+                component: LoginPageComponent,
         },
 ];
 
