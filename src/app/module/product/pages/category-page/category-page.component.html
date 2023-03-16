@@ -1,6 +1,6 @@
 <div class="flex p-3 min-h-[900px]">
         <div class="w-1/5 h-full">
-                <app-sidebar></app-sidebar>
+                <app-sidebar (changeSortEmit)="updateGetProduct($event)" [value]="priceSort"></app-sidebar>
         </div>
         <div class="min-h-[600px] w-4/5 relative">
                 <div class="flex flex-wrap" *ngIf="!isLoading; else loading">

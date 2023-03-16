@@ -16,18 +16,19 @@ interface Product {
 })
 export class CategoryPageComponent implements OnInit, OnDestroy {
         categoryId: any;
-
         listProducts: any;
         count: number;
         listCategory: any = [];
         length = 0;
         pageSize = 20;
         pageIndex = 0;
+        sortCur: any;
         code: string;
         disabled = false;
         pageEvent: PageEvent;
         isLoading: boolean = false;
         navigationSubscription: any;
+        priceSort = 200000;
         handlePageEvent(e: PageEvent) {
                 this.pageEvent = e;
                 this.length = e.length;
@@ -40,7 +41,9 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                 public CartService: CartServiceService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
-        ) {}
+        ) {
+                this.sortCur = this.ProductService.sortType[0];
+        }
 
         ngOnInit() {
                 this.categoryId = this.activatedRoute.snapshot.params['id'];
@@ -57,8 +60,8 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                                 this.getData();
                         }
                 });
-
                 this.getData();
+                this.ProductService.postData().subscribe((res: any) => console.log(res));
         }
 
         ngOnDestroy() {
@@ -68,13 +71,23 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         }
 
         getData() {
-                this.ProductService.getProduct({ code: this.categoryId, page: this.pageIndex + 1 }).subscribe(
-                        (products: any) => {
-                                return (
-                                        (this.listProducts = products.productData.rows),
-                                        (this.count = products.productData.count)
-                                );
-                        },
-                );
+                this.ProductService.getProduct({
+                        code: this.categoryId,
+                        page: this.pageIndex + 1,
+                        sort: this.sortCur,
+                        price: this.priceSort,
+                }).subscribe((products: any) => {
+                        return (
+                                (this.listProducts = products.productData.rows),
+                                (this.count = products.productData.count)
+                        );
+                });
+        }
+        updateGetProduct(e: any) {
+                console.log(e);
+
+                this.sortCur = e.sortCurrent;
+                this.priceSort = e.price;
+                this.getData();
         }
 }

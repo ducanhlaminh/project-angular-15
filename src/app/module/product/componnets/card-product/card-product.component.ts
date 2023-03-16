@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 @Component({
         selector: 'app-card-product',
         templateUrl: './card-product.component.html',
@@ -10,9 +11,10 @@ export class CardProductComponent implements OnInit {
         @Input() product: any;
         faCartShopping = faCartShopping;
         productSelected: any = null;
-        constructor(public CartService: CartServiceService) {}
+        constructor(public CartService: CartServiceService, private router: Router) {}
         ngOnInit(): void {}
-        addToCartProduct(product: any) {
+        addToCartProduct($event: any, product: any) {
+                $event.stopPropagation();
                 this.CartService.addToCart(product);
         }
         onBuy(product: any) {}
@@ -39,8 +41,9 @@ export class CardProductComponent implements OnInit {
                 str = str.split(' ').join('-');
                 return str;
         }
-        onClick(product: any) {
-                // this.productSelected = product;
-                // console.log(product);
+        onClick(id: any) {
+                console.log(id);
+
+                this.router.navigateByUrl('/product/' + id);
         }
 }

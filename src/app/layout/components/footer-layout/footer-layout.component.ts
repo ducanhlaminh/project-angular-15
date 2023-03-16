@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CategoryService } from 'src/app/module/product/category.service';
 import { ProductServiceService } from 'src/app/module/product/product-service.service';
 
 @Component({
@@ -8,8 +9,8 @@ import { ProductServiceService } from 'src/app/module/product/product-service.se
 })
 export class FooterLayoutComponent {
         listCates: any;
-        constructor(public ProductService: ProductServiceService) {
-                this.ProductService.getCategory().subscribe((category: any) => {
+        constructor(public CategoryService: CategoryService) {
+                this.CategoryService.getCategory().subscribe((category: any) => {
                         this.listCates = category.response;
                 });
         }

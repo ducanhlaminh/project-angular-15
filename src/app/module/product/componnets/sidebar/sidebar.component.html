@@ -1,1 +1,21 @@
-<p>sidebar works!</p>
+<div class="w-full p-4">
+        <div class="">
+                <mat-form-field appearance="fill" class="w-full">
+                        <mat-label class="">Sort</mat-label>
+                        <mat-select (selectionChange)="onChangeSort($event)" [value]="selected">
+                                <mat-option [value]="convertJSON(item)" *ngFor="let item of ProductService.sortType">{{
+                                        item.lable
+                                }}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+        </div>
+        <div class="example-label-container flex justify-between">
+                <label id="example-name-label" class="example-name-label">Khoảng giá :</label>
+                <label class="example-value-label">{{ value | priceProduct }}</label>
+        </div>
+        <div class="">
+                <mat-slider class="" [max]="max" [min]="min" [step]="step">
+                        <input matSliderThumb [ngModel]="value" (ngModelChange)="onChangePrice($event)" />
+                </mat-slider>
+        </div>
+</div>

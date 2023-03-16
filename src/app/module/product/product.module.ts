@@ -13,6 +13,11 @@ import { PaginatorProductComponent } from './componnets/paginator-product/pagina
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './componnets/sidebar/sidebar.component';
+import { OptionProductComponent } from './componnets/option-product/option-product.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 @NgModule({
         declarations: [
                 HomePageComponent,
@@ -23,6 +28,7 @@ import { SidebarComponent } from './componnets/sidebar/sidebar.component';
                 ProductItemDirective,
                 PaginatorProductComponent,
                 SidebarComponent,
+                OptionProductComponent,
         ],
         imports: [
                 CommonModule,
@@ -31,6 +37,10 @@ import { SidebarComponent } from './componnets/sidebar/sidebar.component';
                 MatPaginatorModule,
                 NgxSpinnerModule.forRoot({ type: 'ball-triangle-path' }),
                 BrowserAnimationsModule,
+                MatOptionModule,
+                MatSelectModule,
+                MatSliderModule,
+                FormsModule,
         ],
         exports: [HomePageComponent, CategoryPageComponent, DetailPageComponent, ProductItemDirective],
 })

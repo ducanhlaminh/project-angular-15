@@ -2,6 +2,7 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { CartServiceService } from 'src/app/module/cart/cart-service.service';
+import { CategoryService } from 'src/app/module/product/category.service';
 import { ProductServiceService } from 'src/app/module/product/product-service.service';
 
 @Component({
@@ -12,21 +13,24 @@ import { ProductServiceService } from 'src/app/module/product/product-service.se
 export class HeaderLayoutComponent {
         listCategory: any;
         valueSearch: string = '';
-        listProductCart = [];
+        listProductCart: any[];
 
         navigationSubscription: any;
 
         constructor(
                 public ProductService: ProductServiceService,
                 public CartService: CartServiceService,
+                public CategoryService: CategoryService,
                 private router: Router,
         ) {}
         faCartShopping = faCartShopping;
+
         ngOnInit() {
-                this.ProductService.getCategory().subscribe((cateData: any) => {
+                this.CategoryService.getCategory().subscribe((cateData: any) => {
                         this.listCategory = cateData.response;
                 });
                 // update products in cart
+                this.listProductCart = this.CartService.listProduct;
         }
         updateValueSearch(newValue: string) {
                 this.valueSearch = newValue;
