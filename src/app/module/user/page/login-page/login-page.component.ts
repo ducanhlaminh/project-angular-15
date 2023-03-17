@@ -13,8 +13,7 @@ export class LoginPageComponent {
         constructor(private UserService: UseServiceService, private router: Router) {}
         loginAcc() {
                 this.UserService.login(this.email, this.password).subscribe((res: any) => {
-                        res.status = '0' && localStorage.setItem('token', res.token);
-                        this.router.navigateByUrl('');
+                        res.status = '0' && (localStorage.setItem('token', res.token), this.router.navigateByUrl(''));
                 });
         }
 }

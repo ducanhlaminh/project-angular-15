@@ -38,7 +38,6 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         }
         constructor(
                 public ProductService: ProductServiceService,
-                public CartService: CartServiceService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
         ) {
@@ -60,8 +59,8 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                                 this.getData();
                         }
                 });
+
                 this.getData();
-                this.ProductService.postData().subscribe((res: any) => console.log(res));
         }
 
         ngOnDestroy() {

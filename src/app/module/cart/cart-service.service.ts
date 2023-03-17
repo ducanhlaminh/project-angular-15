@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 class ProductCartType {
         couter: number = 1;
         constructor(public product: any) {
@@ -12,20 +12,16 @@ class ProductCartType {
         providedIn: 'root',
 })
 export class CartServiceService {
-        ProductCart = new Observable();
         listProduct: any[] = [];
-        constructor() {}
+        constructor(private http: HttpClient) {}
+
         addToCart(product: any) {
-                const index: number = this.listProduct.findIndex(
-                        (productCart: any) => productCart.product.id === product.id,
-                );
-                // check duplicates product trong ccart && update counter a product
-                index === -1
-                        ? (this.listProduct = [...this.listProduct, new ProductCartType(product)])
-                        : (this.listProduct[index].couter = ++this.listProduct[index].couter);
-                console.log(this.listProduct);
+                return this.http.post(environment.API_CART, product);
         }
-        getCart() {
-                return this.listProduct;
+        getProductCart() {
+                this.http
+                        .get(environment.API_CART)
+                        .subscribe((response: any) => (this.listProduct = response.yourCart));
+                return;
         }
 }

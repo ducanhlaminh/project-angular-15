@@ -1,1 +1,41 @@
-<p>cart-page works!</p>
+<div class="h-[700px]">
+        <p class="h-[50px]">Gio hang cua toi</p>
+        <div class="flex">
+                <div class="w-[70%] h-[650px]">
+                        <div class="h-[50px] flex border-b-2">
+                                <div class="w-[50%] flex items-center">
+                                        <span>Thông tin sản phẩm</span>
+                                </div>
+                                <div class="w-[15%] flex items-center"><span>Số lượng</span></div>
+                                <div class="w-[15%] flex items-center"><span>Giá</span></div>
+                                <div class="w-[20%] flex items-center">Tổng</div>
+                        </div>
+                        <div class="h-[600px] overflow-auto">
+                                <div
+                                        *ngFor="let item of CartService.listProduct"
+                                        class="h-[120px] pl-5 border-b-2 mb-2 py-2"
+                                >
+                                        <div class="w-1/2 h-full flex">
+                                                <div class="w-[100px] h-full">
+                                                        <img
+                                                                [src]="item.productData?.mainImage"
+                                                                alt=""
+                                                                class="object-cover h-full"
+                                                        />
+                                                </div>
+                                                <div class="px-3">
+                                                        <p class="font-[500]">{{ item.productData?.name }}</p>
+                                                        <div *ngFor="let item of item.variant" class="flex gap-2">
+                                                                <span>{{ item.variant }} :</span>
+                                                                <span>{{ item.value }}</span>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="w-[15%] flex items-center"><span></span></div>
+                                </div>
+
+                                <!-- <p>{{ item | json }}</p> -->
+                        </div>
+                </div>
+        </div>
+</div>

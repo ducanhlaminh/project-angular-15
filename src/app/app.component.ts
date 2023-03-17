@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartServiceService } from './module/cart/cart-service.service';
 
 @Component({
         selector: 'app-root',
@@ -7,5 +8,5 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
         title = 'project-angular-15';
-        listProduct: any;
+        constructor(private CartService: CartServiceService) {}
 }

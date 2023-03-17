@@ -13,24 +13,20 @@ import { ProductServiceService } from 'src/app/module/product/product-service.se
 export class HeaderLayoutComponent {
         listCategory: any;
         valueSearch: string = '';
-        listProductCart: any[];
-
         navigationSubscription: any;
-
+        faCartShopping = faCartShopping;
         constructor(
                 public ProductService: ProductServiceService,
                 public CartService: CartServiceService,
                 public CategoryService: CategoryService,
                 private router: Router,
-        ) {}
-        faCartShopping = faCartShopping;
-
+        ) {
+                console.log(CartService);
+        }
         ngOnInit() {
                 this.CategoryService.getCategory().subscribe((cateData: any) => {
                         this.listCategory = cateData.response;
                 });
-                // update products in cart
-                this.listProductCart = this.CartService.listProduct;
         }
         updateValueSearch(newValue: string) {
                 this.valueSearch = newValue;

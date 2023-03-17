@@ -6,14 +6,16 @@ import { ProductModule } from './module/product/product.module';
 import { CheckoutModule } from './module/checkout/checkout.module';
 import { LayoutModule } from './layout/layout.module';
 import { UserModule } from './module/user/user.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { HttpInterceptorInterceptor } from './interceptor/http-interceptor.interceptor';
+import { CartModule } from './module/cart/cart.module';
 @NgModule({
         declarations: [AppComponent],
         imports: [
                 BrowserModule,
+                CartModule,
                 AppRoutingModule,
                 ProductModule,
                 CheckoutModule,
@@ -23,7 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
                 FormsModule,
                 FontAwesomeModule,
         ],
-        providers: [],
+        providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true }],
         bootstrap: [AppComponent],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

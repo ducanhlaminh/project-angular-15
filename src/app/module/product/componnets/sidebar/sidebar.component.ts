@@ -9,7 +9,7 @@ import { ProductServiceService } from '../../product-service.service';
 export class SidebarComponent {
         @Output() changeSortEmit = new EventEmitter<any>();
         max = 500000;
-        min = 100000;
+        min = 0;
         step = 10000;
         @Input() value = 200000;
         selected = JSON.stringify(this.ProductService.sortType[0]);

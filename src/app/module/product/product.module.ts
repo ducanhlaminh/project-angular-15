@@ -18,6 +18,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
         declarations: [
                 HomePageComponent,
@@ -35,6 +36,7 @@ import { FormsModule } from '@angular/forms';
                 ProductRoutingModule,
                 FontAwesomeModule,
                 MatPaginatorModule,
+                MatChipsModule,
                 NgxSpinnerModule.forRoot({ type: 'ball-triangle-path' }),
                 BrowserAnimationsModule,
                 MatOptionModule,

@@ -4,14 +4,8 @@ import { CommonModule } from '@angular/common';
 import { CartRoutingModule } from './cart-routing.module';
 import { CartPageComponent } from './cart-page/cart-page.component';
 
-
 @NgModule({
-  declarations: [
-    CartPageComponent
-  ],
-  imports: [
-    CommonModule,
-    CartRoutingModule
-  ]
+        declarations: [CartPageComponent],
+        imports: [CommonModule, CartRoutingModule],
 })
-export class CartModule { }
+export class CartModule {}

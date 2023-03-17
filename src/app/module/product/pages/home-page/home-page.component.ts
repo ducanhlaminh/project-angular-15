@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 
 @Component({
         selector: 'app-home-page',
