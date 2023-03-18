@@ -16,8 +16,9 @@ import { FooterLayoutComponent } from './components/footer-layout/footer-layout.
                 ItemCategoryComponent,
                 InputFieldComponent,
                 FooterLayoutComponent,
+                PriceProductPipe,
         ],
         imports: [CommonModule, LayoutRoutingModule, FormsModule, FontAwesomeModule],
-        exports: [LayoutPageComponent],
+        exports: [LayoutPageComponent, PriceProductPipe],
 })
 export class LayoutModule {}

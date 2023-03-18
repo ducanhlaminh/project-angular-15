@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { CartRoutingModule } from './cart-routing.module';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { PriceProductPipe } from '../product/price-product.pipe';
+import { LayoutModule } from 'src/app/layout/layout.module';
 @NgModule({
-        declarations: [CartPageComponent, PriceProductPipe],
-        imports: [CommonModule, CartRoutingModule, FormsModule],
+        declarations: [CartPageComponent],
+        imports: [CommonModule, CartRoutingModule, FormsModule, LayoutModule],
 })
 export class CartModule {}

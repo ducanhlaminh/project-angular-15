@@ -5,7 +5,6 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CategoryPageComponent } from './pages/category-page/category-page.component';
 import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 import { CardProductComponent } from './componnets/card-product/card-product.component';
-import { PriceProductPipe } from './price-product.pipe';
 import { ProductItemDirective } from './pages/home-page/directive/product-item.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -17,6 +16,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
+import { LayoutModule } from 'src/app/layout/layout.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
         declarations: [
                 HomePageComponent,
@@ -30,6 +32,7 @@ import { MatChipsModule } from '@angular/material/chips';
         ],
         imports: [
                 CommonModule,
+                BrowserAnimationsModule,
                 ProductRoutingModule,
                 FontAwesomeModule,
                 MatPaginatorModule,
@@ -38,6 +41,7 @@ import { MatChipsModule } from '@angular/material/chips';
                 MatSelectModule,
                 MatSliderModule,
                 FormsModule,
+                LayoutModule,
         ],
         exports: [HomePageComponent, CategoryPageComponent, DetailPageComponent, ProductItemDirective],
 })
