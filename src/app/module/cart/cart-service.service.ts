@@ -19,9 +19,13 @@ export class CartServiceService {
                 return this.http.post(environment.API_CART, product);
         }
         getProductCart() {
-                this.http
-                        .get(environment.API_CART)
-                        .subscribe((response: any) => (this.listProduct = response.yourCart));
-                return;
+                this.http.get(environment.API_CART).subscribe(
+                        (response: any) =>
+                                (this.listProduct = response.yourCart.map((product: any) => ({
+                                        product,
+                                        count: 1,
+                                }))),
+                );
+                return this.listProduct;
         }
 }

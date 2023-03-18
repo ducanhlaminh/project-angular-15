@@ -10,8 +10,6 @@ import { ProductItemDirective } from './pages/home-page/directive/product-item.d
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PaginatorProductComponent } from './componnets/paginator-product/paginator-product.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './componnets/sidebar/sidebar.component';
 import { OptionProductComponent } from './componnets/option-product/option-product.component';
 import { MatOptionModule } from '@angular/material/core';
@@ -25,7 +23,6 @@ import { MatChipsModule } from '@angular/material/chips';
                 CategoryPageComponent,
                 DetailPageComponent,
                 CardProductComponent,
-                PriceProductPipe,
                 ProductItemDirective,
                 PaginatorProductComponent,
                 SidebarComponent,
@@ -37,8 +34,6 @@ import { MatChipsModule } from '@angular/material/chips';
                 FontAwesomeModule,
                 MatPaginatorModule,
                 MatChipsModule,
-                NgxSpinnerModule.forRoot({ type: 'ball-triangle-path' }),
-                BrowserAnimationsModule,
                 MatOptionModule,
                 MatSelectModule,
                 MatSliderModule,

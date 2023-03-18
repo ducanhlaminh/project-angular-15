@@ -10,6 +10,5 @@ export class CartPageComponent {
         listProduct: any = [];
         constructor(public CartService: CartServiceService) {
                 this.listProduct = this.CartService.listProduct.map((product) => ({ ...product, count: 1 }));
-                console.log(this.listProduct);
         }
 }

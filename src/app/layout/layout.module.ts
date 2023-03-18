@@ -7,9 +7,16 @@ import { HeaderLayoutComponent } from './components/header-layout/header-layout.
 import { ItemCategoryComponent } from './components/item-category/item-category.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
 import { FormsModule } from '@angular/forms';
+import { PriceProductPipe } from '../module/product/price-product.pipe';
 import { FooterLayoutComponent } from './components/footer-layout/footer-layout.component';
 @NgModule({
-        declarations: [LayoutPageComponent, HeaderLayoutComponent, ItemCategoryComponent, InputFieldComponent, FooterLayoutComponent],
+        declarations: [
+                LayoutPageComponent,
+                HeaderLayoutComponent,
+                ItemCategoryComponent,
+                InputFieldComponent,
+                FooterLayoutComponent,
+        ],
         imports: [CommonModule, LayoutRoutingModule, FormsModule, FontAwesomeModule],
         exports: [LayoutPageComponent],
 })

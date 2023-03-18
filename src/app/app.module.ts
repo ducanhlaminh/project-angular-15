@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpInterceptorInterceptor } from './interceptor/http-interceptor.interceptor';
 import { CartModule } from './module/cart/cart.module';
+import { PriceProductPipe } from './module/product/price-product.pipe';
 @NgModule({
         declarations: [AppComponent],
         imports: [
