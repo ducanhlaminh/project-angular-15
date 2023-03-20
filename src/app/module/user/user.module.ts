@@ -11,6 +11,7 @@ import { ManageBillsComponent } from './page/manage-bills/manage-bills.component
 import { HistoryBillsComponent } from './page/history-bills/history-bills.component';
 import { AdminComponent } from './page/admin/admin.component';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
         declarations: [
                 UserPageComponent,
@@ -23,7 +24,7 @@ import { FormsModule } from '@angular/forms';
                 HistoryBillsComponent,
                 AdminComponent,
         ],
-        imports: [CommonModule, UserRoutingModule, FormsModule],
+        imports: [CommonModule, UserRoutingModule, FormsModule, MatFormFieldModule],
         exports: [UserPageComponent, LoginPageComponent, SignupPageComponent, BillPageComponent],
 })
 export class UserModule {}

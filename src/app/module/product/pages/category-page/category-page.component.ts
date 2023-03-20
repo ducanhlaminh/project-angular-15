@@ -1,13 +1,11 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, OnDestroy } from '@angular/core';
-import { CartServiceService } from 'src/app/module/cart/cart-service.service';
-import { CardProductComponent } from '../../componnets/card-product/card-product.component';
 import { ProductServiceService } from '../../product-service.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { isLoading } from 'src/app/store/actions/app.actions';
-import { selectFeatureCount } from 'src/app/store/selector/appSelector';
+import { getProductBegin, isLoading } from 'src/app/store/actions/app.actions';
+import { selectFeatureLoading, selectFeatureProduct } from 'src/app/store/selector/appSelector';
+
 interface Product {
         name: string;
         price: number;
@@ -20,19 +18,19 @@ interface Product {
 })
 export class CategoryPageComponent implements OnInit, OnDestroy {
         categoryId: any;
-        listProducts: any;
+        listProducts$ = this.store.select(selectFeatureProduct);
         count: number;
         listCategory: any = [];
         length = 0;
         pageSize = 20;
         pageIndex = 0;
-        sortCur: any;
+        sortDefault: any;
         code: string;
         disabled = false;
         pageEvent: PageEvent;
         navigationSubscription: any;
         priceSort = 200000;
-        loading$: Observable<boolean>;
+        loadingPage$ = this.store.select(selectFeatureLoading);
         handlePageEvent(e: PageEvent) {
                 this.pageEvent = e;
                 this.length = e.length;
@@ -44,15 +42,9 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                 public ProductService: ProductServiceService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
-                private store: Store<{ loading: boolean }>,
+                private store: Store<{ app: any }>,
         ) {
-                this.loading$ = store.select(selectFeatureCount);
-                this.loading$.subscribe((data) => console.log(data));
-
-                this.sortCur = this.ProductService.sortType[0];
-        }
-        onClick() {
-                this.store.dispatch(isLoading());
+                this.sortDefault = this.ProductService.sortType[0];
         }
         ngOnInit() {
                 this.categoryId = this.activatedRoute.snapshot.params['id'];
@@ -61,7 +53,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                                 this.pageIndex = params.page;
                         }
                 });
-
+                // this.loadingPage$.subscribe((data) => console.log(data));
                 this.navigationSubscription = this.router.events.subscribe((e: any) => {
                         // If it is a NavigationEnd event re-initalise the component
                         if (e instanceof NavigationEnd) {
@@ -69,33 +61,39 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                                 this.getData();
                         }
                 });
-
                 this.getData();
         }
-
         ngOnDestroy() {
                 if (this.navigationSubscription) {
                         this.navigationSubscription.unsubscribe();
                 }
         }
-
         getData() {
-                this.ProductService.getProduct({
-                        code: this.categoryId,
-                        page: this.pageIndex + 1,
-                        sort: this.sortCur,
-                        price: this.priceSort,
-                }).subscribe((products: any) => {
-                        return (
-                                (this.listProducts = products.productData.rows),
-                                (this.count = products.productData.count)
-                        );
-                });
+                this.store.dispatch(
+                        getProductBegin({
+                                data: {
+                                        code: this.categoryId,
+                                        page: this.pageIndex + 1,
+                                        sort: this.sortDefault,
+                                        price: this.priceSort,
+                                },
+                        }),
+                );
+
+                // this.ProductService.getProduct({
+                //         code: this.categoryId,
+                //         page: this.pageIndex + 1,
+                //         sort: this.sortCur,
+                //         price: this.priceSort,
+                // }).subscribe((products: any) => {
+                //         return (
+                //                 (this.listProducts = products.productData.rows),
+                //                 (this.count = products.productData.count)
+                //         );
+                // });
         }
         updateGetProduct(e: any) {
-                console.log(e);
-
-                this.sortCur = e.sortCurrent;
+                this.sortDefault = e.sortCurrent;
                 this.priceSort = e.price;
                 this.getData();
         }

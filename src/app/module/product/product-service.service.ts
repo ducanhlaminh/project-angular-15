@@ -33,11 +33,17 @@ export class ProductServiceService {
                         },
                 });
         }
-        getProductById(id: number) {
+        getProductById(id: any) {
                 return this.http.get(environment.API_PRODUCT, {
                         params: {
-                                limitProduct: 20,
                                 id: id,
+                        },
+                });
+        }
+        getProductSByName(name: string) {
+                return this.http.get(environment.API_PRODUCT, {
+                        params: {
+                                name,
                         },
                 });
         }

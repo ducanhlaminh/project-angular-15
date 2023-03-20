@@ -19,6 +19,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
         declarations: [
                 HomePageComponent,
@@ -32,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         ],
         imports: [
                 CommonModule,
+                MatProgressSpinnerModule,
                 BrowserAnimationsModule,
                 ProductRoutingModule,
                 FontAwesomeModule,

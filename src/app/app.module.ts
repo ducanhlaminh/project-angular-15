@@ -15,11 +15,13 @@ import { PriceProductPipe } from './module/product/price-product.pipe';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/reducer/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './store/effects/app.effect';
 @NgModule({
         declarations: [AppComponent],
         imports: [
                 BrowserModule,
-                StoreModule.forRoot({ loading: appReducer }),
+                StoreModule.forRoot({ app: appReducer }),
                 CartModule,
                 AppRoutingModule,
                 ProductModule,
@@ -28,6 +30,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
                 UserModule,
                 HttpClientModule,
                 FormsModule,
+                EffectsModule.forRoot([AppEffects]),
                 FontAwesomeModule,
                 StoreDevtoolsModule.instrument({
                         maxAge: 25, // Retains last 25 states

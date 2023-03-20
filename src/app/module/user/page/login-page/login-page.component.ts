@@ -17,13 +17,23 @@ export class LoginPageComponent {
                 private router: Router,
         ) {}
         loginAcc() {
-                this.UserService.login(this.email, this.password).subscribe((res: any) => {
-                        // status = 0 => save token in LocalStorage , navigation to Home , update cart
-                        res.status =
-                                '0' &&
-                                (localStorage.setItem('token', res.token),
-                                this.router.navigateByUrl(''),
-                                this.CartService.getProductCart());
-                });
+                this.validateEmail(this.email) &&
+                        // this.validatePassword(this.password) &&
+                        this.UserService.login(this.email, this.password).subscribe((res: any) => {
+                                // status = 0 => save token in LocalStorage , navigation to Home , update cart
+                                res.status =
+                                        '0' &&
+                                        (localStorage.setItem('token', res.token),
+                                        this.router.navigateByUrl(''),
+                                        this.CartService.getProductCart());
+                        });
         }
+        validateEmail = (email: string) => {
+                return email.match(
+                        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                );
+        };
+        validatePassword = (pw: string) => {
+                return pw.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$/);
+        };
 }

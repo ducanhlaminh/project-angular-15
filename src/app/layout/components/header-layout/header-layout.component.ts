@@ -1,21 +1,27 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 import { CategoryService } from 'src/app/module/product/category.service';
 import { ProductServiceService } from 'src/app/module/product/product-service.service';
 import { UseServiceService } from 'src/app/module/user/use-service.service';
-
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map, debounceTime, tap, switchMap } from 'rxjs/operators';
 @Component({
         selector: 'app-header-layout',
         templateUrl: './header-layout.component.html',
         styleUrls: ['./header-layout.component.scss'],
 })
-export class HeaderLayoutComponent {
+export class HeaderLayoutComponent implements OnInit {
+        control = new FormControl('');
+        streets: any[] = [];
         listCategory: any;
         valueSearch: string = '';
-        navigationSubscription: any;
+
         faCartShopping = faCartShopping;
+        filteredStreets: any;
+        productId: string = '';
         constructor(
                 public ProductService: ProductServiceService,
                 public CartService: CartServiceService,
@@ -27,9 +33,16 @@ export class HeaderLayoutComponent {
                 this.CategoryService.getCategory().subscribe((cateData: any) => {
                         this.listCategory = cateData.response;
                 });
-        }
-        updateValueSearch(newValue: string) {
-                this.valueSearch = newValue;
+                this.control.valueChanges
+                        .pipe(
+                                debounceTime(500),
+                                switchMap((value) => this.ProductService.getProductSByName(value || '')),
+                        )
+                        .subscribe((data: any) => {
+                                console.log(data.productData.rows);
+
+                                return (this.filteredStreets = data.productData.rows);
+                        });
         }
         addToCart() {}
         convert(str: string): string {
@@ -58,5 +71,10 @@ export class HeaderLayoutComponent {
         logoutAcc() {
                 this.UserService.logout();
                 this.CartService.resetCart();
+        }
+        selectProductSearch(e: any) {
+                const id = e.option.id;
+
+                this.router.navigateByUrl(`/product/${id}`);
         }
 }

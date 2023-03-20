@@ -11,8 +11,25 @@
                         </a>
                 </div>
         </div>
-        <div class="w-[30%]">
-                <app-input-field [valueText]="valueSearch" (newValueText)="updateValueSearch($event)"></app-input-field>
+        <div class="w-[30%] relative">
+                <form class="example-form">
+                        <input
+                                type="text"
+                                placeholder="Search for a street"
+                                [formControl]="control"
+                                [matAutocomplete]="auto"
+                                class="h-[42px] bg-gray-200 text-gray-500 px-5 py-3 w-full outline-none rounded-sm"
+                        />
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectProductSearch($event)">
+                                <mat-option
+                                        *ngFor="let street of filteredStreets"
+                                        [value]="street?.name"
+                                        [id]="street?.id"
+                                >
+                                        {{ street.name }}
+                                </mat-option>
+                        </mat-autocomplete>
+                </form>
         </div>
         <div class="w-[5%] flex items-center text-[22px] justify-center relative">
                 <fa-icon [icon]="faCartShopping"></fa-icon>

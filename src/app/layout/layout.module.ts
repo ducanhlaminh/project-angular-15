@@ -9,6 +9,8 @@ import { InputFieldComponent } from './components/input-field/input-field.compon
 import { FormsModule } from '@angular/forms';
 import { PriceProductPipe } from '../module/product/price-product.pipe';
 import { FooterLayoutComponent } from './components/footer-layout/footer-layout.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
         declarations: [
                 LayoutPageComponent,
@@ -18,7 +20,14 @@ import { FooterLayoutComponent } from './components/footer-layout/footer-layout.
                 FooterLayoutComponent,
                 PriceProductPipe,
         ],
-        imports: [CommonModule, LayoutRoutingModule, FormsModule, FontAwesomeModule],
+        imports: [
+                CommonModule,
+                LayoutRoutingModule,
+                FormsModule,
+                FontAwesomeModule,
+                MatAutocompleteModule,
+                ReactiveFormsModule,
+        ],
         exports: [LayoutPageComponent, PriceProductPipe],
 })
 export class LayoutModule {}

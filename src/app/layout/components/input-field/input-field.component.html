@@ -3,5 +3,5 @@
         class="h-[42px] bg-gray-200 text-gray-500 px-5 py-3 w-full outline-none rounded-sm"
         placeholder="Tim kiem san pham"
         [(ngModel)]="valueText"
-        (keyup)="onChangeValueText()"
+        (keyup)="onChangeValueText($event)"
 />
