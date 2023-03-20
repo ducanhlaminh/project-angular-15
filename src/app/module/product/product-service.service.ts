@@ -29,7 +29,7 @@ export class ProductServiceService {
                                 page: args.page,
                                 categoryCode: args.code,
                                 order: [args.sort.name, args.sort.code],
-                                price: [args.price, 2000000],
+                                price: [args.price, 9000000],
                         },
                 });
         }

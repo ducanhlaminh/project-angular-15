@@ -4,6 +4,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 import { CategoryService } from 'src/app/module/product/category.service';
 import { ProductServiceService } from 'src/app/module/product/product-service.service';
+import { UseServiceService } from 'src/app/module/user/use-service.service';
 
 @Component({
         selector: 'app-header-layout',
@@ -19,10 +20,9 @@ export class HeaderLayoutComponent {
                 public ProductService: ProductServiceService,
                 public CartService: CartServiceService,
                 public CategoryService: CategoryService,
+                public UserService: UseServiceService,
                 private router: Router,
-        ) {
-                console.log(CartService);
-        }
+        ) {}
         ngOnInit() {
                 this.CategoryService.getCategory().subscribe((cateData: any) => {
                         this.listCategory = cateData.response;
@@ -54,5 +54,9 @@ export class HeaderLayoutComponent {
                 str = str.replace(/  +/g, ' ');
                 str = str.split(' ').join('-');
                 return str;
+        }
+        logoutAcc() {
+                this.UserService.logout();
+                this.CartService.resetCart();
         }
 }

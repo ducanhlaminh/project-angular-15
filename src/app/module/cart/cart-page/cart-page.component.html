@@ -34,11 +34,26 @@
                                                         </div>
                                                 </div>
                                         </div>
-                                        <div class="w-[15%] flex items-center justify-center">
-                                                <span>{{ item.count }}</span>
-                                        </div>
-                                        <div class="w-[15%] flex items-center justify-center">
-                                                <span>{{ item.product.productData?.costPerUnit | priceProduct }}</span>
+                                        <div class="w-1/2">
+                                                <div class="h-4/6 flex">
+                                                        <div class="w-[30%] flex items-center justify-center">
+                                                                <span>{{ item.count }}</span>
+                                                        </div>
+                                                        <div class="w-[30%] flex items-center justify-center">
+                                                                <span>{{
+                                                                        item.product.productData?.costPerUnit
+                                                                                | priceProduct
+                                                                }}</span>
+                                                        </div>
+                                                </div>
+                                                <div class="h-2/6 flex justify-end">
+                                                        <button
+                                                                (click)="this.CartService.deleteProductCart(item)"
+                                                                class="px-6 py-1 bg-red-300 text-white font-semibold rounded-md"
+                                                        >
+                                                                Xoa
+                                                        </button>
+                                                </div>
                                         </div>
                                 </div>
 

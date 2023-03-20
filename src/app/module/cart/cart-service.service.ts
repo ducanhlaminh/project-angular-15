@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
+import { catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 class ProductCartType {
         couter: number = 1;
@@ -27,5 +28,18 @@ export class CartServiceService {
                                 }))),
                 );
                 return this.listProduct;
+        }
+        resetCart() {
+                this.listProduct = [];
+        }
+        deleteProductCart(product: any) {
+                console.log(product);
+
+                let cids = [product.product.id, 10000];
+                console.log(typeof cids);
+
+                this.http.delete(environment.API_CART, { params: { cids: cids } }).subscribe((response: any) => {
+                        response.status === 0 && this.getProductCart();
+                });
         }
 }

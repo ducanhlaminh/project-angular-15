@@ -4,6 +4,10 @@ import { CardProductComponent } from '../../componnets/card-product/card-product
 import { ProductServiceService } from '../../product-service.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { isLoading } from 'src/app/store/actions/app.actions';
+import { selectFeatureCount } from 'src/app/store/selector/appSelector';
 interface Product {
         name: string;
         price: number;
@@ -26,9 +30,9 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         code: string;
         disabled = false;
         pageEvent: PageEvent;
-        isLoading: boolean = false;
         navigationSubscription: any;
         priceSort = 200000;
+        loading$: Observable<boolean>;
         handlePageEvent(e: PageEvent) {
                 this.pageEvent = e;
                 this.length = e.length;
@@ -40,10 +44,16 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                 public ProductService: ProductServiceService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
+                private store: Store<{ loading: boolean }>,
         ) {
+                this.loading$ = store.select(selectFeatureCount);
+                this.loading$.subscribe((data) => console.log(data));
+
                 this.sortCur = this.ProductService.sortType[0];
         }
-
+        onClick() {
+                this.store.dispatch(isLoading());
+        }
         ngOnInit() {
                 this.categoryId = this.activatedRoute.snapshot.params['id'];
                 this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -64,9 +74,9 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         }
 
         ngOnDestroy() {
-                // if (this.navigationSubscription) {
-                //         this.navigationSubscription.unsubscribe();
-                // }
+                if (this.navigationSubscription) {
+                        this.navigationSubscription.unsubscribe();
+                }
         }
 
         getData() {

@@ -9,4 +9,7 @@ export class UseServiceService {
         login(email: string, password: string) {
                 return this.http.post('http://localhost:8888/api/v1/auth/login', { email, password }, {});
         }
+        logout() {
+                localStorage.setItem('token', '');
+        }
 }

@@ -3,11 +3,17 @@
                 <app-sidebar (changeSortEmit)="updateGetProduct($event)" [value]="priceSort"></app-sidebar>
         </div>
         <div class="min-h-[600px] w-4/5 relative">
-                <div class="flex flex-wrap" *ngIf="!isLoading; else loading">
-                        <div class="w-1/4 flex justify-center px-3 mb-3" *ngFor="let product of listProducts">
+                <div class="flex flex-wrap">
+                        <div
+                                class="w-1/4 flex justify-center px-3 mb-3"
+                                *ngFor="let product of listProducts"
+                                (click)="onClick()"
+                        >
                                 <app-card-product [product]="product" class="w-full" appProductItem></app-card-product>
                         </div>
                 </div>
+                <button (click)="onClick()">clickk</button>
+                <pre>{{ loading$ | async | json }}</pre>
         </div>
 </div>
 <mat-paginator

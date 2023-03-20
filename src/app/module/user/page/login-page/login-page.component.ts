@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 import { UseServiceService } from '../../use-service.service';
 
 @Component({
@@ -10,10 +11,19 @@ import { UseServiceService } from '../../use-service.service';
 export class LoginPageComponent {
         @Input() email: string;
         password: string;
-        constructor(private UserService: UseServiceService, private router: Router) {}
+        constructor(
+                private UserService: UseServiceService,
+                private CartService: CartServiceService,
+                private router: Router,
+        ) {}
         loginAcc() {
                 this.UserService.login(this.email, this.password).subscribe((res: any) => {
-                        res.status = '0' && (localStorage.setItem('token', res.token), this.router.navigateByUrl(''));
+                        // status = 0 => save token in LocalStorage , navigation to Home , update cart
+                        res.status =
+                                '0' &&
+                                (localStorage.setItem('token', res.token),
+                                this.router.navigateByUrl(''),
+                                this.CartService.getProductCart());
                 });
         }
 }
