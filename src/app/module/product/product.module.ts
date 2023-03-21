@@ -6,20 +6,15 @@ import { CategoryPageComponent } from './pages/category-page/category-page.compo
 import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 import { CardProductComponent } from './componnets/card-product/card-product.component';
 import { ProductItemDirective } from './pages/home-page/directive/product-item.directive';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { IconModule } from 'src/app/icon/icon.module';
+
 import { PaginatorProductComponent } from './componnets/paginator-product/paginator-product.component';
 import { SidebarComponent } from './componnets/sidebar/sidebar.component';
 import { OptionProductComponent } from './componnets/option-product/option-product.component';
-import { MatOptionModule } from '@angular/material/core';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
+
 import { LayoutModule } from 'src/app/layout/layout.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { RangePriceComponent } from './componnets/range-price/range-price.component';
 @NgModule({
         declarations: [
                 HomePageComponent,
@@ -30,21 +25,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
                 PaginatorProductComponent,
                 SidebarComponent,
                 OptionProductComponent,
+                RangePriceComponent,
         ],
-        imports: [
-                CommonModule,
-                MatProgressSpinnerModule,
-                BrowserAnimationsModule,
-                ProductRoutingModule,
-                FontAwesomeModule,
-                MatPaginatorModule,
-                MatChipsModule,
-                MatOptionModule,
-                MatSelectModule,
-                MatSliderModule,
-                FormsModule,
-                LayoutModule,
-        ],
+        imports: [CommonModule, IconModule, ProductRoutingModule, LayoutModule],
         exports: [HomePageComponent, CategoryPageComponent, DetailPageComponent, ProductItemDirective],
 })
 export class ProductModule {}

@@ -18,4 +18,20 @@
                         <input matSliderThumb [ngModel]="value" (ngModelChange)="onChangePrice($event)" />
                 </mat-slider>
         </div>
+        <div class="">
+                <mat-form-field appearance="fill" floatLabel="always">
+                        <mat-label>Từ : </mat-label>
+                        <input matInput type="number" class="example-right-align" placeholder="0" />
+                        <span matTextPrefix>đ&nbsp;</span>
+                        <span matTextSuffix>.000</span>
+                </mat-form-field>
+        </div>
+        <div class="">
+                <mat-form-field appearance="fill" floatLabel="always">
+                        <mat-label>Đến :</mat-label>
+                        <input matInput type="number" class="example-right-align" placeholder="0" />
+                        <span matTextPrefix>đ&nbsp;</span>
+                        <span matTextSuffix>.000</span>
+                </mat-form-field>
+        </div>
 </div>
