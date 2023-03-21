@@ -4,8 +4,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getProductBegin, isLoading } from 'src/app/store/actions/app.actions';
-import { selectFeatureLoading, selectFeatureProduct } from 'src/app/store/selector/appSelector';
-
+import { selectFeatureCount, selectFeatureLoading, selectFeatureProduct } from 'src/app/store/selector/appSelector';
+import { map } from 'rxjs';
 interface Product {
         name: string;
         price: number;
@@ -17,20 +17,19 @@ interface Product {
         styleUrls: ['./category-page.component.scss'],
 })
 export class CategoryPageComponent implements OnInit, OnDestroy {
-        categoryId: any;
         listProducts$ = this.store.select(selectFeatureProduct);
-        count: number;
+        length$: any = this.store.select(selectFeatureCount);
+        loadingPage$ = this.store.select(selectFeatureLoading);
+        categoryId: any;
         listCategory: any = [];
-        length = 0;
-        pageSize = 20;
+        length: number;
+        pageSize = 16;
         pageIndex = 0;
         sortDefault: any;
         code: string;
-        disabled = false;
         pageEvent: PageEvent;
         navigationSubscription: any;
         priceSort = 200000;
-        loadingPage$ = this.store.select(selectFeatureLoading);
         handlePageEvent(e: PageEvent) {
                 this.pageEvent = e;
                 this.length = e.length;
@@ -61,6 +60,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                                 this.getData();
                         }
                 });
+                this.length$.pipe().subscribe((data: any) => console.log(data));
                 this.getData();
         }
         ngOnDestroy() {

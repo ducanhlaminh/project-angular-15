@@ -4,6 +4,7 @@ const initialState = {
         status: false,
         products: [],
         loading: true,
+        count: 0,
 };
 
 export const appReducer = createReducer(
@@ -13,6 +14,11 @@ export const appReducer = createReducer(
         }),
 
         on(getProductSuccess, (state, action: any) => {
-                return { ...state, products: action.data.productData.rows, loading: true };
+                return {
+                        ...state,
+                        products: action.data.productData.rows,
+                        count: action.data.productData.count,
+                        loading: true,
+                };
         }),
 );

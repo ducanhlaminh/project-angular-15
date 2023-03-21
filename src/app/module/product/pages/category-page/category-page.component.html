@@ -14,9 +14,9 @@
 <mat-paginator
         #paginator
         class="demo-paginator"
-        [length]="count"
+        [length]="length$ | async"
         [pageSize]="pageSize"
-        [disabled]="disabled"
+        [disabled]="false"
         [hidePageSize]="true"
         [pageIndex]="pageIndex"
         aria-label="Select page"
