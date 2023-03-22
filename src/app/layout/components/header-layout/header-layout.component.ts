@@ -1,13 +1,13 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 import { CategoryService } from 'src/app/module/product/category.service';
 import { ProductServiceService } from 'src/app/module/product/product-service.service';
 import { UseServiceService } from 'src/app/module/user/use-service.service';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { startWith, map, debounceTime, tap, switchMap } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 @Component({
         selector: 'app-header-layout',
         templateUrl: './header-layout.component.html',
@@ -18,7 +18,7 @@ export class HeaderLayoutComponent implements OnInit {
         streets: any[] = [];
         listCategory: any;
         valueSearch: string = '';
-
+        faUser = faUser;
         faCartShopping = faCartShopping;
         filteredStreets: any;
         productId: string = '';
@@ -39,8 +39,6 @@ export class HeaderLayoutComponent implements OnInit {
                                 switchMap((value) => this.ProductService.getProductSByName(value || '')),
                         )
                         .subscribe((data: any) => {
-                                console.log(data.productData.rows);
-
                                 return (this.filteredStreets = data.productData.rows);
                         });
         }

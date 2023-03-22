@@ -1,14 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartServiceService } from '../cart-service.service';
-
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 @Component({
         selector: 'app-cart-page',
         templateUrl: './cart-page.component.html',
         styleUrls: ['./cart-page.component.scss'],
 })
-export class CartPageComponent {
-        listProduct: any = [];
-        constructor(public CartService: CartServiceService) {
-                this.listProduct = this.CartService.listProduct.map((product) => ({ ...product, count: 1 }));
+export class CartPageComponent implements OnInit {
+        faPlus = faPlus;
+        faMinus = faMinus;
+
+        constructor(public CartService: CartServiceService) {}
+        ngOnInit(): void {
+                this.CartService.totalPrice = 0;
+                this.CartService.listProductSelect = [];
+        }
+        incCount(product: any) {
+                ++product.count;
+                this.CartService.updateSelected(product);
+        }
+        desCount(product: any) {
+                --product.count;
+
+                this.CartService.updateSelected(product);
+        }
+        selectProduct(product: any) {
+                this.CartService.addToSelected(product);
         }
 }

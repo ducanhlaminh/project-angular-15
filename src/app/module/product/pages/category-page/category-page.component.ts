@@ -29,7 +29,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         code: string;
         pageEvent: PageEvent;
         navigationSubscription: any;
-        priceSort = 200000;
+        priceSort = [10000, 100000];
         handlePageEvent(e: PageEvent) {
                 this.pageEvent = e;
                 this.length = e.length;
@@ -57,10 +57,11 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
                         // If it is a NavigationEnd event re-initalise the component
                         if (e instanceof NavigationEnd) {
                                 this.categoryId = this.activatedRoute.snapshot.params['id'];
+                                this.pageIndex = 0;
                                 this.getData();
                         }
                 });
-                this.length$.pipe().subscribe((data: any) => console.log(data));
+
                 this.getData();
         }
         ngOnDestroy() {

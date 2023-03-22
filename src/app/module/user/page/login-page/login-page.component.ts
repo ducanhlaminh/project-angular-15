@@ -25,7 +25,10 @@ export class LoginPageComponent {
                                         '0' &&
                                         (localStorage.setItem('token', res.token),
                                         this.router.navigateByUrl(''),
-                                        this.CartService.getProductCart());
+                                        this.CartService.getProductCart(),
+                                        this.UserService.getCurrent().subscribe(
+                                                (res) => (this.UserService.userInfor = res),
+                                        ));
                         });
         }
         validateEmail = (email: string) => {

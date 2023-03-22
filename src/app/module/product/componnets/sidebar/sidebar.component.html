@@ -1,5 +1,6 @@
 <div class="w-full p-4">
         <div class="">
+                <div class="example-name-label font-semibold mb-2">Bộ lọc sản phẩm :</div>
                 <mat-form-field appearance="fill" class="w-full">
                         <mat-label class="">Sort</mat-label>
                         <mat-select (selectionChange)="onChangeSort($event)" [value]="selected">
@@ -10,28 +11,41 @@
                 </mat-form-field>
         </div>
         <div class="example-label-container flex justify-between">
-                <label id="example-name-label" class="example-name-label">Khoảng giá :</label>
-                <label class="example-value-label">{{ value | priceProduct }}</label>
+                <label id="example-name-label" class="example-name-label font-semibold mb-2">Khoảng giá :</label>
         </div>
-        <div class="">
-                <mat-slider class="" [max]="max" [min]="min" [step]="step">
-                        <input matSliderThumb [ngModel]="value" (ngModelChange)="onChangePrice($event)" />
-                </mat-slider>
+
+        <div class="flex gap-2">
+                <div class="w-1/2">
+                        <mat-form-field appearance="fill" floatLabel="always" class="w-full">
+                                <mat-label>Từ :</mat-label>
+                                <input
+                                        matInput
+                                        type="number"
+                                        class="example-right-align"
+                                        placeholder="0"
+                                        [formControl]="minPrice"
+                                        required
+                                />
+                                <span matTextPrefix>đ&nbsp;</span>
+                                <span matTextSuffix>.000</span>
+                        </mat-form-field>
+                </div>
+                <div class="w-1/2">
+                        <mat-form-field appearance="fill" floatLabel="always" class="w-full">
+                                <mat-label>Đến :</mat-label>
+                                <input
+                                        matInput
+                                        type="number"
+                                        class="example-right-align"
+                                        placeholder="0"
+                                        [formControl]="maxPrice"
+                                        required
+                                />
+                                <span matTextPrefix>đ&nbsp;</span>
+                                <span matTextSuffix>.000</span>
+                        </mat-form-field>
+                </div>
         </div>
-        <div class="">
-                <mat-form-field appearance="fill" floatLabel="always">
-                        <mat-label>Từ : </mat-label>
-                        <input matInput type="number" class="example-right-align" placeholder="0" />
-                        <span matTextPrefix>đ&nbsp;</span>
-                        <span matTextSuffix>.000</span>
-                </mat-form-field>
-        </div>
-        <div class="">
-                <mat-form-field appearance="fill" floatLabel="always">
-                        <mat-label>Đến :</mat-label>
-                        <input matInput type="number" class="example-right-align" placeholder="0" />
-                        <span matTextPrefix>đ&nbsp;</span>
-                        <span matTextSuffix>.000</span>
-                </mat-form-field>
-        </div>
+        <small class="text-red-500" *ngIf="!this.checkPrice">Vui lòng nhập đúng khoảng giá</small>
+        <button class="w-full py-3 bg-slate-200 rounded-md" (click)="validateRangePrice()">Tim kiem</button>
 </div>

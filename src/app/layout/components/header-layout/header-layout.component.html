@@ -31,7 +31,7 @@
                         </mat-autocomplete>
                 </form>
         </div>
-        <div class="w-[5%] flex items-center text-[22px] justify-center relative">
+        <div class="w-[5%] flex items-center text-[22px] justify-center relative cursor-pointer" routerLink="/cart">
                 <fa-icon [icon]="faCartShopping"></fa-icon>
                 <div
                         class="bg-orange-500 h-4 w-4 rounded-full absolute top-0 right-[10px] flex justify-center items-center"
@@ -39,11 +39,23 @@
                         <span class="text-white text-xs">{{ CartService.listProduct.length }}</span>
                 </div>
         </div>
-        <div class="w-[10%] flex items-center text-[22px] justify-center relative">
-                <button class="bg-blue-200 px-3 py-2 rounded-md" (click)="logoutAcc()">Logout</button>
+        <div class="w-[5%] flex items-center text-[22px] justify-center relative">
+                <fa-icon [icon]="faUser"></fa-icon>
+        </div>
+        <div
+                class="w-[10%] flex items-center text-[22px] justify-center relative"
+                *ngIf="UserService.userInfor; else login"
+        >
+                <button class="bg-blue-200 text-base w-full py-2 rounded-md" (click)="logoutAcc()">Logout</button>
         </div>
 </div>
 <p class="bg-slate-200 text-center p-3 text-sm">
         Chào mừng quý khách đến với cửa hàng tạp hóa Phương Thanh. Chúng tôi đang có rất nhiều deal hot dành riêng cho
         bạn <a href="" class="underline text-blue-500">ở đây</a>
 </p>
+
+<ng-template #login>
+        <div class="w-[10%] flex items-center text-[22px] justify-center relative">
+                <button class="bg-blue-200 text-base w-full py-2 rounded-md" routerLink="/login">Login</button>
+        </div>
+</ng-template>

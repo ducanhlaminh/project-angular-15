@@ -8,5 +8,4 @@ import { CartServiceService } from './module/cart/cart-service.service';
 })
 export class AppComponent {
         title = 'project-angular-15';
-        constructor(private CartService: CartServiceService) {}
 }
