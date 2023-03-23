@@ -17,6 +17,7 @@ export class DetailPageComponent implements OnInit {
                 private activatedRoute: ActivatedRoute,
         ) {}
         productDetail: any;
+        productPrice: number;
         selectOption: any = [];
         navigationSubscription: any;
         productId: any;
@@ -26,11 +27,9 @@ export class DetailPageComponent implements OnInit {
                 const id = params.slug.slice(-36);
                 this.productService.getProductById(id).subscribe((product: any) => {
                         this.productDetail = product.productData.rows[0];
-                        console.log(this.productDetail.variants);
+                        this.productPrice = this.productDetail.costPerUnit;
                 });
                 this.navigationSubscription = this.router.events.subscribe((e: any) => {
-                        console.log(e);
-
                         // If it is a NavigationEnd event re-initalise the component
                         if (e instanceof NavigationEnd) {
                                 this.productId = this.activatedRoute.snapshot.params['slug'];
@@ -43,8 +42,23 @@ export class DetailPageComponent implements OnInit {
                 });
         }
         onSelectVariant(e: any) {
-                this.selectOption = this.selectOption.filter((option: any) => option.name !== e.source._value.name);
-                this.selectOption.push(e.source._value);
+                const select = e.source._value;
+
+                let indx = this.selectOption.findIndex((option: any) => {
+                        return option.name === select.name;
+                });
+                if (indx !== -1) {
+                        this.selectOption.some((item: any) => JSON.stringify(item) === JSON.stringify(select))
+                                ? (this.selectOption = this.selectOption.filter(
+                                          (option: any) => JSON.stringify(option) !== JSON.stringify(select),
+                                  ))
+                                : (this.selectOption[indx] = select);
+                } else {
+                        this.selectOption.push(select);
+                }
+                console.log(this.selectOption);
+
+                this.setPriceProduct();
         }
         addToCart() {
                 const variant = this.selectOption.map((option: any) => ({
@@ -55,5 +69,9 @@ export class DetailPageComponent implements OnInit {
                 this.CartService.addToCart({ pid: this.productDetail.id, variant }).subscribe((res: any) => {
                         res.status === 0 && this.CartService.getProductCart();
                 });
+        }
+        setPriceProduct() {
+                this.productPrice = this.productDetail.costPerUnit;
+                this.selectOption.map((option: any) => (this.productPrice += option.value.price * 1000));
         }
 }

@@ -27,4 +27,15 @@ export class CartPageComponent implements OnInit {
         selectProduct(product: any) {
                 this.CartService.addToSelected(product);
         }
+        priceProductOption(product: any, option: any) {
+                console.log(product, option);
+
+                let price = product.costPerUnit;
+                option.map((variant: any) => {
+                        price += variant.price * 1000;
+                });
+                console.log(price);
+
+                return price;
+        }
 }
