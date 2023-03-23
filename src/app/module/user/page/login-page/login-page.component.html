@@ -10,10 +10,11 @@
                 <div class="mb-3">
                         <input
                                 type="text"
-                                class="w-full h-[42px] px-3 outline-none border-[2px] border-red-500 rounded-md"
+                                class="w-full h-[42px] px-3 outline-none rounded-md"
                                 [(ngModel)]="email"
+                                [ngClass]="{ 'border-[2px] border-red-500 ': !validateEmail() }"
                         />
-                        <small class="text-red-500">Vui lòng nhập Email hợp lệ</small>
+                        <small *ngIf="!validateEmail()" class="text-red-500">Vui lòng nhập Email hợp lệ</small>
                 </div>
                 <p class="font-bold">Password</p>
                 <div class="mb-3">
