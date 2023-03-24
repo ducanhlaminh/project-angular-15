@@ -1,1 +1,108 @@
 <p>checkout-page works!</p>
+<div class="p-3">
+        <p class="text-[35px] text-[#193c55] font-medium">Địa chỉ giao hàng</p>
+        <div class="flex gap-3">
+                <div class="w-[60%]">
+                        <div class="">
+                                <mat-form-field appearance="fill">
+                                        <mat-label>Select an option</mat-label>
+                                        <mat-select
+                                                (selectionChange)="onChangeProvice($event)"
+                                                [value]="proviceSelected"
+                                        >
+                                                <mat-option
+                                                        [value]="item"
+                                                        *ngFor="let item of this.CheckOutService.address.provice"
+                                                        >{{ item.ProvinceName }}</mat-option
+                                                >
+                                        </mat-select>
+                                </mat-form-field>
+                        </div>
+                        <div class="">
+                                <mat-form-field appearance="fill">
+                                        <mat-label>Select an option</mat-label>
+                                        <mat-select
+                                                (selectionChange)="onChangeDistrict($event)"
+                                                [value]="districtSelected"
+                                        >
+                                                <mat-option
+                                                        [value]="convertJSON(item)"
+                                                        [value]="item"
+                                                        *ngFor="let item of this.CheckOutService.address.district"
+                                                        >{{ item.DistrictName }}</mat-option
+                                                >
+                                        </mat-select>
+                                </mat-form-field>
+                        </div>
+                        <div class="">
+                                <mat-form-field appearance="fill">
+                                        <mat-label>Select an option</mat-label>
+                                        <mat-select (selectionChange)="onChangeWarn($event)" [value]="warnSelected">
+                                                <mat-option
+                                                        [value]="convertJSON(item)"
+                                                        [value]="item"
+                                                        *ngFor="let item of this.CheckOutService.address.warn"
+                                                        >{{ item.WardName }}</mat-option
+                                                >
+                                        </mat-select>
+                                </mat-form-field>
+                        </div>
+
+                        <button class="px-7 py-3 bg-slate-400" (click)="addAddress()">Xac nhan dia chi</button>
+                </div>
+                <div class="w-[40%]">
+                        <p class="border-b-2 pb-3">Hóa đơn</p>
+                        <div class="h-[50px] flex border-b-2 font-[500] text-gray-500">
+                                <div class="w-[50%] flex items-center">
+                                        <span>Thông tin sản phẩm</span>
+                                </div>
+                                <div class="w-[15%] flex items-center justify-center"><span>Số lượng</span></div>
+                                <div class="w-[15%] flex items-center justify-center"><span>Giá</span></div>
+                                <div class="w-[20%] flex items-center justify-center"><span>Tổng</span></div>
+                        </div>
+                        <div class="h-[600px] overflow-auto">
+                                <div *ngFor="let item of productCache" class="h-[120px] pl-5 border-b-2 mb-2 py-2 flex">
+                                        <div class="w-1/2 h-full flex">
+                                                <div class="w-[100px] h-full">
+                                                        <img
+                                                                [src]="item.product.productData?.mainImage"
+                                                                alt=""
+                                                                class="object-cover h-full"
+                                                        />
+                                                </div>
+                                                <div class="px-3">
+                                                        <p class="font-[500]">{{ item.product.productData?.name }}</p>
+                                                        <div
+                                                                *ngFor="let item of item.product.variant"
+                                                                class="flex gap-2"
+                                                        >
+                                                                <span>{{ item.variant }} :</span>
+                                                                <span>{{ item.value }}</span>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="w-1/2">
+                                                <div class="h-4/6 flex">
+                                                        <div class="w-[30%] flex items-center justify-center">
+                                                                <div class="flex gap-5 border-2 rounded-xl px-3">
+                                                                        <span>{{ item.count }}</span>
+                                                                </div>
+                                                        </div>
+                                                        <div class="w-[30%] flex items-center justify-center">
+                                                                <span>{{ item.price | priceProduct }}</span>
+                                                        </div>
+                                                        <div class="w-[40%] flex items-center justify-center">
+                                                                <span>{{
+                                                                        item.price * item.count | priceProduct
+                                                                }}</span>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <!-- <p>{{ item | json }}</p> -->
+                        </div>
+                </div>
+        </div>
+</div>
+<div class=""></div>

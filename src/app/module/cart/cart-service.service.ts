@@ -28,6 +28,10 @@ export class CartServiceService {
                                 (this.listProduct = response.yourCart.map((product: any) => {
                                         return {
                                                 product,
+                                                price: this.priceProductOption(
+                                                        product.productData.costPerUnit,
+                                                        product.variant,
+                                                ),
                                                 count: 1,
                                         };
                                 })),
@@ -49,9 +53,7 @@ export class CartServiceService {
         }
         getValueTotal() {
                 this.totalPrice = 0;
-                this.listProductSelect.map(
-                        (product: any) => (this.totalPrice += product.product.productData.costPerUnit * product.count),
-                );
+                this.listProductSelect.map((product: any) => (this.totalPrice += product.price * product.count));
         }
         updateSelected(product: any) {
                 this.listProductSelect.map((item: any) => {
@@ -67,5 +69,22 @@ export class CartServiceService {
                         : this.listProductSelect.push(product);
 
                 this.getValueTotal();
+        }
+        priceProductOption(productPrice: any, option: any) {
+                option.map((variant: any) => {
+                        productPrice += variant.price * 1000;
+                });
+
+                return productPrice;
+        }
+        createBillCache(data: any) {
+                const product = { products: data };
+                return this.http.post('http://localhost:8888/api/v1/bill2', product);
+        }
+        deleteCache() {
+                return this.http.delete('http://localhost:8888/api/v1/bill2/cached-products');
+        }
+        getProductCache() {
+                return this.http.get('http://localhost:8888/api/v1/bill2/cached-products');
         }
 }

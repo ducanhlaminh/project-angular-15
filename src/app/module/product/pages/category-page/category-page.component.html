@@ -6,7 +6,7 @@
         <div class="min-h-[600px] w-4/5 relative" *ngIf="loadingPage$ | async; else loading">
                 <div class="flex flex-wrap">
                         <div class="w-1/4 flex justify-center px-3 mb-3" *ngFor="let product of listProducts$ | async">
-                                <app-card-product [product]="product" class="w-full" appProductItem></app-card-product>
+                                <app-card-product [product]="product" class="w-full"></app-card-product>
                         </div>
                 </div>
         </div>

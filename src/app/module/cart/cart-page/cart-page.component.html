@@ -52,23 +52,11 @@
                                                                 </div>
                                                         </div>
                                                         <div class="w-[30%] flex items-center justify-center">
-                                                                <!-- <span>{{
-                                                                        priceProductOption(
-                                                                                item.product.productData?.costPerUnit,
-                                                                                item.product.variant
-                                                                        ) | priceProduct
-                                                                }}</span> -->
-                                                                <pre>{{
-                                                                        priceProductOption(
-                                                                                item.product.productData?.costPerUnit,
-                                                                                item.product.variant
-                                                                        )
-                                                                }}</pre>
+                                                                <span>{{ item.price | priceProduct }}</span>
                                                         </div>
                                                         <div class="w-[40%] flex items-center justify-center">
                                                                 <span>{{
-                                                                        item.product.productData?.costPerUnit *
-                                                                                item.count | priceProduct
+                                                                        item.price * item.count | priceProduct
                                                                 }}</span>
                                                         </div>
                                                 </div>
@@ -76,8 +64,14 @@
                                                         <div
                                                                 class="flex items-center border-b-2 border-[#2c51d5] gap-1"
                                                         >
-                                                                <input type="checkbox" (change)="selectProduct(item)" />
-                                                                <label for="" class="text-[#2c51d5] font-semibold"
+                                                                <input
+                                                                        type="checkbox"
+                                                                        (change)="selectProduct(item)"
+                                                                        [id]="item.product.id"
+                                                                />
+                                                                <label
+                                                                        [for]="item.product.id"
+                                                                        class="text-[#2c51d5] font-semibold"
                                                                         >CHỌN</label
                                                                 >
                                                         </div>
@@ -101,7 +95,12 @@
                                 <span>Tổng hóa đơn :</span>
                                 <span>{{ this.CartService.totalPrice | priceProduct }}</span>
                         </div>
-                        <button class="w-full py-3 bg-[#1B4B66] text-white rounded-md">Tiến hành thanh toán</button>
+                        <button
+                                class="w-full py-3 bg-[#1B4B66] text-white rounded-md"
+                                (click)="onSaveProductSelected()"
+                        >
+                                Tiến hành thanh toán
+                        </button>
                 </div>
         </div>
 </div>

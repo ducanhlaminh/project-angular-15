@@ -1,1 +1,40 @@
 <p>signup-page works!</p>
+<div class="h-[600px] flex justify-center items-center relative">
+        <img
+                src="https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                class="absolute object-cover h-full w-full"
+                alt=""
+        />
+        <div class="w-[30%] absolute z-10 bg-slate-100 rounded-md p-3">
+                <p class="text-center text-[30px] font-medium">Đăng ký</p>
+                <p class="font-bold">Email :</p>
+                <div class="mb-3">
+                        <input
+                                type="text"
+                                class="w-full h-[42px] px-3 outline-none rounded-md"
+                                [(ngModel)]="email"
+                                [ngClass]="{ 'border-[2px] border-red-500 ': !validateEmail() }"
+                        />
+                        <small *ngIf="!validateEmail()" class="text-red-500">Vui lòng nhập Email hợp lệ</small>
+                </div>
+                <p class="font-bold">Password</p>
+                <div class="mb-3">
+                        <input
+                                type="password"
+                                class="w-full h-[42px] px-3 outline-none border-[2px] border-red-500 rounded-md"
+                                [(ngModel)]="password"
+                        />
+                        <small class="text-red-500">Vui lòng nhập mật khẩu hợp lệ</small>
+                </div>
+                <p class="font-bold">Nhập lại password</p>
+                <div class="mb-3">
+                        <input
+                                type="password"
+                                class="w-full h-[42px] px-3 outline-none border-[2px] border-red-500 rounded-md"
+                                [(ngModel)]="password2"
+                        />
+                        <small *ngIf="!checkPassword2()" class="text-red-500">Mật khẩu không khớp</small>
+                </div>
+                <button class="px-4 py-3 bg-slate-400 rounded-md w-full" (click)="signupAcc()">Đăng ký</button>
+        </div>
+</div>

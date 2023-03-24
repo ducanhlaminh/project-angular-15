@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 import { ProductServiceService } from '../../product-service.service';
@@ -8,7 +8,7 @@ import { ProductServiceService } from '../../product-service.service';
         templateUrl: './detail-page.component.html',
         styleUrls: ['./detail-page.component.scss'],
 })
-export class DetailPageComponent implements OnInit {
+export class DetailPageComponent implements OnInit, OnDestroy {
         constructor(
                 private route: ActivatedRoute,
                 private productService: ProductServiceService,
@@ -16,6 +16,9 @@ export class DetailPageComponent implements OnInit {
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
         ) {}
+        ngOnDestroy(): void {
+                this.navigationSubscription.unsubscribe();
+        }
         productDetail: any;
         productPrice: number;
         selectOption: any = [];
