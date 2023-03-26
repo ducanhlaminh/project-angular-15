@@ -13,11 +13,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
         declarations: [],
         imports: [CommonModule],
         exports: [
                 FontAwesomeModule,
+                MatRadioModule,
                 ReactiveFormsModule,
                 MatProgressSpinnerModule,
                 BrowserAnimationsModule,

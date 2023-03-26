@@ -46,4 +46,8 @@ export class CheckOutService {
         getAddress() {
                 return this.http.get('http://localhost:8888/api/v1/address/');
         }
+        createBill(data: any) {
+                let formData = { shipPrice: 30000, aid: data.id };
+                return this.http.post('http://localhost:8888/api/v1/bill2', formData);
+        }
 }

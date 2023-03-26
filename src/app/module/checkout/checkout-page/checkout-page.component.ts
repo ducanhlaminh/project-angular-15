@@ -17,6 +17,7 @@ export class CheckoutPageComponent implements OnInit {
         productCache: any;
         showAddress = true;
         myAddress: any = [];
+        addressSelected: any;
         constructor(
                 public CheckOutService: CheckOutService,
                 public CartService: CartServiceService,
@@ -81,5 +82,11 @@ export class CheckoutPageComponent implements OnInit {
 
                         return (this.myAddress = data.yourAddress);
                 });
+        }
+        onChangesAddress(e: any) {
+                console.log(e);
+        }
+        confirmBill() {
+                this.CheckOutService.createBill(this.addressSelected).subscribe((data) => console.log(data));
         }
 }
