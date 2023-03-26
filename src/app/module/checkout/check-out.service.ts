@@ -40,4 +40,10 @@ export class CheckOutService {
                                 this.address.warn = data.data;
                         });
         }
+        addAddress(data: any) {
+                return this.http.post('http://localhost:8888/api/v1/address/', data);
+        }
+        getAddress() {
+                return this.http.get('http://localhost:8888/api/v1/address/');
+        }
 }

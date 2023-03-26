@@ -12,7 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
         declarations: [],
         imports: [CommonModule],
@@ -27,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
                 MatChipsModule,
                 MatOptionModule,
                 MatSelectModule,
+                MatTabsModule,
                 MatSliderModule,
                 FormsModule,
         ],
