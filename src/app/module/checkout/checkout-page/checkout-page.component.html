@@ -97,6 +97,7 @@
                                                                         matInput
                                                                         placeholder="Nguyen van A"
                                                                         [(ngModel)]="infoUser.name"
+                                                                        [formControl]="nameForm"
                                                                 />
                                                         </mat-form-field>
                                                 </div>
@@ -107,6 +108,7 @@
                                                                         type="text"
                                                                         [(ngModel)]="infoUser.phone"
                                                                         matInput
+                                                                        [formControl]="phoneForm"
                                                                 />
                                                         </mat-form-field>
                                                 </div>
@@ -119,6 +121,8 @@
                                                                 <mat-select
                                                                         (selectionChange)="onChangeProvice($event)"
                                                                         [value]="proviceSelected"
+                                                                        required
+                                                                        [formControl]="selectFormDistrict"
                                                                 >
                                                                         <mat-option
                                                                                 [value]="item"
@@ -137,6 +141,8 @@
                                                                 <mat-select
                                                                         (selectionChange)="onChangeDistrict($event)"
                                                                         [value]="districtSelected"
+                                                                        required
+                                                                        [formControl]="selectFormWarn"
                                                                 >
                                                                         <mat-option
                                                                                 [value]="convertJSON(item)"
@@ -156,6 +162,8 @@
                                                                 <mat-select
                                                                         (selectionChange)="onChangeWarn($event)"
                                                                         [value]="warnSelected"
+                                                                        required
+                                                                        [formControl]="selectFormProvice"
                                                                 >
                                                                         <mat-option
                                                                                 [value]="convertJSON(item)"
@@ -181,8 +189,11 @@
                                                         </mat-form-field>
                                                 </div>
 
-                                                <button class="px-7 py-3 bg-slate-400" (click)="addAddress()">
-                                                        Xac nhan dia chi
+                                                <button
+                                                        class="bg-[#1e5371] px-3 py-2 text-white rounded-md"
+                                                        (click)="addAddress()"
+                                                >
+                                                        Xác nhận địa chỉ
                                                 </button>
                                         </div></mat-tab
                                 >
@@ -193,31 +204,44 @@
                                                 [(ngModel)]="addressSelected"
                                                 (change)="onChangesAddress($event)"
                                         >
-                                                <mat-radio-button
-                                                        class="example-radio-button"
-                                                        *ngFor="let season of myAddress"
-                                                        [value]="season"
-                                                >
-                                                        <div class="p-3">
-                                                                <p><span>Tên người nhận : </span> {{ season.name }}</p>
-                                                                <p><span>Số điện thoại : </span> {{ season.phone }}</p>
-                                                                <p>
-                                                                        <span>Địa chỉ : </span>
-                                                                        {{
-                                                                                season.address.proviceSelected
-                                                                                        .ProvinceName
-                                                                        }}
-                                                                        -
-                                                                        {{
-                                                                                season.address.districtSelected
-                                                                                        .DistrictName
-                                                                        }}
-                                                                        - {{ season.address.warnSelected.WardName }} -
-                                                                </p>
-                                                        </div>
-                                                </mat-radio-button>
+                                                <div class="" *ngFor="let season of myAddress; index as idx">
+                                                        <mat-radio-button
+                                                                class="example-radio-button"
+                                                                [value]="season"
+                                                                [checked]="idx === 0"
+                                                                color="primary"
+                                                        >
+                                                                <div class="p-3">
+                                                                        <p>
+                                                                                <span>Tên người nhận : </span>
+                                                                                {{ season.name }}
+                                                                        </p>
+                                                                        <p>
+                                                                                <span>Số điện thoại : </span>
+                                                                                {{ season.phone }}
+                                                                        </p>
+                                                                        <p>
+                                                                                <span>Địa chỉ : </span>
+                                                                                {{
+                                                                                        season.address.proviceSelected
+                                                                                                .ProvinceName
+                                                                                }}
+                                                                                -
+                                                                                {{
+                                                                                        season.address.districtSelected
+                                                                                                .DistrictName
+                                                                                }}
+                                                                                -
+                                                                                {{
+                                                                                        season.address.warnSelected
+                                                                                                .WardName
+                                                                                }}
+                                                                                -
+                                                                        </p>
+                                                                </div>
+                                                        </mat-radio-button>
+                                                </div>
                                         </mat-radio-group>
-                                        <div>Your favorite season is: {{ addressSelected }}</div>
                                         <!-- <div class="flex" *ngFor="let item of myAddress">
                                                 <div class="flex items-center pr-5">
                                                         <input type="radio" />
@@ -246,40 +270,57 @@
                                 <div class="w-[15%] flex items-center justify-center"><span>Giá</span></div>
                                 <div class="w-[20%] flex items-center justify-center"><span>Tổng</span></div>
                         </div>
-                        <div class="h-[600px] overflow-auto">
-                                <div *ngFor="let item of productCache" class="h-[120px] pl-5 border-b-2 mb-2 py-2 flex">
-                                        <div class="w-1/2 h-full flex">
-                                                <div class="w-[100px] h-full">
-                                                        <img
-                                                                [src]="item.product?.mainImage"
-                                                                alt=""
-                                                                class="object-cover h-full"
-                                                        />
+                        <div class="pb-2">
+                                <div class="overflow-auto max-h-[300px]">
+                                        <div
+                                                *ngFor="let item of productCache"
+                                                class="h-[120px] pl-5 border-b-2 mb-2 py-2 flex"
+                                        >
+                                                <div class="w-1/2 h-full flex">
+                                                        <div class="w-[100px] h-full">
+                                                                <img
+                                                                        [src]="item.product?.mainImage"
+                                                                        alt=""
+                                                                        class="object-cover h-full"
+                                                                />
+                                                        </div>
+                                                        <div class="px-3">
+                                                                <p class="font-[500]">{{ item.product?.name }}</p>
+                                                        </div>
                                                 </div>
-                                                <div class="px-3">
-                                                        <p class="font-[500]">{{ item.product?.name }}</p>
-                                                </div>
-                                        </div>
-                                        <div class="w-1/2">
-                                                <div class="h-4/6 flex">
-                                                        <div class="w-[30%] flex items-center justify-center">
-                                                                <div class="flex gap-5 border-2 rounded-xl px-3">
-                                                                        <span>{{ item.qty }}</span>
+                                                <div class="w-1/2">
+                                                        <div class="h-4/6 flex">
+                                                                <div class="w-[30%] flex items-center justify-center">
+                                                                        <div
+                                                                                class="flex gap-5 border-2 rounded-xl px-3"
+                                                                        >
+                                                                                <span>{{ item.qty }}</span>
+                                                                        </div>
                                                                 </div>
-                                                        </div>
-                                                        <div class="w-[30%] flex items-center justify-center">
-                                                                <span>{{ item.cost | priceProduct }}</span>
-                                                        </div>
-                                                        <div class="w-[40%] flex items-center justify-center">
-                                                                <span>{{ item.qty * item.cost | priceProduct }}</span>
+                                                                <div class="w-[30%] flex items-center justify-center">
+                                                                        <span>{{ item.cost | priceProduct }}</span>
+                                                                </div>
+                                                                <div class="w-[40%] flex items-center justify-center">
+                                                                        <span>{{
+                                                                                item.qty * item.cost | priceProduct
+                                                                        }}</span>
+                                                                </div>
                                                         </div>
                                                 </div>
                                         </div>
                                 </div>
+                                <div class="">
+                                        <p class="py-3"><b>Tổng hóa đơn :</b></p>
+                                        <button
+                                                (click)="confirmBill()"
+                                                class="bg-[#1e5371] px-3 py-2 text-white rounded-md"
+                                        >
+                                                Xác nhận đơn hàng
+                                        </button>
+                                </div>
 
                                 <!-- <p>{{ item | json }}</p> -->
                         </div>
-                        <button (click)="confirmBill()">Xac nhan don hang</button>
                 </div>
         </div>
 </div>

@@ -3,6 +3,8 @@ import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular
 import { CartServiceService } from '../../cart/cart-service.service';
 import { CheckOutService } from '../check-out.service';
 import { debounceTime } from 'rxjs';
+import { FormControl, Validators } from '@angular/forms';
+
 @Component({
         selector: 'app-checkout-page',
         templateUrl: './checkout-page.component.html',
@@ -18,6 +20,11 @@ export class CheckoutPageComponent implements OnInit {
         showAddress = true;
         myAddress: any = [];
         addressSelected: any;
+        selectFormProvice = new FormControl('', Validators.required);
+        selectFormDistrict = new FormControl('', Validators.required);
+        selectFormWarn = new FormControl('', Validators.required);
+        nameForm = new FormControl('', Validators.required);
+        phoneForm = new FormControl('', Validators.required);
         constructor(
                 public CheckOutService: CheckOutService,
                 public CartService: CartServiceService,
