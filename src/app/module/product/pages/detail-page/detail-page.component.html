@@ -1,43 +1,73 @@
-<div class="h-[700px] flex py-3">
-        <div class="w-1/2 h-full">
-                <img [src]="productDetail?.mainImage" alt="" class="object-cover h-full w-full rounded-md" />
+<div class="h-[700px] flex py-3" *ngIf="productDetail; else loading">
+    <div class="w-1/2 h-full">
+        <div class="h-[80%] relative flex justify-center">
+            <img [src]="picsProduct[posiImgCur]" alt="" class="object-cover h-full rounded-md absolute imgProduct" />
+            <button class="absolute z-30 bg-slate-400 top-1/2 p-3 left-0 rounded-md" (click)="backImg()">
+                <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </button>
+            <button class="absolute z-30 right-0 bg-slate-400 top-1/2 p-3 rounded-md" (click)="nextImg()">
+                <fa-icon [icon]="faChevronRight"></fa-icon>
+            </button>
         </div>
-        <div class="w-1/2 h-full px-5">
-                <p class="font-medium text-[35px]">{{ productDetail?.name }}</p>
-                <p class="font-medium text-[25px] text-gray-600">{{ productDetail?.description }}</p>
-                <p class="font-medium text-[35px]">{{ productPrice | priceProduct }}</p>
-                <div class="">
-                        <p class="my-3 font-semibold">Tùy chọn của sản phầm</p>
-                        <div class="min-h-[300px]">
-                                <div class="flex" *ngFor="let option of productDetail?.variants">
-                                        <div class="w-[100px]">
-                                                <p class="text-gray-500 font-[500]">{{ option?.name }}</p>
-                                        </div>
-                                        <div class="w-3/4">
-                                                <mat-chip-listbox
-                                                        class="mat-mdc-chip-set-stacked"
-                                                        aria-label="Color selection"
-                                                >
-                                                        <mat-chip-option
-                                                                *ngFor="let chip of option?.value"
-                                                                color=""
-                                                                [value]="{ value: chip, name: option?.name }"
-                                                                (selectionChange)="onSelectVariant($event)"
-                                                        >
-                                                                {{ chip?.type }}
-                                                        </mat-chip-option>
-                                                </mat-chip-listbox>
-                                        </div>
-                                </div>
-                        </div>
 
-                        <button
-                                class="px-5 py-3 rounded-md bg-slate-300 disabled:cursor-not-allowed"
-                                [disabled]="selectOption?.length === productDetail?.variants.length ? false : true"
-                                (click)="addToCart()"
-                        >
-                                Thêm vào giỏ hàng
-                        </button>
-                </div>
+        <div class="h-[15%] flex mt-3">
+            <div class="h-full w-1/4" *ngFor="let img of picsProduct; index as idx">
+                <img
+                    [src]="img"
+                    alt=""
+                    class="object-contain h-full w-full rounded-md cursor-pointer"
+                    (mouseover)="selectedImg(idx)"
+                    [ngClass]="{ 'border-2 border-[#1e5371]': posiImgCur === idx }"
+                />
+            </div>
         </div>
+    </div>
+    <div class="w-1/2 h-full px-5">
+        <p class="font-medium text-[35px]">{{ productDetail?.name }}</p>
+        <p class="font-medium text-[25px] text-gray-600">{{ productDetail?.description }}</p>
+        <p class="font-medium text-[35px]">{{ productPrice | priceProduct }}</p>
+        <div class="">
+            <p class="my-3 font-semibold">Tùy chọn của sản phầm</p>
+            <div class="min-h-[300px]">
+                <div class="flex" *ngFor="let option of productDetail?.variants">
+                    <div class="w-[100px]">
+                        <p class="text-gray-500 font-[500]">{{ option?.name }}</p>
+                    </div>
+                    <div class="w-3/4">
+                        <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+                            <mat-chip-option
+                                *ngFor="let chip of option?.value"
+                                color=""
+                                [value]="{ value: chip, name: option?.name }"
+                                (selectionChange)="onSelectVariant($event)"
+                            >
+                                {{ chip?.type }}
+                            </mat-chip-option>
+                        </mat-chip-listbox>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="px-5 py-3 rounded-md bg-slate-300 disabled:cursor-not-allowed bg-[#33333307] w"
+                [disabled]="selectOption?.length === productDetail?.variants.length ? false : true"
+                (click)="addToCart()"
+            >
+                Thêm vào giỏ hàng
+            </button>
+        </div>
+    </div>
 </div>
+
+<ng-template #loading>
+    <div class="warp w-1/2">
+        <ngx-skeleton-loader
+            appearance="circle"
+            [theme]="{
+                width: '500px',
+                height: '500px',
+                'border-radius': '10px'
+            }"
+        >
+        </ngx-skeleton-loader>
+    </div>
+</ng-template>

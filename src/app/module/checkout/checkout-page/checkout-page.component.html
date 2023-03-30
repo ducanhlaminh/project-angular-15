@@ -1,9 +1,9 @@
 <p>checkout-page works!</p>
-<div class="p-3">
-        <p class="text-[35px] text-[#193c55] font-medium">Địa chỉ giao hàng</p>
-        <div class="flex gap-3">
-                <div class="w-[60%]">
-                        <!-- <div class="flex bg-slate-200 text-center rounded-t-md">
+<div>
+    <p class="text-[35px] text-[#193c55] font-medium">Địa chỉ giao hàng</p>
+    <div class="flex gap-3">
+        <div class="w-[60%]">
+            <!-- <div class="flex bg-slate-200 text-center rounded-t-md">
                                 <div class="w-1/2 py-4 bg-[#1e5371] rounded-tl-md text-white">Thêm địa chỉ</div>
                                 <div class="w-1/2 py-4 rounded-tr-md">Chọn địa chỉ</div>
                         </div>
@@ -83,244 +83,183 @@
 
                                 <button class="px-7 py-3 bg-slate-400" (click)="addAddress()">Xac nhan dia chi</button>
                         </div> -->
-                        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-                                <mat-tab label="Thêm địa chỉ"
-                                        ><div class="p-4">
-                                                <div class="">
-                                                        <P class="border-b-2 pb-2 mb-2 font-semibold"
-                                                                >Thông tin liên lạc</P
-                                                        >
-                                                        <mat-form-field class="example-full-width" class="w-full">
-                                                                <mat-label>Họ và tên</mat-label>
-                                                                <input
-                                                                        type="text"
-                                                                        matInput
-                                                                        placeholder="Nguyen van A"
-                                                                        [(ngModel)]="infoUser.name"
-                                                                        [formControl]="nameForm"
-                                                                />
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="">
-                                                        <mat-form-field class="example-full-width" class="w-full">
-                                                                <mat-label>Số điện thoại</mat-label>
-                                                                <input
-                                                                        type="text"
-                                                                        [(ngModel)]="infoUser.phone"
-                                                                        matInput
-                                                                        [formControl]="phoneForm"
-                                                                />
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="">
-                                                        <P class="border-b-2 pb-2 mb-2 font-semibold"
-                                                                >Địa chỉ giao hàng</P
-                                                        >
-                                                        <mat-form-field appearance="fill" class="w-full">
-                                                                <mat-label>Select an option</mat-label>
-                                                                <mat-select
-                                                                        (selectionChange)="onChangeProvice($event)"
-                                                                        [value]="proviceSelected"
-                                                                        required
-                                                                        [formControl]="selectFormDistrict"
-                                                                >
-                                                                        <mat-option
-                                                                                [value]="item"
-                                                                                *ngFor="
-                                                                                        let item of this.CheckOutService
-                                                                                                .address.provice
-                                                                                "
-                                                                                >{{ item.ProvinceName }}</mat-option
-                                                                        >
-                                                                </mat-select>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="">
-                                                        <mat-form-field appearance="fill" class="w-full">
-                                                                <mat-label>Select an option</mat-label>
-                                                                <mat-select
-                                                                        (selectionChange)="onChangeDistrict($event)"
-                                                                        [value]="districtSelected"
-                                                                        required
-                                                                        [formControl]="selectFormWarn"
-                                                                >
-                                                                        <mat-option
-                                                                                [value]="convertJSON(item)"
-                                                                                [value]="item"
-                                                                                *ngFor="
-                                                                                        let item of this.CheckOutService
-                                                                                                .address.district
-                                                                                "
-                                                                                >{{ item.DistrictName }}</mat-option
-                                                                        >
-                                                                </mat-select>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="">
-                                                        <mat-form-field appearance="fill" class="w-full">
-                                                                <mat-label>Select an option</mat-label>
-                                                                <mat-select
-                                                                        (selectionChange)="onChangeWarn($event)"
-                                                                        [value]="warnSelected"
-                                                                        required
-                                                                        [formControl]="selectFormProvice"
-                                                                >
-                                                                        <mat-option
-                                                                                [value]="convertJSON(item)"
-                                                                                [value]="item"
-                                                                                *ngFor="
-                                                                                        let item of this.CheckOutService
-                                                                                                .address.warn
-                                                                                "
-                                                                                >{{ item.WardName }}</mat-option
-                                                                        >
-                                                                </mat-select>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="">
-                                                        <mat-form-field class="example-full-width" class="w-full">
-                                                                <mat-label>Địa chỉ chi tiết</mat-label>
-                                                                <input
-                                                                        type="text"
-                                                                        matInput
-                                                                        placeholder="Nguyen van A"
-                                                                        [(ngModel)]="infoUser.detailAddress"
-                                                                />
-                                                        </mat-form-field>
-                                                </div>
-
-                                                <button
-                                                        class="bg-[#1e5371] px-3 py-2 text-white rounded-md"
-                                                        (click)="addAddress()"
-                                                >
-                                                        Xác nhận địa chỉ
-                                                </button>
-                                        </div></mat-tab
+            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" [selectedIndex]="toggleTag ? 1 : 0">
+                <mat-tab label="Thêm địa chỉ">
+                    <form class="p-4" [formGroup]="formAddress" (ngSubmit)="addAddress(formAddress)">
+                        <div class="">
+                            <P class="border-b-2 pb-2 mb-2 font-semibold">Thông tin liên lạc</P>
+                            <mat-form-field class="example-full-width" class="w-full">
+                                <mat-label>Họ và tên</mat-label>
+                                <input type="text" matInput placeholder="Nguyen van A" formControlName="nameForm" />
+                            </mat-form-field>
+                        </div>
+                        <div class="">
+                            <mat-form-field class="example-full-width" class="w-full">
+                                <mat-label>Số điện thoại</mat-label>
+                                <input
+                                    type="text"
+                                    matInput
+                                    formControlName="phoneForm"
+                                    (keyup)="setPhoneForm($event)"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div class="">
+                            <P class="border-b-2 pb-2 mb-2 font-semibold">Địa chỉ giao hàng</P>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Select an option</mat-label>
+                                <mat-select
+                                    (selectionChange)="onChangeProvice($event)"
+                                    [value]="proviceSelected"
+                                    formControlName="selectFormProvice"
                                 >
-                                <mat-tab label="Chọn địa chỉ">
-                                        <mat-radio-group
-                                                aria-labelledby="example-radio-group-label"
-                                                class="example-radio-group"
-                                                [(ngModel)]="addressSelected"
-                                                (change)="onChangesAddress($event)"
-                                        >
-                                                <div class="" *ngFor="let season of myAddress; index as idx">
-                                                        <mat-radio-button
-                                                                class="example-radio-button"
-                                                                [value]="season"
-                                                                [checked]="idx === 0"
-                                                                color="primary"
-                                                        >
-                                                                <div class="p-3">
-                                                                        <p>
-                                                                                <span>Tên người nhận : </span>
-                                                                                {{ season.name }}
-                                                                        </p>
-                                                                        <p>
-                                                                                <span>Số điện thoại : </span>
-                                                                                {{ season.phone }}
-                                                                        </p>
-                                                                        <p>
-                                                                                <span>Địa chỉ : </span>
-                                                                                {{
-                                                                                        season.address.proviceSelected
-                                                                                                .ProvinceName
-                                                                                }}
-                                                                                -
-                                                                                {{
-                                                                                        season.address.districtSelected
-                                                                                                .DistrictName
-                                                                                }}
-                                                                                -
-                                                                                {{
-                                                                                        season.address.warnSelected
-                                                                                                .WardName
-                                                                                }}
-                                                                                -
-                                                                        </p>
-                                                                </div>
-                                                        </mat-radio-button>
-                                                </div>
-                                        </mat-radio-group>
-                                        <!-- <div class="flex" *ngFor="let item of myAddress">
-                                                <div class="flex items-center pr-5">
-                                                        <input type="radio" />
-                                                </div>
-                                                <div class="">
-                                                        <p><span>Tên người nhận : </span> {{ item.name }}</p>
-                                                        <p><span>Số điện thoại : </span> {{ item.phone }}</p>
-                                                        <p>
-                                                                <span>Địa chỉ : </span>
-                                                                {{ item.address.proviceSelected.ProvinceName }} -
-                                                                {{ item.address.districtSelected.DistrictName }} -
-                                                                {{ item.address.warnSelected.WardName }} -
-                                                        </p>
-                                                </div>
-                                        </div> -->
-                                </mat-tab>
-                        </mat-tab-group>
-                </div>
-                <div class="w-[40%]">
-                        <p class="border-b-2 pb-3">Hóa đơn</p>
-                        <div class="h-[50px] flex border-b-2 font-[500] text-gray-500">
-                                <div class="w-[50%] flex items-center">
-                                        <span>Thông tin sản phẩm</span>
-                                </div>
-                                <div class="w-[15%] flex items-center justify-center"><span>Số lượng</span></div>
-                                <div class="w-[15%] flex items-center justify-center"><span>Giá</span></div>
-                                <div class="w-[20%] flex items-center justify-center"><span>Tổng</span></div>
+                                    <mat-option
+                                        [value]="item"
+                                        *ngFor="let item of this.CheckOutService.address.provice"
+                                        >{{ item.ProvinceName }}</mat-option
+                                    >
+                                </mat-select>
+                            </mat-form-field>
                         </div>
-                        <div class="pb-2">
-                                <div class="overflow-auto max-h-[300px]">
-                                        <div
-                                                *ngFor="let item of productCache"
-                                                class="h-[120px] pl-5 border-b-2 mb-2 py-2 flex"
-                                        >
-                                                <div class="w-1/2 h-full flex">
-                                                        <div class="w-[100px] h-full">
-                                                                <img
-                                                                        [src]="item.product?.mainImage"
-                                                                        alt=""
-                                                                        class="object-cover h-full"
-                                                                />
-                                                        </div>
-                                                        <div class="px-3">
-                                                                <p class="font-[500]">{{ item.product?.name }}</p>
-                                                        </div>
-                                                </div>
-                                                <div class="w-1/2">
-                                                        <div class="h-4/6 flex">
-                                                                <div class="w-[30%] flex items-center justify-center">
-                                                                        <div
-                                                                                class="flex gap-5 border-2 rounded-xl px-3"
-                                                                        >
-                                                                                <span>{{ item.qty }}</span>
-                                                                        </div>
-                                                                </div>
-                                                                <div class="w-[30%] flex items-center justify-center">
-                                                                        <span>{{ item.cost | priceProduct }}</span>
-                                                                </div>
-                                                                <div class="w-[40%] flex items-center justify-center">
-                                                                        <span>{{
-                                                                                item.qty * item.cost | priceProduct
-                                                                        }}</span>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                </div>
-                                <div class="">
-                                        <p class="py-3"><b>Tổng hóa đơn :</b></p>
-                                        <button
-                                                (click)="confirmBill()"
-                                                class="bg-[#1e5371] px-3 py-2 text-white rounded-md"
-                                        >
-                                                Xác nhận đơn hàng
-                                        </button>
-                                </div>
+                        <div class="">
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Select an option</mat-label>
+                                <mat-select
+                                    (selectionChange)="onChangeDistrict($event)"
+                                    [value]="districtSelected"
+                                    formControlName="selectFormDistrict"
+                                >
+                                    <mat-option
+                                        [value]="item"
+                                        *ngFor="let item of this.CheckOutService.address.district"
+                                        >{{ item.DistrictName }}</mat-option
+                                    >
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="">
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Select an option</mat-label>
+                                <mat-select
+                                    (selectionChange)="onChangeWarn($event)"
+                                    [value]="warnSelected"
+                                    formControlName="selectFormWarn"
+                                >
+                                    <mat-option [value]="item" *ngFor="let item of this.CheckOutService.address.warn">{{
+                                        item.WardName
+                                    }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="">
+                            <mat-form-field class="example-full-width" class="w-full">
+                                <mat-label>Địa chỉ chi tiết</mat-label>
+                                <input
+                                    type="text"
+                                    matInput
+                                    placeholder="Nguyen van A"
+                                    formControlName="detailAddress"
+                                />
+                            </mat-form-field>
+                        </div>
 
-                                <!-- <p>{{ item | json }}</p> -->
-                        </div>
-                </div>
+                        <button class="bg-[#1e5371] px-3 py-2 text-white rounded-md" type="submit">
+                            Xác nhận địa chỉ
+                        </button>
+                    </form></mat-tab
+                >
+                <mat-tab label="Chọn địa chỉ">
+                    <div class="w-full">
+                        <mat-radio-group
+                            aria-labelledby="example-radio-group-label"
+                            [(ngModel)]="addressSelected"
+                            (change)="onChangesAddress($event)"
+                        >
+                            <div class="flex" *ngFor="let item of myAddress; index as idx">
+                                <mat-radio-button
+                                    class="example-radio-button"
+                                    [value]="item"
+                                    [checked]="idx === 0"
+                                    color="primary"
+                                >
+                                    <div class="p-3 flex w-[700px] justify-between">
+                                        <div class="">
+                                            <p>
+                                                <span>Tên người nhận : </span>
+                                                {{ item.name }}
+                                            </p>
+                                            <p>
+                                                <span>Số điện thoại : </span>
+                                                {{ item.phone }}
+                                            </p>
+                                            <p>
+                                                <span>Địa chỉ : </span>
+                                                {{ item.address.proviceSelected.ProvinceName }}
+                                                -
+                                                {{ item.address.districtSelected.DistrictName }}
+                                                -
+                                                {{ item.address.warnSelected.WardName }}
+                                                -
+                                            </p>
+                                        </div>
+                                        <div class="" (click)="deleteAddress(item.id)">
+                                            <button class="px-4 py-2 bg-red-700 text-white font-semibold rounded-md">
+                                                Xóa địa chỉ
+                                            </button>
+                                        </div>
+                                    </div>
+                                </mat-radio-button>
+                            </div>
+                        </mat-radio-group>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </div>
+        <div class="w-[40%]">
+            <p class="border-b-2 pb-3">Hóa đơn</p>
+            <div class="h-[50px] flex border-b-2 font-[500] text-gray-500">
+                <div class="w-[50%] flex items-center">
+                    <span>Thông tin sản phẩm</span>
+                </div>
+                <div class="w-[15%] flex items-center justify-center"><span>Số lượng</span></div>
+                <div class="w-[15%] flex items-center justify-center"><span>Giá</span></div>
+                <div class="w-[20%] flex items-center justify-center"><span>Tổng</span></div>
+            </div>
+            <div class="pb-2">
+                <div class="overflow-auto max-h-[300px]">
+                    <div *ngFor="let item of productCache" class="h-[120px] pl-5 border-b-2 mb-2 py-2 flex">
+                        <div class="w-1/2 h-full flex">
+                            <div class="w-[100px] h-full">
+                                <img [src]="item.product?.mainImage" alt="" class="object-cover h-full" />
+                            </div>
+                            <div class="px-3">
+                                <p class="font-[500]">{{ item.product?.name }}</p>
+                            </div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="h-4/6 flex">
+                                <div class="w-[30%] flex items-center justify-center">
+                                    <div class="flex gap-5 border-2 rounded-xl px-3">
+                                        <span>{{ item.qty }}</span>
+                                    </div>
+                                </div>
+                                <div class="w-[30%] flex items-center justify-center">
+                                    <span>{{ item.cost | priceProduct }}</span>
+                                </div>
+                                <div class="w-[40%] flex items-center justify-center">
+                                    <span>{{ item.qty * item.cost | priceProduct }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <p class="py-3"><b>Tổng hóa đơn :</b></p>
+                    <button (click)="confirmBill()" class="bg-[#1e5371] px-3 py-2 text-white rounded-md">
+                        Xác nhận đơn hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

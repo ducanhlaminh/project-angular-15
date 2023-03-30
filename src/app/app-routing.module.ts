@@ -5,41 +5,48 @@ import { CheckoutPageComponent } from './module/checkout/checkout-page/checkout-
 import { HomePageComponent } from './module/product/pages/home-page/home-page.component';
 import { LoginPageComponent } from './module/user/page/login-page/login-page.component';
 import { SignupPageComponent } from './module/user/page/signup-page/signup-page.component';
+import { InfoUserComponent } from './module/user/page/user-page/history-bill/info-user/info-user.component';
 import { UserPageComponent } from './module/user/page/user-page/user-page.component';
 const routes: Routes = [
-        {
-                path: '',
-                component: HomePageComponent,
-        },
-        {
-                path: 'cart',
-                component: CartPageComponent,
-        },
-        {
-                path: 'checkout',
-                component: CheckoutPageComponent,
-        },
-        {
-                path: 'login',
-                component: LoginPageComponent,
-        },
-        {
-                path: 'signup',
-                component: SignupPageComponent,
-        },
-        {
-                path: 'profile',
-                component: UserPageComponent,
-        },
-        {
-                path: 'home',
-                redirectTo: '',
-                pathMatch: 'full',
-        },
+    {
+        path: '',
+        component: HomePageComponent,
+    },
+    {
+        path: 'cart',
+        component: CartPageComponent,
+    },
+    {
+        path: 'checkout',
+        component: CheckoutPageComponent,
+    },
+    {
+        path: 'login',
+        component: LoginPageComponent,
+    },
+    {
+        path: 'signup',
+        component: SignupPageComponent,
+    },
+    {
+        path: 'profile',
+        component: UserPageComponent,
+        children: [
+            {
+                path: 'infor',
+                component: InfoUserComponent,
+            },
+        ],
+    },
+    {
+        path: 'home',
+        redirectTo: '',
+        pathMatch: 'full',
+    },
 ];
 
 @NgModule({
-        imports: [RouterModule.forRoot(routes)],
-        exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
 export class AppRoutingModule {}

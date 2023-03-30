@@ -1,61 +1,55 @@
-<div class="h-[70px] py-3 flex">
-        <div class="logo-header font-lemonada font-semibold text-[#17494D] text-[25px] pr-5">PHUONGTHANH</div>
-        <div class="w-[35%] flex gap-2">
-                <div class="w-1/3" *ngFor="let item of listCategory">
-                        <a
-                                [routerLink]="['/', 'category', this.convert(item.valueVi), item.code]"
-                                routerLinkActive="font-bold"
-                                class="flex items-center justify-center h-full hover:bg-slate-50 cursor-pointer rounded-md px-5"
-                        >
-                                <span class="">{{ item.valueVi }}</span>
-                        </a>
-                </div>
+<div class="h-[70px] py-3 flex" id="header">
+    <div class="logo-header font-lemonada font-semibold text-[#17494D] text-[25px] pr-5">PHUONGTHANH</div>
+    <div class="w-[35%] flex gap-2">
+        <div class="w-1/3" *ngFor="let item of listCategory">
+            <a
+                [routerLink]="['/', 'category', this.convert(item.valueVi), item.code]"
+                routerLinkActive="font-bold"
+                class="flex items-center justify-center h-full hover:bg-slate-50 cursor-pointer rounded-md px-5"
+            >
+                <span class="">{{ item.valueVi }}</span>
+            </a>
         </div>
-        <div class="w-[30%] relative">
-                <form class="example-form">
-                        <input
-                                type="text"
-                                placeholder="Search for a street"
-                                [formControl]="control"
-                                [matAutocomplete]="auto"
-                                class="h-[42px] bg-gray-200 text-gray-500 px-5 py-3 w-full outline-none rounded-sm"
-                        />
-                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectProductSearch($event)">
-                                <mat-option
-                                        *ngFor="let street of filteredStreets"
-                                        [value]="street?.name"
-                                        [id]="street?.id"
-                                >
-                                        {{ street.name }}
-                                </mat-option>
-                        </mat-autocomplete>
-                </form>
+    </div>
+    <div class="w-[30%] relative">
+        <form class="example-form">
+            <input
+                type="text"
+                placeholder="Search for a street"
+                [formControl]="control"
+                [matAutocomplete]="auto"
+                class="h-[42px] bg-gray-200 text-gray-500 px-5 py-3 w-full outline-none rounded-sm"
+            />
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectProductSearch($event)">
+                <mat-option *ngFor="let street of filteredStreets" [value]="street?.name" [id]="street?.id">
+                    {{ street.name }}
+                </mat-option>
+            </mat-autocomplete>
+        </form>
+    </div>
+    <div class="w-[5%] flex items-center text-[22px] justify-center relative cursor-pointer" routerLink="/cart">
+        <fa-icon [icon]="faCartShopping"></fa-icon>
+        <div class="bg-orange-500 h-4 w-4 rounded-full absolute top-0 right-[10px] flex justify-center items-center">
+            <span class="text-white text-xs">{{ CartService.listProduct.length }}</span>
         </div>
-        <div class="w-[5%] flex items-center text-[22px] justify-center relative cursor-pointer" routerLink="/cart">
-                <fa-icon [icon]="faCartShopping"></fa-icon>
-                <div
-                        class="bg-orange-500 h-4 w-4 rounded-full absolute top-0 right-[10px] flex justify-center items-center"
-                >
-                        <span class="text-white text-xs">{{ CartService.listProduct.length }}</span>
-                </div>
-        </div>
-        <div class="w-[5%] flex items-center text-[22px] justify-center relative">
-                <fa-icon [icon]="faUser"></fa-icon>
-        </div>
-        <div
-                class="w-[10%] flex items-center text-[22px] justify-center relative"
-                *ngIf="UserService.userInfor; else login"
-        >
-                <button class="bg-blue-200 text-base w-full py-2 rounded-md" (click)="logoutAcc()">Logout</button>
-        </div>
+    </div>
+    <div class="w-[5%] flex items-center text-[22px] justify-center relative" routerLink="/profile/infor">
+        <fa-icon [icon]="faUser"></fa-icon>
+    </div>
+    <div
+        class="w-[10%] flex items-center text-[22px] justify-center relative"
+        *ngIf="UserService.userInfor; else login"
+    >
+        <button class="bg-blue-200 text-base w-full py-2 rounded-md" (click)="logoutAcc()">Logout</button>
+    </div>
 </div>
 <p class="bg-slate-200 text-center p-3 text-sm">
-        Chào mừng quý khách đến với cửa hàng tạp hóa Phương Thanh. Chúng tôi đang có rất nhiều deal hot dành riêng cho
-        bạn <a href="" class="underline text-blue-500">ở đây</a>
+    Chào mừng quý khách đến với cửa hàng tạp hóa Phương Thanh. Chúng tôi đang có rất nhiều deal hot dành riêng cho bạn
+    <a href="" class="underline text-blue-500">ở đây</a>
 </p>
 
 <ng-template #login>
-        <div class="w-[10%] flex items-center text-[22px] justify-center relative">
-                <button class="bg-blue-200 text-base w-full py-2 rounded-md" routerLink="/login">Login</button>
-        </div>
+    <div class="w-[10%] flex items-center text-[22px] justify-center relative">
+        <button class="bg-blue-200 text-base w-full py-2 rounded-md" routerLink="/login">Login</button>
+    </div>
 </ng-template>

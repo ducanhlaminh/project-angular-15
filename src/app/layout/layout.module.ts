@@ -11,23 +11,25 @@ import { PriceProductPipe } from '../module/product/price-product.pipe';
 import { FooterLayoutComponent } from './components/footer-layout/footer-layout.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputFormComponent } from './components/input-form/input-form.component';
 @NgModule({
-        declarations: [
-                LayoutPageComponent,
-                HeaderLayoutComponent,
-                ItemCategoryComponent,
-                InputFieldComponent,
-                FooterLayoutComponent,
-                PriceProductPipe,
-        ],
-        imports: [
-                CommonModule,
-                LayoutRoutingModule,
-                FormsModule,
-                FontAwesomeModule,
-                MatAutocompleteModule,
-                ReactiveFormsModule,
-        ],
-        exports: [LayoutPageComponent, PriceProductPipe],
+    declarations: [
+        LayoutPageComponent,
+        HeaderLayoutComponent,
+        ItemCategoryComponent,
+        InputFieldComponent,
+        FooterLayoutComponent,
+        PriceProductPipe,
+        InputFormComponent,
+    ],
+    imports: [
+        CommonModule,
+        LayoutRoutingModule,
+        FormsModule,
+        FontAwesomeModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+    ],
+    exports: [LayoutPageComponent, PriceProductPipe, InputFormComponent],
 })
 export class LayoutModule {}

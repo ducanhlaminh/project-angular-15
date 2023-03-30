@@ -1,0 +1,41 @@
+<form class="" [formGroup]="formUser" (submit)="onSubmit(formUser)">
+    <div class="mb-3 flex items-center gap-4">
+        <img
+            src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2022/02/avatar-trang-y-nghia.jpeg?fit=512%2C20000&quality=95&ssl=1"
+            alt=""
+            class="rounded-full h-[100px] object-contain"
+        />
+        <input type="file" class="hidden" #upload formControlName="avatar" />
+        <button class="bg-[#1e5371] rounded-md px-5 py-2 text-white font-medium mt-5" (click)="uploadAvatar()">
+            Upload
+        </button>
+    </div>
+    <div class="">
+        <p class="font-semibold mt-3">Thông tin chi tiết cá nhân</p>
+        <hr />
+        <p class="py-3 font-semibold">Họ và tên</p>
+        <input
+            type="text"
+            class="h-[50px] bg-gray-200 text-gray-500 px-5 py-3 w-full outline-none rounded-sm"
+            formControlName="name"
+        />
+        <p class="py-3 font-semibold">Họ và tên</p>
+        <input
+            type="text"
+            class="h-[50px] bg-gray-200 text-gray-500 px-5 py-3 w-full outline-none rounded-sm"
+            formControlName="email"
+        />
+    </div>
+
+    <div class="w-1/2">
+        <p class="py-3 font-semibold">Họ và tên</p>
+        <input
+            type="text"
+            class="h-[50px] bg-gray-200 text-gray-500 px-5 py-3 w-full outline-none rounded-sm"
+            formControlName="phone"
+        />
+    </div>
+    <div class="flex justify-end">
+        <button type="submit" class="bg-[#1e5371] rounded-md px-3 py-2 text-white font-medium">Lưu thay đổi</button>
+    </div>
+</form>

@@ -10,21 +10,26 @@ import { ProfilePageComponent } from './componets/profile-page/profile-page.comp
 import { ManageBillsComponent } from './page/manage-bills/manage-bills.component';
 import { HistoryBillsComponent } from './page/history-bills/history-bills.component';
 import { AdminComponent } from './page/admin/admin.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SiderbarUserComponent } from './componets/siderbar-user/siderbar-user.component';
+import { InfoUserComponent } from './page/user-page/history-bill/info-user/info-user.component';
+import { LayoutModule } from 'src/app/layout/layout.module';
 @NgModule({
-        declarations: [
-                UserPageComponent,
-                LoginPageComponent,
-                SignupPageComponent,
-                BillPageComponent,
-                HistoryBillComponent,
-                ProfilePageComponent,
-                ManageBillsComponent,
-                HistoryBillsComponent,
-                AdminComponent,
-        ],
-        imports: [CommonModule, UserRoutingModule, FormsModule, MatFormFieldModule],
-        exports: [UserPageComponent, LoginPageComponent, SignupPageComponent, BillPageComponent],
+    declarations: [
+        UserPageComponent,
+        LoginPageComponent,
+        SignupPageComponent,
+        BillPageComponent,
+        HistoryBillComponent,
+        ProfilePageComponent,
+        ManageBillsComponent,
+        HistoryBillsComponent,
+        AdminComponent,
+        SiderbarUserComponent,
+        InfoUserComponent,
+    ],
+    imports: [CommonModule, UserRoutingModule, FormsModule, MatFormFieldModule, LayoutModule, ReactiveFormsModule],
+    exports: [UserPageComponent, LoginPageComponent, SignupPageComponent, BillPageComponent],
 })
 export class UserModule {}
