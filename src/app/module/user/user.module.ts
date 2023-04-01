@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SiderbarUserComponent } from './componets/siderbar-user/siderbar-user.component';
 import { InfoUserComponent } from './page/user-page/history-bill/info-user/info-user.component';
 import { LayoutModule } from 'src/app/layout/layout.module';
+import { IconModule } from 'src/app/icon/icon.module';
 @NgModule({
     declarations: [
         UserPageComponent,
@@ -29,7 +30,15 @@ import { LayoutModule } from 'src/app/layout/layout.module';
         SiderbarUserComponent,
         InfoUserComponent,
     ],
-    imports: [CommonModule, UserRoutingModule, FormsModule, MatFormFieldModule, LayoutModule, ReactiveFormsModule],
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        FormsModule,
+        MatFormFieldModule,
+        LayoutModule,
+        IconModule,
+        ReactiveFormsModule,
+    ],
     exports: [UserPageComponent, LoginPageComponent, SignupPageComponent, BillPageComponent],
 })
 export class UserModule {}

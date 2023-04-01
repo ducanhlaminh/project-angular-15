@@ -26,11 +26,7 @@ export class LoginPageComponent {
                     setTimeout(() => {
                         localStorage.setItem('token', res.token),
                             this.router.navigateByUrl(''),
-                            this.CartService.getProductCart(),
-                            console.log(1),
-                            this.UserService.getCurrent().subscribe((res: any) => {
-                                this.UserService.userInfor = res.user;
-                            });
+                            this.CartService.getProductCart();
                     }, 1000);
             });
     }

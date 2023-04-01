@@ -15,10 +15,10 @@ export class InfoUserComponent implements OnInit {
         console.log(this.UserService.userInfor);
 
         this.formUser = new FormGroup({
-            avatar: new FormControl(this.UserService.userInfor?.avatar),
-            name: new FormControl(this.UserService.userInfor?.name, Validators.required),
-            email: new FormControl(this.UserService.userInfor?.email, Validators.required),
-            phone: new FormControl(this.UserService.userInfor?.phone, Validators.required),
+            avatar: new FormControl(''),
+            name: new FormControl(this.UserService.userInfor.user?.name, Validators.required),
+            email: new FormControl(this.UserService.userInfor.user?.email, Validators.required),
+            phone: new FormControl(this.UserService.userInfor.user?.phone, Validators.required),
         });
     }
 
