@@ -1,10 +1,14 @@
 <div class="bg-slate-200 font-semibold rounded-md overflow-hidden">
-    <div class="px-7 py-5 flex justify-between" routerLink="/profile/infor" routerLinkActive="bg-slate-300">
+    <div
+        class="px-7 py-5 flex justify-between hover:bg-slate-300 cursor-pointer"
+        routerLink="/profile/infor"
+        routerLinkActive="bg-slate-300"
+    >
         <span>Thông tin cá nhân</span>
         <fa-icon [icon]="faChevronRight"></fa-icon>
     </div>
-    <div class="px-7 py-5 flex justify-between">
+    <div class="px-7 py-5 flex justify-between hover:bg-slate-300 cursor-pointer">
         <span>Trạng thái đơn hàng</span>
-        <span> > </span>
+        <fa-icon [icon]="faChevronRight"></fa-icon>
     </div>
 </div>

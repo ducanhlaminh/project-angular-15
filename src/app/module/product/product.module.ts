@@ -13,7 +13,7 @@ import { OptionProductComponent } from './componnets/option-product/option-produ
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { RangePriceComponent } from './componnets/range-price/range-price.component';
 import { SlidePictureDetailComponent } from './componnets/slide-picture-detail/slide-picture-detail.component';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 @NgModule({
     declarations: [
         HomePageComponent,
@@ -27,7 +27,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
         RangePriceComponent,
         SlidePictureDetailComponent,
     ],
-    imports: [CommonModule, IconModule, ProductRoutingModule, LayoutModule,NgxSkeletonLoaderModule],
+    imports: [CommonModule, IconModule, ProductRoutingModule, LayoutModule],
     exports: [HomePageComponent, CategoryPageComponent, DetailPageComponent, ProductItemDirective],
 })
 export class ProductModule {}

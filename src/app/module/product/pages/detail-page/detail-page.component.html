@@ -17,7 +17,6 @@
                     alt=""
                     class="object-contain h-full w-full rounded-md cursor-pointer"
                     (mouseover)="selectedImg(idx)"
-                    [ngClass]="{ 'border-2 border-[#1e5371]': posiImgCur === idx }"
                 />
             </div>
         </div>
@@ -60,7 +59,7 @@
 
 <ng-template #loading>
     <div class="warp w-1/2">
-        <ngx-skeleton-loader
+        <!-- <ngx-skeleton-loader
             appearance="circle"
             [theme]="{
                 width: '500px',
@@ -68,6 +67,6 @@
                 'border-radius': '10px'
             }"
         >
-        </ngx-skeleton-loader>
+        </ngx-skeleton-loader> -->
     </div>
 </ng-template>

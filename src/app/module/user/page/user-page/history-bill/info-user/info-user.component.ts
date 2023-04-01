@@ -10,20 +10,19 @@ import { UseServiceService } from 'src/app/module/user/use-service.service';
 export class InfoUserComponent implements OnInit {
     formUser: any;
     @ViewChild('upload') upload: any;
-    constructor(private UserService: UseServiceService) {}
+    constructor(public UserService: UseServiceService) {}
     ngOnInit() {
         console.log(this.UserService.userInfor);
-
         this.formUser = new FormGroup({
             avatar: new FormControl(''),
-            name: new FormControl(this.UserService.userInfor.user?.name, Validators.required),
-            email: new FormControl(this.UserService.userInfor.user?.email, Validators.required),
-            phone: new FormControl(this.UserService.userInfor.user?.phone, Validators.required),
+            name: new FormControl(this.UserService.userInfor.name, Validators.required),
+            email: new FormControl(this.UserService.userInfor.email, Validators.required),
+            phone: new FormControl(this.UserService.userInfor.phone, Validators.required),
         });
     }
 
     onSubmit(e: any) {
-        console.log(e.value);
+        console.log(e);
 
         this.UserService.updateInfor(e.value).subscribe((res: any) => {
             if (res.status === 0) {
@@ -33,5 +32,13 @@ export class InfoUserComponent implements OnInit {
     }
     uploadAvatar() {
         this.upload.nativeElement.click();
+    }
+    focus(e: any) {
+        var edit = e.srcElement.parentElement.parentElement.lastChild;
+        if (edit.style.display === 'none') {
+            edit.style.display = 'block';
+        } else {
+            edit.style.display = 'none';
+        }
     }
 }
