@@ -1,5 +1,7 @@
+declare const Buffer: any;
 import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { UseServiceService } from 'src/app/module/user/use-service.service';
 
 @Component({
@@ -9,12 +11,13 @@ import { UseServiceService } from 'src/app/module/user/use-service.service';
 })
 export class InfoUserComponent implements OnInit {
     formUser: any;
+    image: any;
     @ViewChild('upload') upload: any;
-    constructor(public UserService: UseServiceService) {}
+    constructor(public UserService: UseServiceService, private sanitizer: DomSanitizer) {}
     ngOnInit() {
         console.log(this.UserService.userInfor);
         this.formUser = new FormGroup({
-            avatar: new FormControl(''),
+            avatar: new FormControl(this.UserService.userInfor.avatar),
             name: new FormControl(this.UserService.userInfor.name, Validators.required),
             email: new FormControl(this.UserService.userInfor.email, Validators.required),
             phone: new FormControl(this.UserService.userInfor.phone, Validators.required),
@@ -26,7 +29,9 @@ export class InfoUserComponent implements OnInit {
 
         this.UserService.updateInfor(e.value).subscribe((res: any) => {
             if (res.status === 0) {
-                this.UserService.getCurrent().subscribe((res: any) => (this.UserService.userInfor = res.user));
+                this.UserService.getCurrent().subscribe((res: any) => {
+                    return (this.UserService.userInfor = res.user);
+                });
             }
         });
     }
@@ -41,4 +46,5 @@ export class InfoUserComponent implements OnInit {
             edit.style.display = 'none';
         }
     }
+    bufferToBase64 = (arrayBuffer: any) => (arrayBuffer ? new Buffer(arrayBuffer, 'base64').toString('binary') : '');
 }

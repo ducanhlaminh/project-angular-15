@@ -6,7 +6,7 @@ import { BillPageComponent } from './page/bill-page/bill-page.component';
 import { AdminComponent } from './page/admin/admin.component';
 import { ManageBillsComponent } from './page/manage-bills/manage-bills.component';
 import { LoginPageComponent } from './page/login-page/login-page.component';
-import { InfoUserComponent } from './page/user-page/history-bill/info-user/info-user.component';
+import { InfoUserComponent } from './page/user-page/info-user/info-user.component';
 
 export const userRoutes: Routes = [
     {

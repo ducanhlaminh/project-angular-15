@@ -23,4 +23,7 @@ export class UseServiceService {
     updateInfor(data: any) {
         return this.http.put('http://localhost:8888/api/v1/user/', data);
     }
+    getBillsUser(data: any) {
+        return this.http.get('http://localhost:8888/api/v1/bill2', { params: data });
+    }
 }

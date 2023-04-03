@@ -5,7 +5,8 @@ import { CheckoutPageComponent } from './module/checkout/checkout-page/checkout-
 import { HomePageComponent } from './module/product/pages/home-page/home-page.component';
 import { LoginPageComponent } from './module/user/page/login-page/login-page.component';
 import { SignupPageComponent } from './module/user/page/signup-page/signup-page.component';
-import { InfoUserComponent } from './module/user/page/user-page/history-bill/info-user/info-user.component';
+import { InfoUserComponent } from './module/user/page/user-page/info-user/info-user.component';
+import { StatusBillUserComponent } from './module/user/page/user-page/status-bill-user/status-bill-user.component';
 import { UserPageComponent } from './module/user/page/user-page/user-page.component';
 const routes: Routes = [
     {
@@ -35,6 +36,10 @@ const routes: Routes = [
             {
                 path: 'infor',
                 component: InfoUserComponent,
+            },
+            {
+                path: 'status-bills',
+                component: StatusBillUserComponent,
             },
         ],
     },

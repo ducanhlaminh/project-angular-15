@@ -13,9 +13,10 @@ import { AdminComponent } from './page/admin/admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SiderbarUserComponent } from './componets/siderbar-user/siderbar-user.component';
-import { InfoUserComponent } from './page/user-page/history-bill/info-user/info-user.component';
+import { InfoUserComponent } from './page/user-page/info-user/info-user.component';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { IconModule } from 'src/app/icon/icon.module';
+import { StatusBillUserComponent } from './page/user-page/status-bill-user/status-bill-user.component';
 @NgModule({
     declarations: [
         UserPageComponent,
@@ -29,6 +30,7 @@ import { IconModule } from 'src/app/icon/icon.module';
         AdminComponent,
         SiderbarUserComponent,
         InfoUserComponent,
+        StatusBillUserComponent,
     ],
     imports: [
         CommonModule,
