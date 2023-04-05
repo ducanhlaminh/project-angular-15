@@ -12,6 +12,7 @@ export class LayoutPageComponent {
     constructor(public UserService: UseServiceService, private CartService: CartServiceService) {}
     ngOnInit() {
         const token = localStorage.getItem('token');
+
         token &&
             (this.CartService.getProductCart(),
             this.UserService.getCurrent().subscribe((res: any) => (this.UserService.userInfor = res.user)));

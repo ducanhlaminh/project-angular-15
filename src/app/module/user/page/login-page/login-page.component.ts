@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartServiceService } from 'src/app/module/cart/cart-service.service';
 import { UseServiceService } from '../../use-service.service';
+import { LoadingService } from 'src/app/layout/components/loading/loading.service';
 
 @Component({
     selector: 'app-login-page',
@@ -15,19 +16,17 @@ export class LoginPageComponent {
         private UserService: UseServiceService,
         private CartService: CartServiceService,
         private router: Router,
+        public LoadingService: LoadingService,
     ) {}
     loginAcc() {
         this.validateEmail() &&
             // this.validatePassword(this.password) &&
             this.UserService.login(this.email, this.password).subscribe((res: any) => {
                 // status = 0 => save token in LocalStorage , navigation to Home , update cart
-                res.status =
-                    '0' &&
-                    setTimeout(() => {
-                        localStorage.setItem('token', res.token),
-                            this.router.navigateByUrl(''),
-                            this.CartService.getProductCart();
-                    }, 1000);
+                (res.status = '0' && localStorage.setItem('token', res.token)),
+                    this.router.navigateByUrl(''),
+                    this.UserService.getCurrent().subscribe((data: any) => (this.UserService.userInfor = data.user));
+                this.CartService.getProductCart();
             });
     }
     validateEmail = () => {

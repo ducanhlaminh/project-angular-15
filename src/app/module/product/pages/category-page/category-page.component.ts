@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductServiceService } from '../../product-service.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { getProductBegin, isLoading } from 'src/app/store/actions/app.actions';
+import { getProductBegin } from 'src/app/store/actions/app.actions';
 import { selectFeatureCount, selectFeatureLoading, selectFeatureProduct } from 'src/app/store/selector/appSelector';
-import { map } from 'rxjs';
+import { LoadingService } from 'src/app/layout/components/loading/loading.service';
 interface Product {
     name: string;
     price: number;
@@ -19,7 +19,7 @@ interface Product {
 export class CategoryPageComponent implements OnInit, OnDestroy {
     listProducts$ = this.store.select(selectFeatureProduct);
     length$: any = this.store.select(selectFeatureCount);
-    loadingPage$ = this.store.select(selectFeatureLoading);
+
     categoryId: any;
     listCategory: any = [];
     length: number;
@@ -30,6 +30,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
     pageEvent: PageEvent;
     navigationSubscription: any;
     priceSort = [10000, 100000];
+
     handlePageEvent(e: PageEvent) {
         this.pageEvent = e;
         this.length = e.length;

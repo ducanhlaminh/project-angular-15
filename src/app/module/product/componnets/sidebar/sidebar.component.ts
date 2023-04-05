@@ -11,13 +11,13 @@ export class SidebarComponent implements OnInit {
     formSort: any;
     @Input() value: any;
     selected = JSON.stringify(this.ProductService.sortType[0]);
-
+    rangePrice = { min: 100, max: 500 };
     checkPrice: boolean = true;
     constructor(public ProductService: ProductServiceService) {}
     ngOnInit(): void {
         this.formSort = new FormGroup({
-            minPrice: new FormControl(10, [Validators.required, Validators.min(1)]),
-            maxPrice: new FormControl(100, [Validators.required, Validators.min(1)]),
+            minPrice: new FormControl(100, [Validators.required, Validators.min(1)]),
+            maxPrice: new FormControl(500, [Validators.required, Validators.min(1)]),
             sortCurrent: new FormControl(JSON.stringify(this.ProductService.sortType[0])),
         });
     }

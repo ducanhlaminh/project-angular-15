@@ -10,11 +10,17 @@
             </mat-select>
         </mat-form-field>
     </div>
-    <div class="example-label-container flex justify-between">
+    <div class="example-label-container">
         <label id="example-name-label" class="example-name-label font-semibold mb-2">Khoảng giá :</label>
+        <br />
+        <span class="text-[12px] text-slate-400 text-center">( 100.000đ - 10.000.000đ )</span>
     </div>
 
-    <div class="">
+    <div class="mt-2">
+        <mat-slider min="100" max="1000" step="50" showTickMarks="true" discrete="true">
+            <input formControlName="minPrice" matSliderStartThumb [(ngModel)]="rangePrice.min" />
+            <input formControlName="maxPrice" matSliderEndThumb [(ngModel)]="rangePrice.max" />
+        </mat-slider>
         <div class="flex gap-2">
             <div class="w-1/2">
                 <mat-form-field appearance="fill" floatLabel="always" class="w-full">
@@ -24,9 +30,10 @@
                         type="number"
                         class="example-right-align"
                         placeholder="0"
+                        step="100"
                         formControlName="minPrice"
+                        [(ngModel)]="rangePrice.min"
                     />
-                    <span matTextSuffix>.000đ</span>
                 </mat-form-field>
             </div>
             <div class="w-1/2">
@@ -37,9 +44,10 @@
                         type="number"
                         class="example-right-align"
                         placeholder="0"
+                        step="50"
                         formControlName="maxPrice"
+                        [(ngModel)]="rangePrice.max"
                     />
-                    <span matTextSuffix>.000đ</span>
                 </mat-form-field>
             </div>
         </div>
