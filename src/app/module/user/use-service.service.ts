@@ -26,4 +26,7 @@ export class UseServiceService {
     getBillsUser(data: any) {
         return this.http.get('http://localhost:8888/api/v1/bill2', { params: data });
     }
+    getAvatar(id: any) {
+        return this.http.get('http://localhost:8888/api/v1/user/avatar', { params: { id: id } });
+    }
 }

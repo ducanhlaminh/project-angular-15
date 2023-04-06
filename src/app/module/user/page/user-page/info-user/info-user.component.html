@@ -1,6 +1,10 @@
 <form class="" [formGroup]="formUser" (submit)="onSubmit(formUser)" enctype="multipart/form-data">
     <div class="mb-3 flex items-center gap-4">
-        <img src="{{ image }}" alt="avatar" class="rounded-full h-[100px] object-contain" />
+        <img
+            src="http://localhost:8888/api/v1/user/avatar?id=cd9cf500-f1c1-4fec-ac5d-7bc15b717f73"
+            alt="avatar"
+            class="rounded-full h-[100px] object-contain"
+        />
 
         <input type="file" class="hidden" #upload (change)="upImg($event)" />
         <button

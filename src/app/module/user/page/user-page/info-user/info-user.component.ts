@@ -15,9 +15,7 @@ export class InfoUserComponent implements OnInit {
     @ViewChild('upload') upload: any;
     constructor(public UserService: UseServiceService, private sanitizer: DomSanitizer) {}
     ngOnInit() {
-        console.log('log');
-
-        this.image = this.UserService.userInfor.avatar_test;
+        // this.UserService.getAvatar().subscribe((data) => (this.image = data));
 
         console.log(this.image);
 
