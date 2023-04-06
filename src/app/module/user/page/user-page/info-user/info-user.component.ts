@@ -38,8 +38,12 @@ export class InfoUserComponent implements OnInit {
     // }
     onSubmit(e: any) {
         console.log(e);
-
-        this.UserService.updateInfor(e.value).subscribe((res: any) => {
+        var formData = new FormData();
+        formData.append('avatar', e.value.avatar);
+        formData.append('email', e.value.email);
+        formData.append('name', e.value.name);
+        formData.append('phone', e.value.phone);
+        this.UserService.updateInfor(formData).subscribe((res: any) => {
             if (res.status === 0) {
                 this.UserService.getCurrent().subscribe((res: any) => {
                     return (this.UserService.userInfor = res.user);
@@ -71,35 +75,11 @@ export class InfoUserComponent implements OnInit {
     upImg(evt: any) {
         var files = evt.target.files;
         var file = files[0];
+        console.log(file);
 
-        if (files && file) {
-            var reader = new FileReader();
-
-            reader.onload = this._handleReaderLoaded.bind(this);
-
-            reader.readAsBinaryString(file);
-        }
-    }
-
-    _handleReaderLoaded(readerEvt: any) {
-        var binaryString = readerEvt.target.result;
-        this.image = btoa(binaryString);
         this.formUser.patchValue({
-            avatar: `data:image/png;base64,${this.image} `,
+            avatar: evt.target.files[0],
         });
         console.log(this.formUser);
-
-        // this.UserService.userInfor.patchValue({
-        //     avatar: this.image,
-        // });
-    }
-    _arrayBufferToBase64(buffer: any) {
-        var binary = '';
-        var bytes = new Uint8Array(buffer);
-        var len = bytes.byteLength;
-        for (var i = 0; i < len; i++) {
-            binary += String.fromCharCode(bytes[i]);
-        }
-        return window.btoa(binary);
     }
 }
