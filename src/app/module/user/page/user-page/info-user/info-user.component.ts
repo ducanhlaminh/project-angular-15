@@ -1,41 +1,30 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { UseServiceService } from 'src/app/module/user/use-service.service';
-import { Buffer } from 'buffer';
+import { environment } from 'src/environments/environment';
 @Component({
     selector: 'app-info-user',
     templateUrl: './info-user.component.html',
     styleUrls: ['./info-user.component.scss'],
 })
-export class InfoUserComponent implements OnInit {
+export class InfoUserComponent implements OnInit, AfterViewInit {
     formUser: any;
-    image: any;
     valueInputPre = '';
+    inforUser = this.UserService.userInfor;
     @ViewChild('upload') upload: any;
-    constructor(public UserService: UseServiceService, private sanitizer: DomSanitizer) {}
+    constructor(public UserService: UseServiceService) {}
     ngOnInit() {
-        // this.UserService.getAvatar().subscribe((data) => (this.image = data));
-
-        console.log(this.image);
-
         this.formUser = new FormGroup({
-            avatar: new FormControl(this.UserService.userInfor?.avatar),
+            avatar: new FormControl(this.UserService.userInfor?.url),
             name: new FormControl(this.UserService.userInfor.name, Validators.required),
             email: new FormControl(this.UserService.userInfor.email, Validators.required),
             phone: new FormControl(this.UserService.userInfor.phone, Validators.required),
         });
     }
-    // upImg(e: any) {
-    //     let file = e.target.files[0];
-
-    //     this.formUser.patchValue({
-    //         avatar: this.toBase64(file),
-    //         // formControlName2: myValue2 (can be omitted)
-    //     });
-    // }
+    ngAfterViewInit() {
+        console.log(1);
+    }
     onSubmit(e: any) {
-        console.log(e);
         var formData = new FormData();
         formData.append('avatar', e.value.avatar);
         formData.append('email', e.value.email);
@@ -44,7 +33,9 @@ export class InfoUserComponent implements OnInit {
         this.UserService.updateInfor(formData).subscribe((res: any) => {
             if (res.status === 0) {
                 this.UserService.getCurrent().subscribe((res: any) => {
-                    return (this.UserService.userInfor = res.user);
+                    this.UserService.userInfor = res.user;
+                    this.UserService.userInfor.url = res.avatar;
+                    console.log(this.UserService.userInfor);
                 });
             }
         });
@@ -53,15 +44,17 @@ export class InfoUserComponent implements OnInit {
         this.upload.nativeElement.click();
     }
     focus(e: any) {
-        this.valueInputPre = e.srcElement.value;
+        this.valueInputPre = e.target.value;
         var edit = e.srcElement.nextElementSibling;
         edit.style.display = 'flex';
     }
     blur(e: any) {
+        const key = e.target.name;
+        this.UserService.userInfor[key] = this.valueInputPre;
+        this.valueInputPre = '';
         var el = e.srcElement.nextElementSibling;
         el.style.display = 'none';
     }
-
     cancel(e: any) {
         let input = e.srcElement.parentElement.previousElementSibling;
         input.value = this.valueInputPre;
@@ -73,8 +66,6 @@ export class InfoUserComponent implements OnInit {
     upImg(evt: any) {
         var files = evt.target.files;
         var file = files[0];
-        console.log(file);
-
         this.formUser.patchValue({
             avatar: evt.target.files[0],
         });

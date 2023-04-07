@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { param } from 'jquery';
 
 @Injectable({
     providedIn: 'root',
@@ -26,7 +27,7 @@ export class UseServiceService {
     getBillsUser(data: any) {
         return this.http.get('http://localhost:8888/api/v1/bill2', { params: data });
     }
-    getAvatar(id: any) {
+    getAvatar(id: string) {
         return this.http.get('http://localhost:8888/api/v1/user/avatar', { params: { id: id } });
     }
 }

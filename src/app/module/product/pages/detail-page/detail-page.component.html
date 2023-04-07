@@ -17,6 +17,7 @@
                     alt=""
                     class="object-contain h-full w-full rounded-md cursor-pointer"
                     (mouseover)="selectedImg(idx)"
+                    [ngClass]="{ 'border-2': idx === posiImgCur }"
                 />
             </div>
         </div>

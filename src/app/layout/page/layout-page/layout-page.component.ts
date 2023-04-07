@@ -15,6 +15,9 @@ export class LayoutPageComponent {
 
         token &&
             (this.CartService.getProductCart(),
-            this.UserService.getCurrent().subscribe((res: any) => (this.UserService.userInfor = res.user)));
+            this.UserService.getCurrent().subscribe((res: any) => {
+                this.UserService.userInfor = res.user;
+                this.UserService.userInfor.url = res.url;
+            }));
     }
 }
