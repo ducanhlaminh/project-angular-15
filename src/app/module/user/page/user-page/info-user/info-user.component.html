@@ -1,7 +1,7 @@
 <form class="" [formGroup]="formUser" (submit)="onSubmit(formUser)" enctype="multipart/form-data">
     <div class="mb-3 flex items-center gap-4">
         <img
-            [src]="'http://localhost:8888/api/v1/user/avatar?id=' + UserService.userInfor?.avatar"
+            [src]="'http://localhost:8888/api/v1/user/avatar?id=' + inforUser?.avatar"
             alt="avatar"
             class="rounded-full h-[100px] w-[100px] object-cover"
         />
@@ -29,7 +29,7 @@
                     formControlName="name"
                     (focus)="focus($event)"
                     (blur)="blur($event)"
-                    [(ngModel)]="this.UserService.userInfor.name"
+                    [(ngModel)]="inforUser.name"
                 />
                 <div class="hidden h-full gap-2">
                     <button
@@ -59,7 +59,7 @@
                     name="email"
                     (focus)="focus($event)"
                     (blur)="blur($event)"
-                    [(ngModel)]="this.UserService.userInfor.email"
+                    [(ngModel)]="inforUser.email"
                 />
                 <div class="hidden h-full gap-2">
                     <button
@@ -91,7 +91,7 @@
                 (focus)="focus($event)"
                 (blur)="blur($event)"
                 name="phone"
-                [(ngModel)]="this.UserService.userInfor.phone"
+                [(ngModel)]="inforUser.phone"
             />
             <div class="hidden h-full gap-2">
                 <button class="bg-[#1e5371] rounded-md px-3 text-white font-medium" (mousedown)="onSubmit(formUser)">

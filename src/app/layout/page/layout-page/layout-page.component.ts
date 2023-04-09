@@ -13,11 +13,6 @@ export class LayoutPageComponent {
     ngOnInit() {
         const token = localStorage.getItem('token');
 
-        token &&
-            (this.CartService.getProductCart(),
-            this.UserService.getCurrent().subscribe((res: any) => {
-                this.UserService.userInfor = res.user;
-                this.UserService.userInfor.url = res.url;
-            }));
+        token && this.CartService.getProductCart();
     }
 }

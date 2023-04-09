@@ -60,8 +60,8 @@
             </div>
             <button class="w-1/5 flex justify-center underline" (click)="showDetailBill($event)">Xem chi tiết</button>
         </div>
-        <div class="bg-slate-200 hidden">
-            <div class="p-2 mb-3" *ngFor="let product of item.log[0].products">
+        <div class="bg-slate-200 hidden p-2">
+            <div class="mb-3" *ngFor="let product of item.log[0].products">
                 <div class="h-[100px] flex">
                     <div class="w-[10%] h-full">
                         <img [src]="product?.mainImage" alt="" class="object-cover h-full w-full rounded-md" />
@@ -103,6 +103,9 @@
                       </div>
                   </div>
               </div> -->
+            </div>
+            <div class="flex justify-end">
+                <button class="" (click)="cancelBill(item.id)">Hủy đơn</button>
             </div>
         </div>
     </div>

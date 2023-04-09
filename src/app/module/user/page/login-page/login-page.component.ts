@@ -25,8 +25,8 @@ export class LoginPageComponent {
                 // status = 0 => save token in LocalStorage , navigation to Home , update cart
                 (res.status = '0' && localStorage.setItem('token', res.token)),
                     this.router.navigateByUrl(''),
-                    this.UserService.getCurrent().subscribe((data: any) => (this.UserService.userInfor = data.user));
-                this.CartService.getProductCart();
+                    // this.UserService.getCurrent().subscribe((data: any) => (this.UserService.userInfor = data.user));
+                    this.CartService.getProductCart();
             });
     }
     validateEmail = () => {

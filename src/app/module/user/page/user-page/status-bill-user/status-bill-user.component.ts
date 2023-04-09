@@ -51,4 +51,5 @@ export class StatusBillUserComponent implements OnInit {
             el.style.display = 'none';
         }
     }
+    cancelBill(id: string) {}
 }

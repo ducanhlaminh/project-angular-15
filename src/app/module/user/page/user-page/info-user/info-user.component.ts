@@ -8,17 +8,26 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./info-user.component.scss'],
 })
 export class InfoUserComponent implements OnInit, AfterViewInit {
-    formUser: any;
+    formUser: any = new FormGroup({
+        avatar: new FormControl(''),
+        name: new FormControl('', Validators.required),
+        email: new FormControl('', Validators.required),
+        phone: new FormControl('', Validators.required),
+    });
     valueInputPre = '';
-    inforUser = this.UserService.userInfor;
+    inforUser: any = { name: '', email: '', phone: '', avatar: '' };
     @ViewChild('upload') upload: any;
     constructor(public UserService: UseServiceService) {}
     ngOnInit() {
-        this.formUser = new FormGroup({
-            avatar: new FormControl(this.UserService.userInfor?.url),
-            name: new FormControl(this.UserService.userInfor.name, Validators.required),
-            email: new FormControl(this.UserService.userInfor.email, Validators.required),
-            phone: new FormControl(this.UserService.userInfor.phone, Validators.required),
+        console.log(this.UserService.userInfor);
+        this.UserService.getCurrent().subscribe((res: any) => {
+            this.inforUser = res.user;
+            this.formUser.patchValue({
+                avatar: res.user.avatar,
+                name: res.user.name,
+                email: res.user.email,
+                phone: res.user.phone,
+            });
         });
     }
     ngAfterViewInit() {
@@ -33,9 +42,13 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
         this.UserService.updateInfor(formData).subscribe((res: any) => {
             if (res.status === 0) {
                 this.UserService.getCurrent().subscribe((res: any) => {
-                    this.UserService.userInfor = res.user;
-                    this.UserService.userInfor.url = res.avatar;
-                    console.log(this.UserService.userInfor);
+                    this.inforUser = res.user;
+                    this.formUser.patchValue({
+                        avatar: res.user.avatar,
+                        name: res.user.name,
+                        email: res.user.email,
+                        phone: res.user.phone,
+                    });
                 });
             }
         });
@@ -50,7 +63,9 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
     }
     blur(e: any) {
         const key = e.target.name;
-        this.UserService.userInfor[key] = this.valueInputPre;
+        console.log(key);
+
+        this.inforUser[key] = this.valueInputPre;
         this.valueInputPre = '';
         var el = e.srcElement.nextElementSibling;
         el.style.display = 'none';
