@@ -1,106 +1,73 @@
 <div class="h-[700px] p-5">
-        <p class="h-[50px] text-[24px] text-[#1B4B66] font-[600]">GIỎ HÀNG CỦA TÔI</p>
-        <div class="flex">
-                <div class="w-[60%] h-[650px]">
-                        <div class="h-[50px] flex border-b-2 font-[500] text-gray-500">
-                                <div class="w-[50%] flex items-center">
-                                        <span>Thông tin sản phẩm</span>
-                                </div>
-                                <div class="w-[15%] flex items-center justify-center"><span>Số lượng</span></div>
-                                <div class="w-[15%] flex items-center justify-center"><span>Giá</span></div>
-                                <div class="w-[20%] flex items-center justify-center"><span>Tổng</span></div>
-                        </div>
-                        <div class="h-[600px] overflow-auto">
-                                <div
-                                        *ngFor="let item of CartService.listProduct"
-                                        class="h-[120px] pl-5 border-b-2 mb-2 py-2 flex"
-                                >
-                                        <div class="w-1/2 h-full flex">
-                                                <div class="w-[100px] h-full">
-                                                        <img
-                                                                [src]="item.product.productData?.mainImage"
-                                                                alt=""
-                                                                class="object-cover h-full"
-                                                        />
-                                                </div>
-                                                <div class="px-3">
-                                                        <p class="font-[500]">{{ item.product.productData?.name }}</p>
-                                                        <div
-                                                                *ngFor="let item of item.product.variant"
-                                                                class="flex gap-2"
-                                                        >
-                                                                <span>{{ item.variant }} :</span>
-                                                                <span>{{ item.value }}</span>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="w-1/2">
-                                                <div class="h-4/6 flex">
-                                                        <div class="w-[30%] flex items-center justify-center">
-                                                                <div class="flex gap-5 border-2 rounded-xl px-3">
-                                                                        <fa-icon
-                                                                                [icon]="faPlus"
-                                                                                (click)="incCount(item)"
-                                                                        ></fa-icon>
-                                                                        <span>{{ item.count }}</span>
-                                                                        <fa-icon
-                                                                                [icon]="faMinus"
-                                                                                (click)="
-                                                                                        item.count > 1 && desCount(item)
-                                                                                "
-                                                                        ></fa-icon>
-                                                                </div>
-                                                        </div>
-                                                        <div class="w-[30%] flex items-center justify-center">
-                                                                <span>{{ item.price | priceProduct }}</span>
-                                                        </div>
-                                                        <div class="w-[40%] flex items-center justify-center">
-                                                                <span>{{
-                                                                        item.price * item.count | priceProduct
-                                                                }}</span>
-                                                        </div>
-                                                </div>
-                                                <div class="h-2/6 flex justify-end gap-5 px-3 text-[14px]">
-                                                        <div
-                                                                class="flex items-center border-b-2 border-[#2c51d5] gap-1"
-                                                        >
-                                                                <input
-                                                                        type="checkbox"
-                                                                        (change)="selectProduct(item)"
-                                                                        [id]="item.product.id"
-                                                                />
-                                                                <label
-                                                                        [for]="item.product.id"
-                                                                        class="text-[#2c51d5] font-semibold"
-                                                                        >CHỌN</label
-                                                                >
-                                                        </div>
-
-                                                        <button
-                                                                (click)="this.CartService.deleteProductCart(item)"
-                                                                class="border-b-2 border-red-500 text-red-500 font-semibold"
-                                                        >
-                                                                XÓA
-                                                        </button>
-                                                </div>
-                                        </div>
-                                </div>
-
-                                <!-- <p>{{ item | json }}</p> -->
-                        </div>
+    <p class="h-[5%] text-[24px] text-[#1B4B66] font-[600]">GIỎ HÀNG CỦA TÔI</p>
+    <div class="flex h-[85%]">
+        <div class="w-[60%] h-full">
+            <div class="h-[50px] flex border-b-2 font-[500] text-gray-500">
+                <div class="w-[50%] flex items-center">
+                    <span>Thông tin sản phẩm</span>
                 </div>
-                <div class="w-[40%] px-[50px]">
-                        <p class="border-b-2 font-[500] h-[50px] items-center flex">Thông tin hóa đơn :</p>
-                        <div class="py-[50px] flex justify-between font-[500]">
-                                <span>Tổng hóa đơn :</span>
-                                <span>{{ this.CartService.totalPrice | priceProduct }}</span>
+                <div class="w-[15%] flex items-center justify-center"><span>Số lượng</span></div>
+                <div class="w-[15%] flex items-center justify-center"><span>Giá</span></div>
+                <div class="w-[20%] flex items-center justify-center"><span>Tổng</span></div>
+            </div>
+            <div class="h-full overflow-auto">
+                <div *ngFor="let item of CartService.listProduct" class="h-[120px] pl-5 border-b-2 mb-2 py-2 flex">
+                    <div class="w-1/2 h-full flex">
+                        <div class="w-[100px] h-full">
+                            <img [src]="item.product.productData?.mainImage" alt="" class="object-cover h-full" />
                         </div>
-                        <button
-                                class="w-full py-3 bg-[#1B4B66] text-white rounded-md"
-                                (click)="onSaveProductSelected()"
-                        >
-                                Tiến hành thanh toán
-                        </button>
+                        <div class="px-3">
+                            <p class="font-[500]">{{ item.product.productData?.name }}</p>
+                            <div *ngFor="let item of item.product.variant" class="flex gap-2">
+                                <span>{{ item.variant }} :</span>
+                                <span>{{ item.value }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="h-4/6 flex">
+                            <div class="w-[30%] flex items-center justify-center">
+                                <div class="flex gap-5 border-2 rounded-xl px-3">
+                                    <fa-icon [icon]="faMinus" (click)="item.count > 1 && desCount(item)"></fa-icon>
+                                    <span>{{ item.count }}</span>
+                                    <fa-icon [icon]="faPlus" (click)="incCount(item)"></fa-icon>
+                                </div>
+                            </div>
+                            <div class="w-[30%] flex items-center justify-center">
+                                <span>{{ item.price | priceProduct }}</span>
+                            </div>
+                            <div class="w-[40%] flex items-center justify-center">
+                                <span>{{ item.price * item.count | priceProduct }}</span>
+                            </div>
+                        </div>
+                        <div class="h-2/6 flex justify-end gap-5 px-3 text-[14px]">
+                            <div class="flex items-center border-b-2 border-[#2c51d5] gap-1">
+                                <input type="checkbox" (change)="selectProduct(item)" [id]="item.product.id" />
+                                <label [for]="item.product.id" class="text-[#2c51d5] font-semibold">CHỌN</label>
+                            </div>
+
+                            <button
+                                (click)="this.CartService.deleteProductCart(item)"
+                                class="border-b-2 border-red-500 text-red-500 font-semibold"
+                            >
+                                XÓA
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- <p>{{ item | json }}</p> -->
+            </div>
         </div>
+        <div class="w-[40%] px-[50px]">
+            <p class="border-b-2 font-[500] h-[50px] items-center flex">Thông tin hóa đơn :</p>
+            <div class="py-[50px] flex justify-between font-[500]">
+                <span>Tổng hóa đơn :</span>
+                <span>{{ this.CartService.totalPrice | priceProduct }}</span>
+            </div>
+            <button class="w-full py-3 bg-[#1B4B66] text-white rounded-md" (click)="onSaveProductSelected()">
+                Tiến hành thanh toán
+            </button>
+        </div>
+    </div>
 </div>

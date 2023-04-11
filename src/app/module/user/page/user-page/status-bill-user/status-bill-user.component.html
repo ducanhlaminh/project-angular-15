@@ -58,7 +58,7 @@
             <div class="w-1/5 text-center">
                 <span>{{ item.customerData.phone }}</span>
             </div>
-            <button class="w-1/5 flex justify-center underline" (click)="showDetailBill($event)">Xem chi tiết</button>
+            <button class="w-1/5 flex justify-center underline" (click)="showDetailBill(item.id)">Xem chi tiết</button>
         </div>
         <div class="bg-slate-200 hidden p-2">
             <div class="mb-3" *ngFor="let product of item.log[0].products">
@@ -88,24 +88,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="">
-                  <div class="h-4/6 flex">
-                      <div class="w-[30%] flex items-center justify-center">
-                          <div class="flex gap-5 border-2 rounded-xl px-3">
-                              <span>{{ product.qty }}</span>
-                          </div>
-                      </div>
-                      <div class="w-[30%] flex items-center justify-center">
-                          <span>{{ product.cost | priceProduct }}</span>
-                      </div>
-                      <div class="w-[40%] flex items-center justify-center">
-                          <span>{{ product.qty * product.cost | priceProduct }}</span>
-                      </div>
-                  </div>
-              </div> -->
-            </div>
-            <div class="flex justify-end">
-                <button class="" (click)="cancelBill(item.id)">Hủy đơn</button>
             </div>
         </div>
     </div>

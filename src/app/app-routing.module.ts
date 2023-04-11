@@ -8,6 +8,7 @@ import { SignupPageComponent } from './module/user/page/signup-page/signup-page.
 import { InfoUserComponent } from './module/user/page/user-page/info-user/info-user.component';
 import { StatusBillUserComponent } from './module/user/page/user-page/status-bill-user/status-bill-user.component';
 import { UserPageComponent } from './module/user/page/user-page/user-page.component';
+import { DetailBillComponent } from './module/user/page/user-page/detail-bill/detail-bill.component';
 const routes: Routes = [
     {
         path: '',
@@ -40,6 +41,10 @@ const routes: Routes = [
             {
                 path: 'status-bills',
                 component: StatusBillUserComponent,
+            },
+            {
+                path: 'bill/:id',
+                component: DetailBillComponent,
             },
         ],
     },

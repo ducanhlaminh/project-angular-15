@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UseServiceService } from '../../../use-service.service';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'app-status-bill-user',
     templateUrl: './status-bill-user.component.html',
@@ -10,7 +12,7 @@ export class StatusBillUserComponent implements OnInit {
     pageCur: number = 0;
     bills: any;
     faChevronRight = faChevronRight;
-    constructor(private UserService: UseServiceService) {}
+    constructor(private UserService: UseServiceService, private router: Router) {}
     ngOnInit(): void {
         this.getData();
     }
@@ -41,15 +43,18 @@ export class StatusBillUserComponent implements OnInit {
         this.pageCur = numberPage;
         this.getData();
     }
-    showDetailBill(e: any) {
-        console.log(e.srcElement.parentNode.nextElementSibling);
+    showDetailBill(data: any) {
+        // console.log(e.srcElement.parentNode.nextElementSibling);
 
-        const el = e.srcElement.parentNode.nextElementSibling;
-        if (el?.style?.display !== 'block' && el) {
-            el.style.display = 'block';
-        } else {
-            el.style.display = 'none';
-        }
+        // const el = e.srcElement.parentNode.nextElementSibling;
+        // if (el?.style?.display !== 'block' && el) {
+        //     el.style.display = 'block';
+        // } else {
+        //     el.style.display = 'none';
+        // }
+        console.log(data);
+
+        this.router.navigateByUrl('profile/bill/' + data);
     }
     cancelBill(id: string) {}
 }

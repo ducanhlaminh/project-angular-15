@@ -17,6 +17,7 @@ import { InfoUserComponent } from './page/user-page/info-user/info-user.componen
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { IconModule } from 'src/app/icon/icon.module';
 import { StatusBillUserComponent } from './page/user-page/status-bill-user/status-bill-user.component';
+import { DetailBillComponent } from './page/user-page/detail-bill/detail-bill.component';
 @NgModule({
     declarations: [
         UserPageComponent,
@@ -31,6 +32,7 @@ import { StatusBillUserComponent } from './page/user-page/status-bill-user/statu
         SiderbarUserComponent,
         InfoUserComponent,
         StatusBillUserComponent,
+        DetailBillComponent,
     ],
     imports: [
         CommonModule,
