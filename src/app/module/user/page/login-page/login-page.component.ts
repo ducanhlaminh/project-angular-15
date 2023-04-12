@@ -23,10 +23,13 @@ export class LoginPageComponent {
             // this.validatePassword(this.password) &&
             this.UserService.login(this.email, this.password).subscribe((res: any) => {
                 // status = 0 => save token in LocalStorage , navigation to Home , update cart
-                (res.status = '0' && localStorage.setItem('token', res.token)),
-                    this.router.navigateByUrl(''),
-                    // this.UserService.getCurrent().subscribe((data: any) => (this.UserService.userInfor = data.user));
-                    this.CartService.getProductCart();
+                if ((res.status = '0')) {
+                    localStorage.setItem('token', res.token),
+                        this.router.navigateByUrl(''),
+                        (this.UserService.isLogin = true),
+                        // this.UserService.getCurrent().subscribe((data: any) => (this.UserService.userInfor = data.user));
+                        this.CartService.getProductCart();
+                }
             });
     }
     validateEmail = () => {

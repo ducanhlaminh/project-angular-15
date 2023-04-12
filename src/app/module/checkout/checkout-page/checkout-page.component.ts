@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular
 import { CartServiceService } from '../../cart/cart-service.service';
 import { CheckOutService } from '../check-out.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-checkout-page',
@@ -18,7 +19,7 @@ export class CheckoutPageComponent implements OnInit {
     productCache: any;
     showAddress = true;
     myAddress: any = [];
-    addressSelected: any;
+    addressSelectedId: any;
     formAddress: any;
 
     toggleTag: boolean = true;
@@ -27,6 +28,7 @@ export class CheckoutPageComponent implements OnInit {
         public CartService: CartServiceService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
+        private toastr: ToastrService,
     ) {}
     ngOnDestroy(): void {
         this.navigationSubscription.unsubscribe();
@@ -54,37 +56,40 @@ export class CheckoutPageComponent implements OnInit {
     onChangeAddress() {
         this.showAddress = !this.showAddress;
     }
+    showSuccess() {
+        this.toastr.success('Đặt hàng thành công');
+    }
     onChangeProvice(e: any) {
-        this.proviceSelected = e.value;
+        this.proviceSelected = e?.value;
         this.districtSelected = null;
         this.warnSelected = null;
         this.CheckOutService.getDistrict(this.proviceSelected);
     }
     onChangeDistrict(e: any) {
-        this.districtSelected = e.value;
+        this.districtSelected = e?.value;
 
         this.warnSelected = null;
         this.CheckOutService.getWarn(this.districtSelected);
     }
     onChangeWarn(e: any) {
-        this.warnSelected = e.value;
+        this.warnSelected = e?.value;
     }
 
     convertJSON(value: any) {
         return JSON.stringify(value);
     }
     addAddress(e: any) {
-        console.log(e.value);
+        console.log(e?.value);
 
         this.CheckOutService.addAddress({
             address: JSON.stringify({
-                proviceSelected: e.value.selectFormProvice,
-                districtSelected: e.value.selectFormDistrict,
-                warnSelected: e.value.selectFormWarn,
-                detailAddress: e.value.detailAddress,
+                proviceSelected: e?.value.selectFormProvice,
+                districtSelected: e?.value.selectFormDistrict,
+                warnSelected: e?.value.selectFormWarn,
+                detailAddress: e?.value.detailAddress,
             }),
-            name: e.value.nameForm,
-            phone: e.value.phoneForm,
+            name: e?.value.nameForm,
+            phone: e?.value.phoneForm,
         }).subscribe((res: any) => {
             if (res.status === 0) {
                 this.getAddress(), (this.toggleTag = true);
@@ -101,20 +106,27 @@ export class CheckoutPageComponent implements OnInit {
                 this.toggleTag;
             }
 
-            return (this.myAddress = data.yourAddress);
+            this.myAddress = data;
+            this.addressSelectedId = this.myAddress.yourAddress[0].id;
         });
     }
     onChangesAddress(e: any) {
         console.log(e);
     }
     confirmBill() {
-        this.CheckOutService.createBill(this.addressSelected).subscribe((data) => console.log(data));
+        let index = this.myAddress.yourAddress.findIndex((item: any) => item.id === this.addressSelectedId);
+        this.CheckOutService.createBill(this.myAddress.yourAddress[index]).subscribe((data: any) => {
+            if (data.status === 0) {
+                this.showSuccess();
+                this.router.navigateByUrl('/category/Do-gia-dung/OĐAIGNUD8');
+            }
+        });
     }
     setNameForm(e: any) {
-        this.infoUser.name = e.target.value;
+        this.infoUser.name = e.target?.value;
     }
     setPhoneForm(e: any) {
-        this.infoUser.phone = e.target.value;
+        this.infoUser.phone = e.target?.value;
     }
     deleteAddress(id: any) {
         this.CheckOutService.deleteAddress(id).subscribe((res: any) => {});

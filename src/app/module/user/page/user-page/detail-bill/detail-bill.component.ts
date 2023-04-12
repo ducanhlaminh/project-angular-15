@@ -10,11 +10,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DetailBillComponent implements OnInit {
     bill: any;
     total: any = 0;
+    bid: any;
     constructor(private UserService: UseServiceService, private route: ActivatedRoute) {}
     ngOnInit(): void {
         let params: any = this.route.snapshot.params;
-        const bid = params.id;
-        this.UserService.getBillsUserById(bid).subscribe((data: any) => {
+        this.bid = params.id;
+        this.UserService.getBillsUserById(this.bid).subscribe((data: any) => {
             this.bill = data;
             this.getTotal();
         });
@@ -24,5 +25,8 @@ export class DetailBillComponent implements OnInit {
             this.total += data.cost * data.qty;
         });
         console.log(this.total);
+    }
+    cancelBill() {
+        // this.UserService.deleteBill({id:this.bid,status:'cancel',addressId:})
     }
 }

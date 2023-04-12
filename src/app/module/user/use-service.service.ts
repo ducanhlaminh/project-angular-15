@@ -6,13 +6,12 @@ import { param } from 'jquery';
     providedIn: 'root',
 })
 export class UseServiceService {
-    userInfor: any;
+    isLogin: boolean = false;
     constructor(private http: HttpClient) {}
     login(email: string, password: string) {
         return this.http.post('http://localhost:8888/api/v1/auth/login', { email, password }, {});
     }
     logout() {
-        this.userInfor = null;
         localStorage.setItem('token', '');
     }
     getCurrent() {
@@ -32,5 +31,8 @@ export class UseServiceService {
     }
     getAvatar(id: string) {
         return this.http.get('http://localhost:8888/api/v1/user/avatar', { params: { id: id } });
+    }
+    deleteBill(data: any) {
+        return this.http.delete('http://localhost:8888/api/v1/bill/update', { params: { data } });
     }
 }

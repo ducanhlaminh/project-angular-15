@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputFormComponent } from './components/input-form/input-form.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { IconModule } from '../icon/icon.module';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
     declarations: [
         LayoutPageComponent,
@@ -33,6 +34,7 @@ import { IconModule } from '../icon/icon.module';
         FontAwesomeModule,
         MatAutocompleteModule,
         ReactiveFormsModule,
+        ToastrModule.forRoot({ timeOut: 10000, positionClass: 'toast-bottom-right', preventDuplicates: true }),
     ],
     exports: [LayoutPageComponent, PriceProductPipe, InputFormComponent],
 })

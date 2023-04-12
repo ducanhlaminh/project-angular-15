@@ -11,10 +11,11 @@ export class AppComponent implements OnInit {
     title = 'project-angular-15';
     constructor(private UserService: UseServiceService) {}
     ngOnInit(): void {
-        // localStorage.getItem('token') &&
-        //     this.UserService.getCurrent().subscribe((data: any) => {
-        //         this.UserService.userInfor = data.user;
-        //         console.log(this.UserService.userInfor);
-        //     });
+        localStorage.getItem('token') &&
+            this.UserService.getCurrent().subscribe((data: any) => {
+                if (data.status === 0) {
+                    this.UserService.isLogin = true;
+                }
+            });
     }
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoadingService } from './loading.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-loading',
@@ -9,6 +10,8 @@ import { LoadingService } from './loading.service';
 export class LoadingComponent {
     loading: any;
     constructor(private LoadingService: LoadingService) {
-        this.LoadingService.loading.subscribe((data) => (this.loading = data));
+        this.LoadingService.loading.subscribe((data) => {
+            this.loading = data;
+        });
     }
 }

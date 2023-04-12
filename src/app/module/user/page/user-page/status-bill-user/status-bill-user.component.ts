@@ -26,7 +26,7 @@ export class StatusBillUserComponent implements OnInit {
         } else if (this.pageCur === 2) {
             key = 'shipping';
         } else {
-            key = 'complete';
+            key = 'completed';
         }
         this.UserService.getBillsUser({ status: key }).subscribe((data: any) => {
             this.bills = data.billData.rows;

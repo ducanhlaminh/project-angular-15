@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { UseServiceService } from 'src/app/module/user/use-service.service';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -17,11 +18,11 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
     valueInputPre = '';
     inforUser: any = { name: '', email: '', phone: '', avatar: '' };
     @ViewChild('upload') upload: any;
-    constructor(public UserService: UseServiceService) {}
+    constructor(public UserService: UseServiceService, private toastr: ToastrService) {}
     ngOnInit() {
-        console.log(this.UserService.userInfor);
         this.UserService.getCurrent().subscribe((res: any) => {
             this.inforUser = res.user;
+            this.UserService.isLogin = true;
             this.formUser.patchValue({
                 avatar: res.user.avatar,
                 name: res.user.name,
@@ -33,6 +34,9 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         console.log(1);
     }
+    showSuccess() {
+        this.toastr.success('Cập nhật thành công');
+    }
     onSubmit(e: any) {
         var formData = new FormData();
         formData.append('avatar', e.value.avatar);
@@ -41,6 +45,7 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
         formData.append('phone', e.value.phone);
         this.UserService.updateInfor(formData).subscribe((res: any) => {
             if (res.status === 0) {
+                this.showSuccess();
                 this.UserService.getCurrent().subscribe((res: any) => {
                     this.inforUser = res.user;
                     this.formUser.patchValue({

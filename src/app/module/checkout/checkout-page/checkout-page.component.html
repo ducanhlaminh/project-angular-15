@@ -170,19 +170,10 @@
                 >
                 <mat-tab label="Chọn địa chỉ">
                     <div class="w-full">
-                        <mat-radio-group
-                            aria-labelledby="example-radio-group-label"
-                            [(ngModel)]="addressSelected"
-                            (change)="onChangesAddress($event)"
-                        >
-                            <div class="flex" *ngFor="let item of myAddress; index as idx">
-                                <mat-radio-button
-                                    class="example-radio-button"
-                                    [value]="item"
-                                    [checked]="idx === 0"
-                                    color="primary"
-                                >
-                                    <div class="p-3 flex w-[700px] justify-between">
+                        <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="addressSelectedId">
+                            <div class="flex" *ngFor="let item of myAddress.yourAddress; index as idx">
+                                <mat-radio-button class="example-radio-button" [value]="item.id" color="primary">
+                                    <div class="p-3 flex justify-between w-full">
                                         <div class="">
                                             <p>
                                                 <span>Tên người nhận : </span>
@@ -202,7 +193,7 @@
                                                 -
                                             </p>
                                         </div>
-                                        <div class="" (click)="deleteAddress(item.id)">
+                                        <div class="flex items-center justify-end" (click)="deleteAddress(item.id)">
                                             <button class="px-4 py-2 bg-red-700 text-white font-semibold rounded-md">
                                                 Xóa địa chỉ
                                             </button>

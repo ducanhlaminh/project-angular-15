@@ -36,10 +36,7 @@
     <div class="w-[5%] flex items-center text-[22px] justify-center relative" routerLink="/profile/infor">
         <fa-icon [icon]="faUser"></fa-icon>
     </div>
-    <div
-        class="w-[10%] flex items-center text-[22px] justify-center relative"
-        *ngIf="UserService.userInfor; else login"
-    >
+    <div class="w-[10%] flex items-center text-[22px] justify-center relative" *ngIf="UserService.isLogin; else login">
         <button class="bg-blue-200 text-base w-full py-2 rounded-md" (click)="logoutAcc()">Logout</button>
     </div>
 </div>
