@@ -20,7 +20,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
     faChevronRight = faChevronRight;
     faChevronLeft = faChevronLeft;
     picsProduct: any = [];
-
+    comments: any[] = [];
     constructor(
         private route: ActivatedRoute,
         private productService: ProductServiceService,
@@ -103,7 +103,23 @@ export class DetailPageComponent implements OnInit, OnDestroy {
         this.posiImgCur = index;
     }
     getComment(id: any) {
-        this.productService.getComment(id).subscribe();
+        this.productService.getComment(id).subscribe((data: any) => {
+            (this.comments = data.commentData.rows), this.handleComments();
+        });
+    }
+    handleComments() {
+        let commentsParent: any = this.comments.filter((comment: any) => {
+            return !comment.parentCommentId;
+        });
+        commentsParent.map((comment: any) => {
+            comment.child = [];
+            this.comments.map((comment1: any) => {
+                if (comment1.parentCommentId === comment.id) {
+                    comment.child.push(comment1);
+                }
+            });
+        });
+        console.log(commentsParent);
     }
     getProduct(id: any) {
         this.productService.getProductById(id).subscribe((product: any) => {
