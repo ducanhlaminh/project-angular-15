@@ -1,62 +1,156 @@
-<div class="h-[1000px] flex py-3" *ngIf="productDetail">
-    <div class="w-1/2 h-[600px]">
-        <div class="h-[80%] relative flex justify-center">
-            <img [src]="picsProduct[posiImgCur]" alt="" class="object-cover h-full rounded-md absolute imgProduct" />
-            <button class="absolute z-30 bg-slate-400 top-1/2 p-3 left-0 rounded-md" (click)="backImg()">
-                <fa-icon [icon]="faChevronLeft"></fa-icon>
-            </button>
-            <button class="absolute z-30 right-0 bg-slate-400 top-1/2 p-3 rounded-md" (click)="nextImg()">
-                <fa-icon [icon]="faChevronRight"></fa-icon>
-            </button>
-        </div>
-
-        <div class="h-[15%] flex mt-3 gap-4 justify-evenly">
-            <div
-                class="h-full w-1/5 flex justify-center rounded-md"
-                *ngFor="let img of picsProduct; index as idx"
-                [ngClass]="{ 'border-2': idx === posiImgCur }"
-            >
+<div class="my-5 bg-white">
+    <div class="flex py-3 mb-3 bg-white" *ngIf="productDetail">
+        <div class="w-1/2 h-[600px]">
+            <div class="h-[80%] relative flex justify-center">
                 <img
-                    [src]="img"
+                    [src]="picsProduct[posiImgCur]"
                     alt=""
-                    class="object-contain h-full rounded-md cursor-pointer"
-                    (mouseover)="selectedImg(idx)"
+                    class="object-cover h-full rounded-md absolute imgProduct"
                 />
+                <button class="absolute z-30 bg-slate-200 top-1/2 p-3 left-0 rounded-md" (click)="backImg()">
+                    <fa-icon [icon]="faChevronLeft"></fa-icon>
+                </button>
+                <button class="absolute z-30 right-0 bg-slate-200 shadow-sm top-1/2 p-3 rounded-md" (click)="nextImg()">
+                    <fa-icon [icon]="faChevronRight"></fa-icon>
+                </button>
+            </div>
+
+            <div class="h-[15%] flex mt-3 gap-4 justify-evenly">
+                <div
+                    class="h-full w-1/5 flex justify-center rounded-md"
+                    *ngFor="let img of picsProduct; index as idx"
+                    [ngClass]="{ 'border-2': idx === posiImgCur }"
+                >
+                    <img
+                        [src]="img"
+                        alt=""
+                        class="object-contain h-full rounded-md cursor-pointer"
+                        (mouseover)="selectedImg(idx)"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="w-1/2 h-full px-5">
+            <p class="font-medium text-[35px]">{{ productDetail?.name }}</p>
+            <p class="font-medium text-[25px] text-gray-600">{{ productDetail?.description }}</p>
+            <p class="font-medium text-[35px]">{{ productPrice | priceProduct }}</p>
+            <div class="">
+                <p class="my-3 font-semibold">Tùy chọn của sản phầm</p>
+                <div class="min-h-[300px]">
+                    <div class="flex" *ngFor="let option of productDetail?.variants">
+                        <div class="w-[100px]">
+                            <p class="text-gray-500 font-[500]">{{ option?.name }}</p>
+                        </div>
+                        <div class="w-3/4">
+                            <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+                                <mat-chip-option
+                                    *ngFor="let chip of option?.value"
+                                    color=""
+                                    [value]="{ value: chip, name: option?.name }"
+                                    (selectionChange)="onSelectVariant($event)"
+                                >
+                                    {{ chip?.type }}
+                                </mat-chip-option>
+                            </mat-chip-listbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-2 text-red-500">
+                    <small>* Vui lòng chọn tùy chọn trước khi thêm vào giỏ hàng</small>
+                </div>
+                <button
+                    class="px-5 py-3 rounded-md bg-slate-300 disabled:cursor-not-allowed bg-[#33333307] w"
+                    [disabled]="selectOption?.length === productDetail?.variants.length ? false : true"
+                    (click)="addToCart()"
+                >
+                    Thêm vào giỏ hàng
+                </button>
             </div>
         </div>
     </div>
-    <div class="w-1/2 h-full px-5">
-        <p class="font-medium text-[35px]">{{ productDetail?.name }}</p>
-        <p class="font-medium text-[25px] text-gray-600">{{ productDetail?.description }}</p>
-        <p class="font-medium text-[35px]">{{ productPrice | priceProduct }}</p>
-        <div class="">
-            <p class="my-3 font-semibold">Tùy chọn của sản phầm</p>
-            <div class="min-h-[300px]">
-                <div class="flex" *ngFor="let option of productDetail?.variants">
-                    <div class="w-[100px]">
-                        <p class="text-gray-500 font-[500]">{{ option?.name }}</p>
-                    </div>
-                    <div class="w-3/4">
-                        <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
-                            <mat-chip-option
-                                *ngFor="let chip of option?.value"
-                                color=""
-                                [value]="{ value: chip, name: option?.name }"
-                                (selectionChange)="onSelectVariant($event)"
-                            >
-                                {{ chip?.type }}
-                            </mat-chip-option>
-                        </mat-chip-listbox>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> <p class="my-3 text-xl font-medium">Mô tả sản phẩm :</p></mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ productDetail?.description }}</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> <p class="my-3 text-xl font-medium">Đánh giá sản phẩm :</p></mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="min-h-[300px]" *ngIf="comments.length > 0; else empty">
+                <div class="p-5">
+                    <div class="" *ngFor="let item of comments">
+                        <div class="flex gap-3 m-3">
+                            <div class="w-[70px]">
+                                <img
+                                    [src]="'http://localhost:8888/api/v1/user/avatar?id=' + item.commentator.avatar"
+                                    alt=""
+                                    class="object-cover h-[70px] rounded-md w-full"
+                                />
+                            </div>
+                            <div class="flex-auto">
+                                <div class="h-[80px] mb-5">
+                                    <p class="font-medium text-[16px]">{{ item.commentator.name }}</p>
+                                    <p class="font-medium text-gray-500">
+                                        {{ item.createdAt | date }}
+                                    </p>
+                                    <p class="font-medium text-gray-500">
+                                        {{ item.createdAt | timeProduct }}
+                                    </p>
+                                    <button class="rounded-md px-5 font-medium text-gray-500 bg-gray-200 mr-2">
+                                        Thích
+                                    </button>
+                                    <button class="rounded-md px-5 font-medium text-gray-500 bg-gray-200">
+                                        Trả lời
+                                    </button>
+                                </div>
+
+                                <p><span class="font-medium text-gray-400">Nhận xét : </span> {{ item.content }}</p>
+                            </div>
+                        </div>
+                        <div
+                            class="ml-[100px] mb-3 flex gap-3"
+                            [ngClass]="{ 'border-b-2': idx !== item.child.length - 1 }"
+                            *ngFor="let itemChild of item.child; index as idx"
+                        >
+                            <div class="w-[70px]">
+                                <img
+                                    [src]="
+                                        'http://localhost:8888/api/v1/user/avatar?id=' + itemChild.commentator.avatar
+                                    "
+                                    alt=""
+                                    class="object-cover h-[70px] rounded-md w-full"
+                                />
+                            </div>
+                            <div class="flex-auto">
+                                <div class="h-[80px] mb-5">
+                                    <p class="font-medium text-[16px]">{{ itemChild.commentator.name }}</p>
+                                    <p class="font-medium text-gray-500">
+                                        {{ itemChild.createdAt | date }}
+                                    </p>
+                                    <p class="font-medium text-gray-500">
+                                        {{ itemChild.createdAt | timeProduct }}
+                                    </p>
+                                    <button class="rounded-md px-5 font-medium text-gray-500 bg-gray-200">Thích</button>
+                                </div>
+
+                                <p>
+                                    <span class="font-medium text-gray-400">Nhận xét : </span> {{ itemChild.content }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
                     </div>
                 </div>
             </div>
-            <button
-                class="px-5 py-3 rounded-md bg-slate-300 disabled:cursor-not-allowed bg-[#33333307] w"
-                [disabled]="selectOption?.length === productDetail?.variants.length ? false : true"
-                (click)="addToCart()"
-            >
-                Thêm vào giỏ hàng
-            </button>
-        </div>
-    </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
+
+<ng-template #empty>
+    <span>Chưa có nhận xét cho sản phầm này</span>
+</ng-template>

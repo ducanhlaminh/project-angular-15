@@ -1,19 +1,29 @@
 <form class="" [formGroup]="formUser" (submit)="onSubmit(formUser)" enctype="multipart/form-data">
     <div class="mb-3 flex items-center gap-4">
         <img
-            [src]="'http://localhost:8888/api/v1/user/avatar?id=' + inforUser?.avatar"
+            [src]="urlAvatarPreview || 'http://localhost:8888/api/v1/user/avatar?id=' + inforUser?.avatar"
             alt="avatar"
             class="rounded-full h-[100px] w-[100px] object-cover"
         />
 
         <input type="file" class="hidden" #upload (change)="upImg($event)" />
-        <button
-            class="bg-[#1e5371] rounded-md px-5 py-2 text-white font-medium mt-5"
-            type="button"
-            (click)="uploadAvatar()"
-        >
-            Upload
-        </button>
+
+        <div class="flex gap-5">
+            <button
+                class="bg-[#1e5371] rounded-md px-5 py-2 text-white font-medium"
+                type="button"
+                (click)="uploadAvatar()"
+            >
+                Upload
+            </button>
+            <button
+                type="submit"
+                class="bg-[#1e5371] rounded-md px-3 py-2 text-white font-medium"
+                *ngIf="urlAvatarPreview"
+            >
+                Lưu avatar
+            </button>
+        </div>
     </div>
     <div class="">
         <p class="font-semibold mt-3">Thông tin chi tiết cá nhân</p>
@@ -21,17 +31,20 @@
         <div class="">
             <p class="pt-3 font-semibold">Họ và tên :</p>
             <small class="text-gray-500">*Nhấn vào trường nhập thông tin nếu muốn sửa</small>
-            <div class="mt-3 flex h-[50px] gap-2">
-                <input
-                    type="text"
-                    name="name"
-                    class="h-full bg-gray-200 text-gray-500 px-5 py-3 outline-none rounded-sm w-1/2 focus:text-black"
-                    formControlName="name"
-                    (focus)="focus($event)"
-                    (blur)="blur($event)"
-                    [(ngModel)]="inforUser.name"
-                />
-                <div class="hidden h-full gap-2">
+            <div class="mt-3 flex gap-2">
+                <mat-form-field class="example-full-width" [className]="'w-1/2'">
+                    <input
+                        type="text"
+                        name="name"
+                        class="h-full bg-gray-200 text-gray-500 px-5 py-3 outline-none rounded-sm w-full focus:text-black"
+                        formControlName="name"
+                        (focus)="focus($event)"
+                        (blur)="blur($event)"
+                        [(ngModel)]="inforUser.name"
+                        matInput
+                    />
+                </mat-form-field>
+                <div class="flex h-[50px] gap-2" *ngIf="showComfirm.name">
                     <button
                         class="bg-[#1e5371] rounded-md px-3 text-white font-medium"
                         (mousedown)="onSubmit(formUser)"
@@ -51,19 +64,27 @@
         <div class="">
             <p class="pt-3 font-semibold">Email :</p>
             <small class="text-gray-500">*Nhấn vào trường nhập thông tin nếu muốn sửa</small>
-            <div class="mt-3 flex h-[50px] gap-2">
-                <input
-                    type="text"
-                    class="h-full bg-gray-200 text-gray-500 px-5 py-3 outline-none rounded-sm w-1/2 focus:text-black"
-                    formControlName="email"
-                    name="email"
-                    (focus)="focus($event)"
-                    (blur)="blur($event)"
-                    [(ngModel)]="inforUser.email"
-                />
-                <div class="hidden h-full gap-2">
+            <div class="mt-3 flex gap-2">
+                <mat-form-field class="example-full-width" [className]="'w-1/2'">
+                    <input
+                        type="text"
+                        class="h-full bg-gray-200 text-gray-500 px-5 py-3 outline-none rounded-sm w-full focus:text-black"
+                        formControlName="email"
+                        name="email"
+                        (focus)="focus($event)"
+                        (blur)="blur($event)"
+                        [(ngModel)]="inforUser.email"
+                        matInput
+                    />
+                    <mat-error *ngIf="formUser.get('email').invalid"> Email không hợp lệ </mat-error>
+                </mat-form-field>
+
+                <div class="flex h-[50px] gap-2" *ngIf="showComfirm.email">
                     <button
                         class="bg-[#1e5371] rounded-md px-3 text-white font-medium"
+                        [disabled]="
+                            this.formUser.value.email === this.valueInputPre || this.formUser.get('email').valid
+                        "
                         (mousedown)="onSubmit(formUser)"
                     >
                         Xác nhận
@@ -83,17 +104,21 @@
     <div class="w-1/2">
         <p class="pt-3 font-semibold">Số điện thoại :</p>
         <small class="text-gray-500">*Nhấn vào trường nhập thông tin nếu muốn sửa</small>
-        <div class="mt-3 flex h-[50px] gap-2">
-            <input
-                type="text"
-                class="h-full bg-gray-200 text-gray-500 px-5 py-3 outline-none rounded-sm w-1/2 focus:text-black"
-                formControlName="phone"
-                (focus)="focus($event)"
-                (blur)="blur($event)"
-                name="phone"
-                [(ngModel)]="inforUser.phone"
-            />
-            <div class="hidden h-full gap-2">
+        <div class="mt-3 flex gap-2">
+            <mat-form-field class="example-full-width" [className]="'w-1/2'">
+                <input
+                    type="text"
+                    class="h-full bg-gray-200 text-gray-500 px-5 py-3 outline-none rounded-sm w-full focus:text-black"
+                    formControlName="phone"
+                    (focus)="focus($event)"
+                    (blur)="blur($event)"
+                    name="phone"
+                    [(ngModel)]="inforUser.phone"
+                    matInput
+                />
+            </mat-form-field>
+
+            <div class="flex h-[50px] gap-2" *ngIf="showComfirm.phone">
                 <button class="bg-[#1e5371] rounded-md px-3 text-white font-medium" (mousedown)="onSubmit(formUser)">
                     Xác nhận
                 </button>
@@ -102,8 +127,5 @@
                 </button>
             </div>
         </div>
-    </div>
-    <div class="flex justify-end">
-        <button type="submit" class="bg-[#1e5371] rounded-md px-3 py-2 text-white font-medium">Lưu thay đổi</button>
     </div>
 </form>

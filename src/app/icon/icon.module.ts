@@ -14,24 +14,26 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
 @NgModule({
-        declarations: [],
-        imports: [CommonModule],
-        exports: [
-                FontAwesomeModule,
-                MatRadioModule,
-                ReactiveFormsModule,
-                MatProgressSpinnerModule,
-                BrowserAnimationsModule,
-                MatInputModule,
-                MatPaginatorModule,
-                MatFormFieldModule,
-                MatChipsModule,
-                MatOptionModule,
-                MatSelectModule,
-                MatTabsModule,
-                MatSliderModule,
-                FormsModule,
-        ],
+    declarations: [],
+    imports: [CommonModule],
+    exports: [
+        FontAwesomeModule,
+        MatExpansionModule,
+        MatRadioModule,
+        ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatChipsModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatSliderModule,
+        FormsModule,
+    ],
 })
 export class IconModule {}

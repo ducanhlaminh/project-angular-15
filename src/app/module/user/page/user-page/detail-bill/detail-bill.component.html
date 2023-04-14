@@ -17,7 +17,7 @@
         </div>
     </header>
     <hr />
-    <div class="h-[120px] border-b-[2px] p-3 border-gray-200 flex justify-between" *ngFor="let item of bill.billData">
+    <div class="h-[120px] border-b-[2px] p-3 border-gray-200 flex justify-between" *ngFor="let item of bill?.billData">
         <div class="w-1/3 flex gap-6">
             <div class="w-1/3 h-full">
                 <img [src]="item.products.mainImage" alt="" class="object-cover w-full h-full rounded-md" />
@@ -30,13 +30,13 @@
         <div class="w-1/2">
             <div class="h-4/6 flex font-semibold">
                 <div class="w-1/3 text-center">
-                    {{ item.cost | priceProduct }}
+                    {{ item?.cost | priceProduct }}
                 </div>
                 <div class="w-1/3 text-center">
-                    {{ item.qty }}
+                    {{ item?.qty }}
                 </div>
                 <div class="w-1/3 text-center">
-                    {{ item.qty * item.cost | priceProduct }}
+                    {{ item?.qty * item?.cost | priceProduct }}
                 </div>
             </div>
             <div class="h-2/6 float-right" *ngIf="bill.statusBill === 'completed'">
@@ -58,7 +58,7 @@
             </div>
             <div class="flex">
                 <p class="w-4/5">Tổng giá trị đơn hàng :</p>
-                <p>{{ bill.cost.shipPrice | priceProduct }}</p>
+                <p>{{ bill?.cost.shipPrice | priceProduct }}</p>
             </div>
         </div>
         <div class="w-1/3">
@@ -68,11 +68,11 @@
         <div class="w-1/3">
             <p class="text-gray-500">Địa chỉ giao hàng</p>
             <p>
-                Địa chỉ cụ thể : <span>{{ bill.address.detailAddress }}</span>
+                Địa chỉ cụ thể : <span>{{ bill?.address?.detailAddress }}</span>
             </p>
-            <p>{{ bill.address.warnSelected.WardName }}</p>
-            <p>{{ bill.address.districtSelected.DistrictName }}</p>
-            <p>{{ bill.address.proviceSelected.ProvinceName }}</p>
+            <p>{{ bill?.address?.warnSelected.WardName }}</p>
+            <p>{{ bill?.address?.districtSelected.DistrictName }}</p>
+            <p>{{ bill?.address?.proviceSelected.ProvinceName }}</p>
             <!-- <button class="px-6 py-1 rounded-md bg-[#1B4B66] text-white font-medium" (click)="cancelBill()">
                 Hủy đơn hàng
             </button> -->

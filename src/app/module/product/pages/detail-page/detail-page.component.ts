@@ -119,7 +119,8 @@ export class DetailPageComponent implements OnInit, OnDestroy {
                 }
             });
         });
-        console.log(commentsParent);
+        this.comments = commentsParent;
+        console.log(this.comments);
     }
     getProduct(id: any) {
         this.productService.getProductById(id).subscribe((product: any) => {

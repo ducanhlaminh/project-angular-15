@@ -15,8 +15,12 @@ import { InputFormComponent } from './components/input-form/input-form.component
 import { LoadingComponent } from './components/loading/loading.component';
 import { IconModule } from '../icon/icon.module';
 import { ToastrModule } from 'ngx-toastr';
+import { DateCustomPipe } from '../module/product/date.pipe';
+import { TimeProductPipe } from '../module/product/time-product.pipe';
 @NgModule({
     declarations: [
+        TimeProductPipe,
+        DateCustomPipe,
         LayoutPageComponent,
         HeaderLayoutComponent,
         ItemCategoryComponent,
@@ -36,6 +40,6 @@ import { ToastrModule } from 'ngx-toastr';
         ReactiveFormsModule,
         ToastrModule.forRoot({ timeOut: 10000, positionClass: 'toast-bottom-right', preventDuplicates: true }),
     ],
-    exports: [LayoutPageComponent, PriceProductPipe, InputFormComponent],
+    exports: [LayoutPageComponent, PriceProductPipe, InputFormComponent, DateCustomPipe, TimeProductPipe],
 })
 export class LayoutModule {}

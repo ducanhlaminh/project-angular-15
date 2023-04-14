@@ -50,7 +50,7 @@
                 <span>{{ item?.addressData?.name }}</span>
             </div>
             <div class="w-1/5 text-center">
-                <span>Ngày tạo</span>
+                <span>{{ item.createdAt | date }}</span>
             </div>
             <div class="w-1/5 text-center">
                 <span>{{ item?.totalCost | priceProduct }}</span>
