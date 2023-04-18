@@ -36,7 +36,7 @@
             <p class="font-medium text-[35px]">{{ productPrice | priceProduct }}</p>
             <div class="">
                 <p class="my-3 font-semibold">Tùy chọn của sản phầm</p>
-                <div class="min-h-[300px]">
+                <!-- <div class="min-h-[300px]">
                     <div class="flex" *ngFor="let option of productDetail?.variants">
                         <div class="w-[100px]">
                             <p class="text-gray-500 font-[500]">{{ option?.name }}</p>
@@ -48,6 +48,46 @@
                                     color=""
                                     [value]="{ value: chip, name: option?.name }"
                                     (selectionChange)="onSelectVariant($event)"
+                                    class="my-custom-class"
+                                >
+                                    {{ chip?.type }}
+                                </mat-chip-option>
+                            </mat-chip-listbox>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- test -->
+                <div class="min-h-[300px]">
+                    <div class="flex" *ngFor="let option of productDetail?.variants">
+                        <div class="w-[100px]">
+                            <p class="text-gray-500 font-[500]">{{ option?.name }}</p>
+                        </div>
+                        <div class="w-3/4 flex flex-col gap-3">
+                            <!-- <div class="flex gap-3" *ngFor="let chip of option?.value">
+                                <input
+                                    type="radio"
+                                    [name]="option?.name"
+                                    [value]="{ value: chip, name: option?.name } | json"
+                                    [id]="option?.name + chip?.type"
+                                    (change)="onSelectVariant($event)"
+                                />
+
+                                <label [for]="option?.name + chip?.type">
+                                    <div
+                                        class="h-[35px] w-[100px] flex justify-center items-center rounded-md font-medium"
+                                        [ngClass]="{'bg-[#1e5371] text-white'}"
+                                    >
+                                        <span>{{ chip?.type }}</span>
+                                    </div>
+                                </label>
+                            </div> -->
+
+                            <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+                                <mat-chip-option
+                                    *ngFor="let chip of option?.value"
+                                    [value]="{ value: chip, name: option?.name }"
+                                    (selectionChange)="onSelectVariant($event)"
+                                    class="my-custom-class"
                                 >
                                     {{ chip?.type }}
                                 </mat-chip-option>
@@ -55,11 +95,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex gap-2 text-red-500">
+                <div class="flex gap-2 text-red-500" *ngIf="selectOption?.length !== productDetail?.variants.length">
                     <small>* Vui lòng chọn tùy chọn trước khi thêm vào giỏ hàng</small>
                 </div>
                 <button
-                    class="px-5 py-3 rounded-md bg-slate-300 disabled:cursor-not-allowed bg-[#33333307] w"
+                    class="px-5 py-3 rounded-md bg-slate-300 bg-[#33333307] w"
                     [disabled]="selectOption?.length === productDetail?.variants.length ? false : true"
                     (click)="addToCart()"
                 >

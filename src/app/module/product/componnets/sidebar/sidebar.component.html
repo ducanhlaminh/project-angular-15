@@ -1,66 +1,71 @@
-<form [formGroup]="formSort" (ngSubmit)="onSubmit(formSort)" class="w-full p-4">
-    <div class="">
-        <div class="example-name-label font-semibold mb-2">Bộ lọc sản phẩm :</div>
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label class="">Sort</mat-label>
-            <mat-select [value]="selected" formControlName="sortCurrent">
-                <mat-option [value]="convertJSON(item)" *ngFor="let item of ProductService.sortType">{{
-                    item.lable
-                }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <div class="example-label-container">
-        <label id="example-name-label" class="example-name-label font-semibold mb-2">Khoảng giá :</label>
-        <br />
-        <span class="text-[12px] text-slate-400 text-center">( 100.000đ - 10.000.000đ )</span>
-    </div>
+<form [formGroup]="formSort" (ngSubmit)="onSubmit(formSort)" class="w-full">
+    <mat-accordion #accordion>
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header><span class="text-base"> Lọc sản phẩm </span></mat-expansion-panel-header>
+            <mat-selection-list #shoes [multiple]="false" (selectionChange)="onChangeSort($event)">
+                <mat-list-option *ngFor="let item of ProductService.sortType" [value]="convertJSON(item)">
+                    <span class="text-sm">{{ item.lable }}</span>
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-expansion-panel>
 
-    <div class="mt-2">
-        <mat-slider min="100" max="1000" step="50" showTickMarks="true" discrete="true">
-            <input formControlName="minPrice" matSliderStartThumb [(ngModel)]="rangePrice.min" />
-            <input formControlName="maxPrice" matSliderEndThumb [(ngModel)]="rangePrice.max" />
-        </mat-slider>
-        <div class="flex gap-2">
-            <div class="w-1/2">
-                <mat-form-field appearance="fill" floatLabel="always" class="w-full">
-                    <mat-label>Từ :</mat-label>
-                    <input
-                        matInput
-                        type="number"
-                        class="example-right-align"
-                        placeholder="0"
-                        step="100"
-                        formControlName="minPrice"
-                        [(ngModel)]="rangePrice.min"
-                    />
-                </mat-form-field>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <span class="text-base">Khoảng giá sản phẩm </span>
+            </mat-expansion-panel-header>
+            <div class="example-label-container">
+                <label id="example-name-label" class="example-name-label font-semibold mb-2">Khoảng giá :</label>
+                <br />
+                <span class="text-[12px] text-slate-400 text-center">( 100.000đ - 10.000.000đ )</span>
             </div>
-            <div class="w-1/2">
-                <mat-form-field appearance="fill" floatLabel="always" class="w-full">
-                    <mat-label>Đến :</mat-label>
-                    <input
-                        matInput
-                        type="number"
-                        class="example-right-align"
-                        placeholder="0"
-                        step="50"
-                        formControlName="maxPrice"
-                        [(ngModel)]="rangePrice.max"
-                    />
-                </mat-form-field>
-            </div>
-        </div>
 
-        <small class="text-red-500" *ngIf="!this.checkPrice">Vui lòng nhập đúng khoảng giá</small>
-        <br />
-        <button
-            class="w-full text-white font-medium py-3 bg-[#256388] rounded-md"
-            type="submit"
-            [disabled]="!formSort.valid"
-            [ngClass]="{ 'bg-[#12314372]': !formSort.valid }"
-        >
-            Lọc sản phẩm
-        </button>
-    </div>
+            <div class="mt-2">
+                <mat-slider min="100" max="1000" step="50" showTickMarks="true" discrete="true">
+                    <input formControlName="minPrice" matSliderStartThumb [(ngModel)]="rangePrice.min" />
+                    <input formControlName="maxPrice" matSliderEndThumb [(ngModel)]="rangePrice.max" />
+                </mat-slider>
+                <div class="flex gap-2">
+                    <div class="w-1/2">
+                        <mat-form-field appearance="fill" floatLabel="always" class="w-full">
+                            <mat-label>Từ :</mat-label>
+                            <input
+                                matInput
+                                type="number"
+                                class="example-right-align"
+                                placeholder="0"
+                                step="100"
+                                formControlName="minPrice"
+                                [(ngModel)]="rangePrice.min"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="w-1/2">
+                        <mat-form-field appearance="fill" floatLabel="always" class="w-full">
+                            <mat-label>Đến :</mat-label>
+                            <input
+                                matInput
+                                type="number"
+                                class="example-right-align"
+                                placeholder="0"
+                                step="50"
+                                formControlName="maxPrice"
+                                [(ngModel)]="rangePrice.max"
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <small class="text-red-500" *ngIf="!this.checkPrice">Vui lòng nhập đúng khoảng giá</small>
+                <br />
+                <button
+                    class="w-full text-white font-medium py-3 bg-[#256388] rounded-md"
+                    type="submit"
+                    [disabled]="!formSort.valid"
+                    [ngClass]="{ 'bg-[#12314372]': !formSort.valid }"
+                >
+                    Lọc sản phẩm
+                </button>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </form>

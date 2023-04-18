@@ -1,12 +1,16 @@
 <div class="flex p-3 min-h-[900px]">
     <!-- Sidebar -->
-    <div class="w-1/5 h-full">
-        <app-sidebar (changeSortEmit)="updateGetProduct($event)" [value]="priceSort"></app-sidebar>
+    <div class="w-1/6 h-full">
+        <app-sidebar
+            (changeSortEmit)="updateGetProductSort($event)"
+            (changePriceEmit)="updateGetProductPrice($event)"
+            [value]="priceSort"
+        ></app-sidebar>
     </div>
     <!-- Listing -->
-    <div class="min-h-[600px] w-4/5 relative">
+    <div class="min-h-[600px] w-5/6 relative">
         <div class="flex flex-wrap">
-            <div class="w-1/4 flex justify-center px-3 mb-3" *ngFor="let product of listProducts$ | async">
+            <div class="w-1/5 flex justify-center px-3 mb-3" *ngFor="let product of listProducts$ | async">
                 <app-card-product [product]="product" class="w-full"></app-card-product>
             </div>
         </div>

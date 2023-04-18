@@ -25,7 +25,7 @@ export class ProductServiceService {
     ) {
         return this.http.get(environment.API_PRODUCT, {
             params: {
-                limitProduct: 16,
+                limitProduct: 20,
                 page: args.page,
                 categoryCode: args.code,
                 order: [args.sort.name, args.sort.code],

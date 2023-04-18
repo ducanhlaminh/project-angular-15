@@ -70,28 +70,28 @@ export class InfoUserComponent implements OnInit {
     onSubmit(e: any) {
         console.log(this.formUser.value.email !== this.valueInputPre && this.formUser.get('email').invalid);
 
-        // var formData: any = new FormData();
-        // const formSubmit = this.getFormData(this.formUser);
-        // Object.entries(formSubmit).forEach(([key, value]) => {
-        //     formData.append(key, value);
-        // });
+        var formData: any = new FormData();
+        const formSubmit = this.getFormData(this.formUser);
+        Object.entries(formSubmit).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
 
-        // this.UserService.updateInfor(formData).subscribe((res: any) => {
-        //     if (res.status === 0) {
-        //         this.showSuccess();
-        //         this.UserService.getCurrent().subscribe((res: any) => {
-        //             this.inforUser = res.user;
-        //             this.formUser.patchValue({
-        //                 avatar: res.user.avatar,
-        //                 name: res.user.name,
-        //                 email: res.user.email,
-        //                 phone: res.user.phone,
-        //             });
-        //             this.urlAvatarPreview = '';
-        //             this.resetDirtyForm();
-        //         });
-        //     }
-        // });
+        this.UserService.updateInfor(formData).subscribe((res: any) => {
+            if (res.status === 0) {
+                this.showSuccess();
+                this.UserService.getCurrent().subscribe((res: any) => {
+                    this.inforUser = res.user;
+                    this.formUser.patchValue({
+                        avatar: res.user.avatar,
+                        name: res.user.name,
+                        email: res.user.email,
+                        phone: res.user.phone,
+                    });
+                    this.urlAvatarPreview = '';
+                    this.resetDirtyForm();
+                });
+            }
+        });
     }
     uploadAvatar() {
         this.upload.nativeElement.click();

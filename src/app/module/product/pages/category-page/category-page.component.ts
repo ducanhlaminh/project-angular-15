@@ -23,7 +23,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
     categoryId: any;
     listCategory: any = [];
     length: number;
-    pageSize = 16;
+    pageSize = 20;
     pageIndex = 0;
     sortDefault: any;
     code: string;
@@ -94,10 +94,12 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
         //         );
         // });
     }
-    updateGetProduct(e: any) {
-        this.sortDefault = JSON.parse(e.value.sortCurrent);
+    updateGetProductSort(e: any) {
+        this.sortDefault = e.sortCurrent;
+        this.getData();
+    }
+    updateGetProductPrice(e: any) {
         this.priceSort = [e.value.minPrice * 1000, e.value.maxPrice * 1000];
-
         this.getData();
     }
 }

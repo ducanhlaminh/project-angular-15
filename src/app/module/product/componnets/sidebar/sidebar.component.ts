@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
 import { ProductServiceService } from '../../product-service.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { MatAccordion } from '@angular/material/expansion';
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
@@ -8,6 +9,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 })
 export class SidebarComponent implements OnInit {
     @Output() changeSortEmit = new EventEmitter<any>();
+    @Output() changePriceEmit = new EventEmitter<any>();
     formSort: any;
     @Input() value: any;
     selected = JSON.stringify(this.ProductService.sortType[0]);
@@ -26,14 +28,15 @@ export class SidebarComponent implements OnInit {
         this.changeSortEmit.emit(params);
     }
     onChangeSort(e: any) {
-        const sortCurrent = JSON.parse(e.value);
+        const sortCurrent = JSON.parse(e.source._value[0]);
         const params = { sortCurrent, price: this.value };
+
         this.changeSortEmit.emit(params);
     }
     convertJSON(value: any) {
         return JSON.stringify(value);
     }
     onSubmit(e: any) {
-        this.changeSortEmit.emit(e);
+        this.changePriceEmit.emit(e);
     }
 }

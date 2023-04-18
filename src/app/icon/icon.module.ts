@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
     declarations: [],
     imports: [CommonModule],
@@ -34,6 +35,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatTabsModule,
         MatSliderModule,
         FormsModule,
+        MatListModule,
     ],
 })
 export class IconModule {}
